@@ -172,7 +172,6 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**

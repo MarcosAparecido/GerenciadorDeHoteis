@@ -10,6 +10,7 @@ import GreneciadorDeHoteis.Repository.TipoRepository;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;

@@ -7,11 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/*
+/**
  *
  * @author Marcos
  */
-//Funcionario
 @Entity
 @Table(name = "tb_funcionario")
 public class Funcionario {

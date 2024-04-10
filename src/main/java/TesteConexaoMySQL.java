@@ -7,8 +7,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-
-//conexão MySql
 public class TesteConexaoMySQL {
     private EntityManager em;
     
