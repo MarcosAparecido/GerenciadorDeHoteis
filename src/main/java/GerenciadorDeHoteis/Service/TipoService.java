@@ -23,7 +23,7 @@ public class TipoService {
         this.tipoRepository = new TipoRepository();
     }
     
-    //Service Funcionario
+    //Service Funcionarios
     private boolean validaDadosFuncionario(Funcionario funcionario) {
 	if (funcionario.getNome() == null || funcionario.getSobrenome() == null || funcionario.getSenha() == null || funcionario.getTelefone() == null || funcionario.getCpf() == null) {
             JOptionPane.showInternalMessageDialog(null, "Um dos campos esta nulo.");

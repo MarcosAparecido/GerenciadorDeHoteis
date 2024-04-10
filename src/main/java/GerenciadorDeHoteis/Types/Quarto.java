@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
  *
  * @author Marcos
  */
+//Quarto
 @Entity
 @Table(name = "tb_quarto")
 public class Quarto {

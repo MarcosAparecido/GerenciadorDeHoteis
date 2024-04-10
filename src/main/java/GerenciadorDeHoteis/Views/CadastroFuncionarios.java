@@ -139,6 +139,11 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         btnSair.setText("Voltar");
         btnSair.setToolTipText("volta a tela de login");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 130, 30));
 
         lblFundo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -164,6 +169,11 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
     private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments

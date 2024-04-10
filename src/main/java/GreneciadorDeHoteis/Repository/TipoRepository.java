@@ -61,16 +61,16 @@ public class TipoRepository {
             List<Quarto> resultados = query.getResultList();
 
             if (resultados.size() == 1) {
-                return resultados.get(0); // Retorna o único funcionário encontrado
+                return resultados.get(0);
 
             } else if (resultados.isEmpty()) {
-                return null; // Retorna null se nenhum funcionário for encontrado com o CPF fornecido
+                return null;
 
             } else {
-                throw new IllegalStateException("Mais de um quarto encontrado com o mesmo nome!"); // Lança uma exceção se mais de um funcionário for encontrado com o mesmo CPF
+                throw new IllegalStateException("Mais de um quarto encontrado com o mesmo nome!");
             }
         } catch (NoResultException e) {
-            return null; // Se nenhum funcionário for encontrado com o CPF fornecido
+            return null;
         }
     }
     
@@ -81,16 +81,16 @@ public class TipoRepository {
             List<Quarto> resultados = query.getResultList();
 
             if (resultados.size() == 1) {
-                return resultados.get(0); // Retorna o único funcionário encontrado
+                return resultados.get(0);
 
             } else if (resultados.isEmpty()) {
-                return null; // Retorna null se nenhum funcionário for encontrado com o CPF fornecido
+                return null;
 
             } else {
-                throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!"); // Lança uma exceção se mais de um funcionário for encontrado com o mesmo CPF
+                throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!");
             }
         } catch (NoResultException e) {
-            return null; // Se nenhum funcionário for encontrado com o CPF fornecido
+            return null;
         }
     }
     
