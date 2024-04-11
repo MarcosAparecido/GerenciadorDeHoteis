@@ -6,7 +6,7 @@ package GerenciadorDeHoteis.Service;
 
 import GerenciadorDeHoteis.Types.Funcionario;
 import GerenciadorDeHoteis.Types.Quarto;
-import GreneciadorDeHoteis.Repository.TipoRepository;
+import GerenciadorDeHoteis.Repository.TipoRepository;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
@@ -60,7 +60,7 @@ public class TipoService {
 	return true;
     }
     
-    public boolean validaFormatoCampoTextoFuncionario(Funcionario funcionario){
+    private boolean validaFormatoCampoTextoFuncionario(Funcionario funcionario){
         boolean nomeValido = funcionario.getNome().matches("[a-zA-Z]+");
         boolean sobreNomeValido = funcionario.getSobrenome().matches("[a-zA-Z]+");
         boolean cpfValido = funcionario.getCpf().trim().matches("^(?!\\d+$)(?!\\d+-\\d+$)\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$");
@@ -83,7 +83,7 @@ public class TipoService {
         return true;   
     }
     
-    public boolean validaDuplicidadeDadosFuncionario(Funcionario funcionario) {
+    private boolean validaDuplicidadeDadosFuncionario(Funcionario funcionario) {
         Funcionario funcionarioExistente = tipoRepository.buscarPorCPFFuncionario(funcionario.getCpf());
         if(funcionarioExistente != null ){
             System.out.println("Ja existe um funcionário com o mesmo CPF");
@@ -134,7 +134,24 @@ public class TipoService {
 	return true;
     }
     
-    public boolean validaDuplicidadeDadosQuarto(Quarto quarto) {
+    
+    private boolean validarCampoPesquisaQuarto(String campo, String valor){
+        if(valor == null){
+            JOptionPane.showInternalMessageDialog(null, "Campo valor esta nulo.");
+            return false;
+            
+        }else if(valor.trim().isBlank()){
+             JOptionPane.showInternalMessageDialog(null, "Campo valor esta em branco.");
+             return false;
+             
+        }else if(valor.length() > 50){    
+            JOptionPane.showInternalMessageDialog(null, "Campo valor não deve possoir mais de 50 characteres");
+            return false;
+        }
+          return true;  
+    } 
+    
+    private boolean validaDuplicidadeDadosQuarto(Quarto quarto) {
         Quarto quartoExistente = tipoRepository.buscarPorNomeQuarto(quarto.getNome());
         if(quartoExistente != null ){
             System.out.println("Ja existe um quarto com o mesmo nome");
@@ -143,9 +160,9 @@ public class TipoService {
         return true;
     }
     
-    public boolean validaFormatoCampoTextoQuarto(Quarto quarto){
+    private boolean validaFormatoCampoTextoQuarto(Quarto quarto){
         String numeroCamasValidoString = String.valueOf(quarto.getNumeroCamas());
-        boolean nomeValido = quarto.getNome().matches("[a-zA-Z0-9]+");  
+        boolean nomeValido = quarto.getNome().matches("[a-zA-Z0-9 ]+");  
         boolean numeroCamasValido =  numeroCamasValidoString.matches("[0-9]+");
        
         if(!nomeValido){
@@ -159,7 +176,40 @@ public class TipoService {
         }
         
         return true;   
-    }   
+    }
+    
+    public Object[] preencherTabelaQuarto(){
+        Object[]linha = tipoRepository.preencherTabelaQuarto();
+        if(linha != null){
+            System.out.println("Erro ao retornar tabela, tabela esta nula"); 
+            return null;
+            
+        }else{
+            System.out.println("tabela retornada com sucesso");
+            return linha;
+        }
+    }
+    
+    public void atulizarQuarto(Quarto quarto){
+        if(validaDadosQuarto(quarto)){
+            System.out.println("Dados validados com sucesso");     
+            if(quarto.getId() != null){
+                System.out.println("id encontrato com sucesso");
+                System.out.println("atualizando dados");
+                tipoRepository.atualizarQuarto(quarto);
+            }
+        }
+    }
+    
+      
+    public Object[][] pesquisaQuarto(String campo, String valor){
+        if(validarCampoPesquisaQuarto(campo, valor)){
+            System.out.println("Dados validados com sucesso");
+            return tipoRepository.preencherTabelaPesquisaQuarto(campo, valor);
+        }
+        System.out.println("erro ao preencher tabela");
+        return null;    
+    }
     
     public void salvarQuarto(Quarto quarto){
         System.out.println("Cadastrando o tipo...");

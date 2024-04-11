@@ -6,11 +6,7 @@ package GerenciadorDeHoteis.Views;
 
 import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Types.Quarto;
-import GreneciadorDeHoteis.Repository.TipoRepository;
-import java.sql.SQLException;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Locale;
+import GerenciadorDeHoteis.Repository.TipoRepository;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -31,7 +27,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         initComponents();
         preencherAtualizarTabela();
         telaPesquisa.setSize(445, 450);
-        cbxCampoPesquisa = getComboBoxColunas(cbxCampoPesquisa);
+        cbmCampoPesquisa = getComboBoxColunas(cbmCampoPesquisa);
         telaPesquisa.setLocationRelativeTo(null);
         this.setLocationRelativeTo(null);
     }
@@ -49,7 +45,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         lblPesquisa = new javax.swing.JLabel();
         lblCampoPesquisa = new javax.swing.JLabel();
         lblValorPesquisa = new javax.swing.JLabel();
-        cbxCampoPesquisa = new javax.swing.JComboBox<>();
+        cbmCampoPesquisa = new javax.swing.JComboBox<>();
         txtCampoPesquisa = new javax.swing.JTextField();
         btnPesquisa = new javax.swing.JButton();
         btnFecharPesquisar = new javax.swing.JToggleButton();
@@ -86,7 +82,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         lblValorPesquisa.setText("Valor da Pesquisar :");
         telaPesquisa.getContentPane().add(lblValorPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 180, 30));
 
-        telaPesquisa.getContentPane().add(cbxCampoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 180, 40));
+        telaPesquisa.getContentPane().add(cbmCampoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 180, 40));
 
         txtCampoPesquisa.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         txtCampoPesquisa.setToolTipText("valor do campo que quer pesquisar");
@@ -240,13 +236,13 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
 
     private void bntRegistarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistarQuartoActionPerformed
         // TODO add your handling code here:
-        criarQuarto(quarto);
-        atualizarTabela();
+        criarQuarto();
+        preencherAtualizarTabela();
     }//GEN-LAST:event_bntRegistarQuartoActionPerformed
 
     private void bntEditarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarQuartoActionPerformed
         atualizarQuarto();
-        atualizarTabela();
+        preencherAtualizarTabela();
     }//GEN-LAST:event_bntEditarQuartoActionPerformed
 
     private void bntSelecionarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSelecionarQuartoActionPerformed
@@ -261,7 +257,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
 
     private void btnRefershActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefershActionPerformed
         // TODO add your handling code here:
-        atualizarTabela();
+        preencherAtualizarTabela();
     }//GEN-LAST:event_btnRefershActionPerformed
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
@@ -320,7 +316,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JToggleButton btnRefersh;
     private javax.swing.JToggleButton btnSair;
-    private javax.swing.JComboBox<String> cbxCampoPesquisa;
+    private javax.swing.JComboBox<String> cbmCampoPesquisa;
     private javax.swing.JCheckBox cbxQuartoOcupado;
     private javax.swing.JComboBox<String> cmbTipoQuarto;
     private javax.swing.JLabel lblCampoPesquisa;
@@ -346,45 +342,23 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         byte numeroCamas = Byte.parseByte(txtNumeroCamas.getText());
         boolean quartoOcupado = cbxQuartoOcupado.isSelected();
         
+        if(txtNumeroCamas.getText().isEmpty()){
+             JOptionPane.showInternalMessageDialog(null,"O campo cama esta vazio");
+             return;
+        }
+        
         Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamas, quartoOcupado);
         tipoService.salvarQuarto(quarto);
+        JOptionPane.showInternalMessageDialog(null,"Quarto criado com sucesso.");
     }
-  
-   /* private void preencherTabela(){
-        DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
-        tabela.setRowCount(0);
-        List<Quarto> quartos = tipoRepository.listarTodosQuartos();
-     
-        for (Quarto quarto : quartos){
-            Object[] linha = {quarto.getId(), quarto.getNumeroquarto(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), diariaFormatada};
-            tabela.addRow(linha);
-        }
-    }*/
-    
+
     private void preencherAtualizarTabela(){
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
-        tabela.addRow(tipoRepository.preencherTabelaQuarto());   
+        tabela.addRow(tipoService.preencherTabelaQuarto());   
     }
     
-    /*public void atualizarTabela(){
-        DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
-        tabela.setRowCount(0);
-        NumberFormat dinheiro = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-
-        try{
-            List<Quarto> quartos = quartoDAO.listarQuartos();
-            for (Quarto quarto : quartos) {
-                String diariaFormatada = dinheiro.format(quarto.getDiaria());
-                Object[] row = {quarto.getId(), quarto.getNumeroquarto(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), diariaFormatada};
-                tabela.addRow(row);
-            }
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
-    
-    public void selecionarQuarto(){
+    private void selecionarQuarto(){
         int index = tbQuartos.getSelectedRow();
         int roomId = (int) tbQuartos.getValueAt(index, 0);
         System.out.println("index selecionado: " + index);       
@@ -396,83 +370,20 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
     }
     
     private void atualizarQuarto(){
-        byte numeroQuarto = Byte.parseByte(txtNomeQuarto.getText());
+        String nome = txtNomeQuarto.getText();
+        String tipoQuarto = (String) cmbTipoQuarto.getSelectedItem();
         byte numeroCamas = Byte.parseByte(txtNumeroCamas.getText());
-        double diaria = Double.parseDouble(txtDiaria.getText());
-        
-        if(validaCamposTexto()){
-            
-        }else if(!validaLetraNumero(txtNomeQuarto.getText(), txtTipoQuarto.getText(), txtNumeroCamas.getText(), txtDiaria.getText())){
-            
-        }else if(!validaTamanhoString(numeroQuarto, numeroCamas, diaria)){
-            
-        }else{
-             
-            Quarto quartoParaAtualizar = new Quarto();   
-            quartoParaAtualizar.setNumeroquarto((byte) numeroQuarto);
-            quartoParaAtualizar.setTipoQuarto(txtTipoQuarto.getText());
-            quartoParaAtualizar.setNumeroCamas((byte) numeroCamas);
-            quartoParaAtualizar.setDiaria(diaria);
-
-            QuartoDAO quartoDAO = new QuartoDAO();
-            try{
-
-                quartoDAO.atualizarQuarto(quartoParaAtualizar);
-            }catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao atualizar o quarto." + e.getMessage());
-            }
-        }
+        boolean quartoOcupado = cbxQuartoOcupado.isSelected();
+        Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamas, quartoOcupado);
+        tipoService.atulizarQuarto(quarto);
     }
     
-    public void pesquisar(){
+    private void pesquisar(){
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
-        String pesquisa = (String) cbxCampoPesquisa.getSelectedItem();
-        String valor = txtCampoPesquisa.getText();
-        NumberFormat dinheiro = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        
-        if(valor.isBlank()){
-            JOptionPane.showMessageDialog(null, "O campo esta em branco.");
-            
-        }else if(!valor.matches("[a-zA-Z\\d\\s.]+")){
-             JOptionPane.showMessageDialog(null, "O campo possui caracteres invalidos");
-             
-        }else if(!limiteTamanhoString(valor, 100)){ 
-             JOptionPane.showMessageDialog(null, "O numeros de caracteres foi ultrapassado.");
-             
-        }else{
-            if(pesquisa.equalsIgnoreCase("id".trim())){
-                pesquisa = "id";     
-                                  
-            }else if(pesquisa.equalsIgnoreCase("Nº Quarto".trim())){ 
-                pesquisa = "n_quarto";
-               
-            }else if(pesquisa.equalsIgnoreCase("Tipo Do Quarto".trim())){ 
-                pesquisa = "tipo_quarto";
-                           
-            }else if(pesquisa.equalsIgnoreCase("Nº De Camas".trim())){
-                pesquisa = "n_camas";
-                
-            }else if(pesquisa.equalsIgnoreCase("Valor Da Diaria".trim())){ 
-                pesquisa = "valor_diaria";
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Nemnhuma das colunas foi encontrada, pesquise novamente");
-                return;
-            }
-        try{
-            ArrayList<Quarto> quartos = quartoDAO.buscar(pesquisa,valor);
-
-            for(Quarto quarto : quartos){
-                String diariaFormatada = dinheiro.format(quarto.getDiaria());
-                Object[] row = {quarto.getId(), quarto.getNumeroquarto(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), diariaFormatada};
-                tabela.addRow(row);
-            }
-
-        }catch(SQLException e){
-            System.out.println("erro ao pesquisar " + e.getMessage());
-        }
-        }
+        String pesquisa = (String) cbmCampoPesquisa.getSelectedItem();
+        String valor = txtCampoPesquisa.getText(); 
+        tabela.addRow(tipoService.pesquisaQuarto(pesquisa, valor));
     }
   
     public JComboBox<String> getComboBoxColunas(JComboBox<String> comboBox){

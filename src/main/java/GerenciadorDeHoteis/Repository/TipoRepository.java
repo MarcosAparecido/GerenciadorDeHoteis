@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GreneciadorDeHoteis.Repository;
+package GerenciadorDeHoteis.Repository;
 
 import GerenciadorDeHoteis.Types.Funcionario;
 import GerenciadorDeHoteis.Types.Quarto;
@@ -92,14 +92,14 @@ public class TipoRepository {
         } catch (NoResultException e) {
             return null; // Se nenhum funcionário for encontrado com o CPF fornecido
         }
-    }
+    }    
     
     public List<Quarto> listarTodosQuartos(){
         TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q", Quarto.class);
         return query.getResultList();
     }
     
-    public Object[][] preencherTabelaQuarto(){
+    public Object[] preencherTabelaQuarto(){
         List<Quarto> quartos = listarTodosQuartos();
         List<Object[]> tabela = new ArrayList<>();
         
@@ -108,6 +108,47 @@ public class TipoRepository {
             tabela.add(linha);
         }
         return tabela.toArray(new Object[0][]);
+    }
+    
+    public Object[][] preencherTabelaPesquisaQuarto(String campo, Object valor){
+        List<Quarto> quartos = pesquisaCampoQuarto(campo, valor);
+        List<Object[]> tabela = new ArrayList<>();
+        
+        for (Quarto quarto : quartos){
+            Object[] linha = {quarto.getId(), quarto.getNome(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), quarto.isStatus()};  
+            tabela.add(linha);
+        }
+        return tabela.toArray(new Object[0][]);
+    }
+    
+    public List<Quarto> pesquisaCampoQuarto(String campo, Object valor) {
+        String pesquisa = "SELECT q FROM Quarto q WHERE ";
+
+        if ("nome".equals(campo)) {
+            pesquisa += "q.nome = :valor";
+            
+        } else if ("tipoQuarto".equals(campo)) {
+            pesquisa += "q.tipoQuarto = :valor";
+            
+        } else if ("numeroCamas".equals(campo)) {
+            pesquisa += "q.numeroCamas = :valor";
+            
+        } else if ("status".equals(campo)) {
+            pesquisa += "q.status = :valor";
+            
+        } else {
+            throw new IllegalArgumentException("Campo de busca inválido: " + campo);
+        }
+        TypedQuery<Quarto> query = em.createQuery(pesquisa, Quarto.class);
+        query.setParameter("valor", valor);
+        return query.getResultList();
+    }
+    
+    public void atualizarQuarto(Quarto quarto) {
+        em.getTransaction().begin();
+        Quarto quartoExistente = em.find(Quarto.class, quarto.getId());
+        quartoExistente = em.merge(quarto);
+        em.getTransaction().commit();          
     }
     
     public void inserirQuarto(Quarto quarto){
