@@ -99,7 +99,7 @@ public class TipoRepository {
         return query.getResultList();
     }
     
-    public Object[] preencherTabelaQuarto(){
+    public List<Object[]> preencherTabelaQuarto(){
         List<Quarto> quartos = listarTodosQuartos();
         List<Object[]> tabela = new ArrayList<>();
         
@@ -107,7 +107,7 @@ public class TipoRepository {
             Object[] linha = {quarto.getId(), quarto.getNome(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), quarto.isStatus()};  
             tabela.add(linha);
         }
-        return tabela.toArray(new Object[0][]);
+        return tabela;
     }
     
     public Object[][] preencherTabelaPesquisaQuarto(String campo, Object valor){
@@ -123,17 +123,20 @@ public class TipoRepository {
     
     public List<Quarto> pesquisaCampoQuarto(String campo, Object valor) {
         String pesquisa = "SELECT q FROM Quarto q WHERE ";
-
-        if ("nome".equals(campo)) {
+        
+        if("Id".equals(campo)){
+            pesquisa += "q.id = :valor";
+            
+        }else if ("Nome Quarto".equals(campo)) {
             pesquisa += "q.nome = :valor";
             
-        } else if ("tipoQuarto".equals(campo)) {
+        } else if ("Tipo Do Quarto".equals(campo)) {
             pesquisa += "q.tipoQuarto = :valor";
             
-        } else if ("numeroCamas".equals(campo)) {
+        } else if ("NºDe Camas".equals(campo)) {
             pesquisa += "q.numeroCamas = :valor";
             
-        } else if ("status".equals(campo)) {
+        } else if ("Status Ocupação".equals(campo)) {
             pesquisa += "q.status = :valor";
             
         } else {

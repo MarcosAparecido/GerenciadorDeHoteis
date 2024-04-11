@@ -7,6 +7,7 @@ package GerenciadorDeHoteis.Views;
 import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Types.Quarto;
 import GerenciadorDeHoteis.Repository.TipoRepository;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -151,16 +152,9 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         scpQuartos.setViewportView(tbQuartos);
@@ -337,25 +331,29 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void criarQuarto(){
-        String nome = txtNomeQuarto.getText();
+        byte numeroCamasNumero;
+        String nome = txtNomeQuarto.getText().trim();
         String tipoQuarto = (String) cmbTipoQuarto.getSelectedItem();
-        byte numeroCamas = Byte.parseByte(txtNumeroCamas.getText());
+        String numeroCamas = txtNumeroCamas.getText().trim();
         boolean quartoOcupado = cbxQuartoOcupado.isSelected();
         
-        if(txtNumeroCamas.getText().isEmpty()){
-             JOptionPane.showInternalMessageDialog(null,"O campo cama esta vazio");
-             return;
+        try {
+            numeroCamasNumero = Byte.parseByte(numeroCamas);    
+        } catch (NumberFormatException e) {
+            JOptionPane.showInternalMessageDialog(null,"O campo cama deve ser um número válido.");
+            return;    
         }
-        
-        Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamas, quartoOcupado);
+        Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamasNumero, quartoOcupado);
         tipoService.salvarQuarto(quarto);
-        JOptionPane.showInternalMessageDialog(null,"Quarto criado com sucesso.");
     }
 
     private void preencherAtualizarTabela(){
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
-        tabela.addRow(tipoService.preencherTabelaQuarto());   
+        List<Object[]> objeto = tipoService.preencherTabelaQuarto();
+        for(Object[] linha : objeto){
+            tabela.addRow(linha);
+        }  
     }
     
     private void selecionarQuarto(){

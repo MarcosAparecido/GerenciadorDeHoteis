@@ -9,6 +9,7 @@ import GerenciadorDeHoteis.Types.Quarto;
 import GerenciadorDeHoteis.Repository.TipoRepository;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -98,6 +99,7 @@ public class TipoService {
             System.out.println("Dados validados com sucesso");
             if (funcionario.getId() == null) {
                 System.out.println("Inserindo os dados");
+                JOptionPane.showInternalMessageDialog(null, "Funcionario cadastrado com sucesso");
                 tipoRepository.inserirFuncionario(funcionario);
             }
 	}   
@@ -105,11 +107,11 @@ public class TipoService {
     
     //Service Quartos
     private boolean validaDadosQuarto(Quarto quarto){
-        if (quarto.getNome().trim().isEmpty() || quarto.getNumeroCamas() < 0) {
+        if (quarto.getNome().trim().isEmpty() || String.valueOf(quarto.getNumeroCamas()).trim().isEmpty()) {
             JOptionPane.showInternalMessageDialog(null, "Um dos campos esta nulo.");
             return false;
         
-	} else if (quarto.getNome().trim().isBlank()) {
+	} else if (quarto.getNome().trim().isBlank() || String.valueOf(quarto.getNumeroCamas()).trim().isBlank()) {
             JOptionPane.showInternalMessageDialog(null, "O campo Nome de Quarto esta em branco.");
             return false;
 
@@ -178,9 +180,9 @@ public class TipoService {
         return true;   
     }
     
-    public Object[] preencherTabelaQuarto(){
-        Object[]linha = tipoRepository.preencherTabelaQuarto();
-        if(linha != null){
+    public List<Object[]> preencherTabelaQuarto(){
+        List<Object[]> linha = tipoRepository.preencherTabelaQuarto();
+        if(linha == null){
             System.out.println("Erro ao retornar tabela, tabela esta nula"); 
             return null;
             
@@ -218,6 +220,7 @@ public class TipoService {
             if (quarto.getId() == null) {
                 System.out.println("Inserindo os dados");
                 tipoRepository.inserirQuarto(quarto);
+                JOptionPane.showInternalMessageDialog(null, "Quarto cadastrado com sucesso");
             }
 	}   
     }
