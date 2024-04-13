@@ -19,13 +19,14 @@ import java.util.List;
  * @author Marcos
  */
 public class TipoRepository {
+
     private EntityManager em;
-    
-    public TipoRepository(){
+
+    public TipoRepository() {
         EntityManagerFactory fm = Persistence.createEntityManagerFactory("bd-gerenciador");
         this.em = fm.createEntityManager();
     }
-    
+
     //Funcionario Repository
     public Funcionario buscarPorCPFFuncionario(String cpf) {
         try {
@@ -45,14 +46,14 @@ public class TipoRepository {
         } catch (NoResultException e) {
             return null; // Se nenhum funcionário for encontrado com o CPF fornecido
         }
-    }   
-    
-    public void inserirFuncionario(Funcionario funcionario){
+    }
+
+    public void inserirFuncionario(Funcionario funcionario) {
         em.getTransaction().begin();
         em.persist(funcionario);
         em.getTransaction().commit();
     }
-    
+
     //Quarto Repository   
     public Quarto buscarPorNomeQuarto(String quarto) {
         try {
@@ -73,7 +74,7 @@ public class TipoRepository {
             return null; // Se nenhum funcionário for encontrado com o CPF fornecido
         }
     }
-    
+
     public Quarto buscarPorIdQuarto(int id) {
         try {
             TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q WHERE q.id = :id", Quarto.class);
@@ -92,53 +93,53 @@ public class TipoRepository {
         } catch (NoResultException e) {
             return null; // Se nenhum funcionário for encontrado com o CPF fornecido
         }
-    }    
-    
-    public List<Quarto> listarTodosQuartos(){
+    }
+
+    public List<Quarto> listarTodosQuartos() {
         TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q", Quarto.class);
         return query.getResultList();
     }
-    
-    public List<Object[]> preencherTabelaQuarto(){
+
+    public List<Object[]> preencherTabelaQuarto() {
         List<Quarto> quartos = listarTodosQuartos();
         List<Object[]> tabela = new ArrayList<>();
-        
-        for (Quarto quarto : quartos){
-            Object[] linha = {quarto.getId(), quarto.getNome(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), quarto.isStatus()};  
+
+        for (Quarto quarto : quartos) {
+            Object[] linha = {quarto.getId(), quarto.getNome(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), quarto.isStatus()};
             tabela.add(linha);
         }
         return tabela;
     }
-    
-    public Object[][] preencherTabelaPesquisaQuarto(String campo, Object valor){
+
+    public List<Object[]> preencherTabelaPesquisaQuarto(String campo, Object valor) {
         List<Quarto> quartos = pesquisaCampoQuarto(campo, valor);
         List<Object[]> tabela = new ArrayList<>();
-        
-        for (Quarto quarto : quartos){
-            Object[] linha = {quarto.getId(), quarto.getNome(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), quarto.isStatus()};  
+
+        for (Quarto quarto : quartos) {
+            Object[] linha = {quarto.getId(), quarto.getNome(), quarto.getTipoQuarto(), quarto.getNumeroCamas(), quarto.isStatus()};
             tabela.add(linha);
         }
-        return tabela.toArray(new Object[0][]);
+        return tabela;
     }
-    
+
     public List<Quarto> pesquisaCampoQuarto(String campo, Object valor) {
         String pesquisa = "SELECT q FROM Quarto q WHERE ";
-        
-        if("Id".equals(campo)){
+
+        if ("Id".equals(campo)) {
             pesquisa += "q.id = :valor";
-            
-        }else if ("Nome Quarto".equals(campo)) {
+
+        } else if ("Nome Quarto".equals(campo)) {
             pesquisa += "q.nome = :valor";
-            
+
         } else if ("Tipo Do Quarto".equals(campo)) {
             pesquisa += "q.tipoQuarto = :valor";
-            
-        } else if ("NºDe Camas".equals(campo)) {
+
+        } else if ("Nº De Camas".equals(campo)) {
             pesquisa += "q.numeroCamas = :valor";
-            
+
         } else if ("Status Ocupação".equals(campo)) {
             pesquisa += "q.status = :valor";
-            
+
         } else {
             throw new IllegalArgumentException("Campo de busca inválido: " + campo);
         }
@@ -146,15 +147,62 @@ public class TipoRepository {
         query.setParameter("valor", valor);
         return query.getResultList();
     }
-    
-    public void atualizarQuarto(Quarto quarto) {
-        em.getTransaction().begin();
-        Quarto quartoExistente = em.find(Quarto.class, quarto.getId());
-        quartoExistente = em.merge(quarto);
-        em.getTransaction().commit();          
+
+    public void atualizarQuarto(int id, Quarto quartoAtualizado) {
+        try {
+            em.getTransaction().begin();
+
+            // Busca o quarto pelo ID
+            Quarto quartoExistente = em.find(Quarto.class, id);
+
+            // Verifica se o quarto existe
+            if (quartoExistente == null) {
+                // Se o quarto não existir, lança uma exceção ou trata conforme necessário
+                throw new IllegalArgumentException("Quarto não encontrado para atualização");
+            }
+
+            // Aplica as atualizações nos campos do quarto existente com os valores do quarto atualizado
+            quartoExistente.setNome(quartoAtualizado.getNome());
+            quartoExistente.setTipoQuarto(quartoAtualizado.getTipoQuarto());
+            quartoExistente.setNumeroCamas(quartoAtualizado.getNumeroCamas());
+            quartoExistente.setStatus(quartoAtualizado.isStatus());
+
+            // Realiza a atualização no banco de dados
+            em.merge(quartoExistente);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction() != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao atualizar o quarto: " + e.getMessage());
+        }
     }
-    
-    public void inserirQuarto(Quarto quarto){
+
+    public void deletarQuartoPorId(int id) {
+        try {
+            em.getTransaction().begin();
+
+            // Busca o quarto pelo ID
+            Quarto quarto = em.find(Quarto.class, id);
+
+            if (quarto != null) {
+                // Remove o quarto do banco de dados
+                em.remove(quarto);
+                em.getTransaction().commit();
+                System.out.println("Quarto deletado com sucesso!");
+            } else {
+                System.out.println("Quarto não encontrado");
+            }
+        } catch (Exception e) {
+            if (em.getTransaction() != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao deletar quarto: " + e.getMessage());
+        }
+    }
+
+    public void inserirQuarto(Quarto quarto) {
         em.getTransaction().begin();
         em.persist(quarto);
         em.getTransaction().commit();

@@ -18,9 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Marcos
  */
 public class GerenciamentoDeQuarto extends javax.swing.JFrame {
+
     TipoService tipoService = new TipoService();
     TipoRepository tipoRepository = new TipoRepository();
-    
+    //private int quartoId = 0;
+
     /**
      * Creates new form GerenciamentoDeQuarto
      */
@@ -28,8 +30,10 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         initComponents();
         preencherAtualizarTabela();
         telaPesquisa.setSize(445, 450);
+        telaEditar.setSize(250, 380);
         cbmCampoPesquisa = getComboBoxColunas(cbmCampoPesquisa);
         telaPesquisa.setLocationRelativeTo(null);
+        telaEditar.setLocationRelativeTo(null);
         this.setLocationRelativeTo(null);
     }
 
@@ -51,6 +55,20 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         btnPesquisa = new javax.swing.JButton();
         btnFecharPesquisar = new javax.swing.JToggleButton();
         lblFundoPesquisa = new javax.swing.JLabel();
+        telaEditar = new javax.swing.JFrame();
+        lblEdicaoQuarto = new javax.swing.JLabel();
+        lblIdEditar = new javax.swing.JLabel();
+        lblNomeQuartoEdicao = new javax.swing.JLabel();
+        lblTipoQuartoEdicao = new javax.swing.JLabel();
+        lblNumeroCamasEdicao = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        txtNomeQuartoEdicao = new javax.swing.JTextField();
+        cmbTipoQuartoEdicao = new javax.swing.JComboBox<>();
+        txtNumeroCamasEdicao = new javax.swing.JTextField();
+        btnQuartoEdicao = new javax.swing.JButton();
+        btnFecharEdicao = new javax.swing.JButton();
+        cbxQuartoOcupadoEdicao = new javax.swing.JCheckBox();
+        lblTelaEditar = new javax.swing.JLabel();
         lblGerenciamentoDeQuatos = new javax.swing.JLabel();
         lblNomeQuarto = new javax.swing.JLabel();
         lblTipoQuarto = new javax.swing.JLabel();
@@ -59,14 +77,14 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         cmbTipoQuarto = new javax.swing.JComboBox<>();
         txtNumeroCamas = new javax.swing.JTextField();
         cbxQuartoOcupado = new javax.swing.JCheckBox();
-        scpQuartos = new javax.swing.JScrollPane();
-        tbQuartos = new javax.swing.JTable();
-        bntRegistarQuarto = new javax.swing.JButton();
-        bntPesquisar = new javax.swing.JToggleButton();
-        bntSelecionarQuarto = new javax.swing.JToggleButton();
-        bntEditarQuarto = new javax.swing.JToggleButton();
+        btnRegistarQuarto = new javax.swing.JButton();
+        btnPesquisarQuarto = new javax.swing.JToggleButton();
+        btnEditarQuarto = new javax.swing.JToggleButton();
+        btnDeletar = new javax.swing.JToggleButton();
         btnRefersh = new javax.swing.JToggleButton();
         btnSair = new javax.swing.JToggleButton();
+        scpQuartos = new javax.swing.JScrollPane();
+        tbQuartos = new javax.swing.JTable();
         lblFundo = new javax.swing.JLabel();
 
         telaPesquisa.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,6 +126,72 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         lblFundoPesquisa.setText("Fundo Pesquisa");
         telaPesquisa.getContentPane().add(lblFundoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 680, 410));
 
+        telaEditar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEdicaoQuarto.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblEdicaoQuarto.setText("Editção de Quartos");
+        telaEditar.getContentPane().add(lblEdicaoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 40));
+
+        lblIdEditar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblIdEditar.setText("ID :");
+        telaEditar.getContentPane().add(lblIdEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 30));
+
+        lblNomeQuartoEdicao.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNomeQuartoEdicao.setText("Nome do Quarto :");
+        telaEditar.getContentPane().add(lblNomeQuartoEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 160, 30));
+
+        lblTipoQuartoEdicao.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblTipoQuartoEdicao.setText("Tipo de Quarto :");
+        telaEditar.getContentPane().add(lblTipoQuartoEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 150, 30));
+
+        lblNumeroCamasEdicao.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNumeroCamasEdicao.setText("Nº de Camas :");
+        telaEditar.getContentPane().add(lblNumeroCamasEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 130, 30));
+
+        lblId.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        lblId.setText("Id");
+        telaEditar.getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 30, 50));
+
+        txtNomeQuartoEdicao.setToolTipText("numero do quarto");
+        telaEditar.getContentPane().add(txtNomeQuartoEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 30));
+
+        cmbTipoQuartoEdicao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cmbTipoQuartoEdicao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Solteiro Duplo", "Quarto Casal", "Apartamento", "Suite" }));
+        telaEditar.getContentPane().add(cmbTipoQuartoEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 150, 30));
+
+        txtNumeroCamasEdicao.setToolTipText("numero de camas no quarto");
+        telaEditar.getContentPane().add(txtNumeroCamasEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 210, 30));
+
+        btnQuartoEdicao.setText("Editar Quarto");
+        btnQuartoEdicao.setToolTipText("efetua o registro de um quarto");
+        btnQuartoEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuartoEdicaoActionPerformed(evt);
+            }
+        });
+        telaEditar.getContentPane().add(btnQuartoEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+
+        btnFecharEdicao.setText("Fechar");
+        btnFecharEdicao.setToolTipText("efetua o registro de um quarto");
+        btnFecharEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharEdicaoActionPerformed(evt);
+            }
+        });
+        telaEditar.getContentPane().add(btnFecharEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, -1, -1));
+
+        cbxQuartoOcupadoEdicao.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cbxQuartoOcupadoEdicao.setText("Quarto Ocupado");
+        cbxQuartoOcupadoEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxQuartoOcupadoEdicaoActionPerformed(evt);
+            }
+        });
+        telaEditar.getContentPane().add(cbxQuartoOcupadoEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 40));
+
+        lblTelaEditar.setText("Fundo Editar");
+        telaEditar.getContentPane().add(lblTelaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 350));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -141,6 +225,60 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         cbxQuartoOcupado.setText("Quarto Ocupado");
         getContentPane().add(cbxQuartoOcupado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 170, 40));
 
+        btnRegistarQuarto.setText("Registrar Quarto");
+        btnRegistarQuarto.setToolTipText("efetua o registro de um quarto");
+        btnRegistarQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistarQuartoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegistarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 160, 40));
+
+        btnPesquisarQuarto.setText("Pesquisar Quarto");
+        btnPesquisarQuarto.setToolTipText("abre a tela de pesquisa");
+        btnPesquisarQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarQuartoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPesquisarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 120, -1));
+
+        btnEditarQuarto.setText("Editar Quarto");
+        btnEditarQuarto.setToolTipText("seleciona um quarto para editar");
+        btnEditarQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarQuartoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 120, -1));
+
+        btnDeletar.setText("Excluir Quarto");
+        btnDeletar.setToolTipText("efetua a edição");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 120, -1));
+
+        btnRefersh.setText("Recarregar/Julinha Mude S2");
+        btnRefersh.setToolTipText("recarrega a tabela");
+        btnRefersh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefershActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRefersh, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 330, 170, -1));
+
+        btnSair.setText("Sair/Julinha Mude S2");
+        btnSair.setToolTipText("fecha essa tela");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 170, -1));
+
         tbQuartos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -168,86 +306,32 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
 
         getContentPane().add(scpQuartos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 990, 210));
 
-        bntRegistarQuarto.setText("Registrar Quarto");
-        bntRegistarQuarto.setToolTipText("efetua o registro de um quarto");
-        bntRegistarQuarto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntRegistarQuartoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bntRegistarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 140, -1));
-
-        bntPesquisar.setText("Pesquisar");
-        bntPesquisar.setToolTipText("abre a tela de pesquisa");
-        bntPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntPesquisarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bntPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, 140, -1));
-
-        bntSelecionarQuarto.setText("Selecionar Quarto");
-        bntSelecionarQuarto.setToolTipText("seleciona um quarto para editar");
-        bntSelecionarQuarto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSelecionarQuartoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bntSelecionarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, 140, -1));
-
-        bntEditarQuarto.setText("Editar Quarto");
-        bntEditarQuarto.setToolTipText("efetua a edição");
-        bntEditarQuarto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntEditarQuartoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bntEditarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 300, 140, -1));
-
-        btnRefersh.setText("Recarregar/Julinha Mude S2");
-        btnRefersh.setToolTipText("recarrega a tabela");
-        btnRefersh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefershActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRefersh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 170, -1));
-
-        btnSair.setText("Sair/Julinha Mude S2");
-        btnSair.setToolTipText("fecha essa tela");
-        btnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 170, -1));
-
         lblFundo.setText("Fundo");
         getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntRegistarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistarQuartoActionPerformed
+    private void btnRegistarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarQuartoActionPerformed
         // TODO add your handling code here:
         criarQuarto();
         preencherAtualizarTabela();
-    }//GEN-LAST:event_bntRegistarQuartoActionPerformed
+    }//GEN-LAST:event_btnRegistarQuartoActionPerformed
 
-    private void bntEditarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarQuartoActionPerformed
-        atualizarQuarto();
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        deletar();
         preencherAtualizarTabela();
-    }//GEN-LAST:event_bntEditarQuartoActionPerformed
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
-    private void bntSelecionarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSelecionarQuartoActionPerformed
+    private void btnEditarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarQuartoActionPerformed
         // TODO add your handling code here:
-        selecionarQuarto();
-    }//GEN-LAST:event_bntSelecionarQuartoActionPerformed
+        editar();
+    }//GEN-LAST:event_btnEditarQuartoActionPerformed
 
-    private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
+    private void btnPesquisarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarQuartoActionPerformed
         // TODO add your handling code here:
-        telaPesquisa.setVisible(true);        
-    }//GEN-LAST:event_bntPesquisarActionPerformed
+        telaPesquisa.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarQuartoActionPerformed
 
     private void btnRefershActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefershActionPerformed
         // TODO add your handling code here:
@@ -255,7 +339,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefershActionPerformed
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:       
         pesquisar();
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
@@ -263,6 +347,20 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void cbxQuartoOcupadoEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuartoOcupadoEdicaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxQuartoOcupadoEdicaoActionPerformed
+
+    private void btnFecharEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharEdicaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFecharEdicaoActionPerformed
+
+    private void btnQuartoEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuartoEdicaoActionPerformed
+        // TODO add your handling code here:
+        atualizarQuarto();
+        preencherAtualizarTabela();
+    }//GEN-LAST:event_btnQuartoEdicaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,105 +394,160 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GerenciamentoDeQuarto().setVisible(true);
-               
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton bntEditarQuarto;
-    private javax.swing.JToggleButton bntPesquisar;
-    private javax.swing.JButton bntRegistarQuarto;
-    private javax.swing.JToggleButton bntSelecionarQuarto;
+    private javax.swing.JToggleButton btnDeletar;
+    private javax.swing.JToggleButton btnEditarQuarto;
+    private javax.swing.JButton btnFecharEdicao;
     private javax.swing.JToggleButton btnFecharPesquisar;
     private javax.swing.JButton btnPesquisa;
+    private javax.swing.JToggleButton btnPesquisarQuarto;
+    private javax.swing.JButton btnQuartoEdicao;
     private javax.swing.JToggleButton btnRefersh;
+    private javax.swing.JButton btnRegistarQuarto;
     private javax.swing.JToggleButton btnSair;
     private javax.swing.JComboBox<String> cbmCampoPesquisa;
     private javax.swing.JCheckBox cbxQuartoOcupado;
+    private javax.swing.JCheckBox cbxQuartoOcupadoEdicao;
     private javax.swing.JComboBox<String> cmbTipoQuarto;
+    private javax.swing.JComboBox<String> cmbTipoQuartoEdicao;
     private javax.swing.JLabel lblCampoPesquisa;
+    private javax.swing.JLabel lblEdicaoQuarto;
     private javax.swing.JLabel lblFundo;
     private javax.swing.JLabel lblFundoPesquisa;
     private javax.swing.JLabel lblGerenciamentoDeQuatos;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblIdEditar;
     private javax.swing.JLabel lblNomeQuarto;
+    private javax.swing.JLabel lblNomeQuartoEdicao;
     private javax.swing.JLabel lblNumeroCamas;
+    private javax.swing.JLabel lblNumeroCamasEdicao;
     private javax.swing.JLabel lblPesquisa;
+    private javax.swing.JLabel lblTelaEditar;
     private javax.swing.JLabel lblTipoQuarto;
+    private javax.swing.JLabel lblTipoQuartoEdicao;
     private javax.swing.JLabel lblValorPesquisa;
     private javax.swing.JScrollPane scpQuartos;
     private javax.swing.JTable tbQuartos;
+    private javax.swing.JFrame telaEditar;
     private javax.swing.JFrame telaPesquisa;
     private javax.swing.JTextField txtCampoPesquisa;
     private javax.swing.JTextField txtNomeQuarto;
+    private javax.swing.JTextField txtNomeQuartoEdicao;
     private javax.swing.JTextField txtNumeroCamas;
+    private javax.swing.JTextField txtNumeroCamasEdicao;
     // End of variables declaration//GEN-END:variables
 
-    private void criarQuarto(){
+    private void criarQuarto() {
         byte numeroCamasNumero;
         String nome = txtNomeQuarto.getText().trim();
         String tipoQuarto = (String) cmbTipoQuarto.getSelectedItem();
         String numeroCamas = txtNumeroCamas.getText().trim();
         boolean quartoOcupado = cbxQuartoOcupado.isSelected();
-        
+
         try {
-            numeroCamasNumero = Byte.parseByte(numeroCamas);    
+            numeroCamasNumero = Byte.parseByte(numeroCamas);
         } catch (NumberFormatException e) {
-            JOptionPane.showInternalMessageDialog(null,"O campo cama deve ser um número válido.");
-            return;    
+            JOptionPane.showInternalMessageDialog(null, "O campo cama deve ser um número válido.");
+            return;
         }
         Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamasNumero, quartoOcupado);
         tipoService.salvarQuarto(quarto);
     }
 
-    private void preencherAtualizarTabela(){
+    private void preencherAtualizarTabela() {
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
         List<Object[]> objeto = tipoService.preencherTabelaQuarto();
-        for(Object[] linha : objeto){
-            tabela.addRow(linha);
-        }  
+        if (objeto == null) {
+            JOptionPane.showInternalMessageDialog(null, "O valor pesquisado não foi encrontrado.");
+        } else {
+            for (Object[] linha : objeto) {
+                tabela.addRow(linha);
+            }
+        }
     }
-    
-    private void selecionarQuarto(){
+
+    private int selecionarQuarto() {
         int index = tbQuartos.getSelectedRow();
-        int roomId = (int) tbQuartos.getValueAt(index, 0);
-        System.out.println("index selecionado: " + index);       
-        Quarto quarto = tipoRepository.buscarPorIdQuarto(roomId);
-        txtNomeQuarto.setText(quarto.getNome());
-        cmbTipoQuarto.setSelectedItem(quarto.getTipoQuarto());
-        txtNumeroCamas.setText(String.valueOf(quarto.getNumeroCamas()));
-        cbxQuartoOcupado.setSelected(quarto.isStatus());
+        if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um quarto na Tabela antes de editar ou excluir", "Erro", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        } else {
+            int id = (int) tbQuartos.getValueAt(index, 0);
+            return id;
+        }
     }
-    
-    private void atualizarQuarto(){
-        String nome = txtNomeQuarto.getText();
-        String tipoQuarto = (String) cmbTipoQuarto.getSelectedItem();
-        byte numeroCamas = Byte.parseByte(txtNumeroCamas.getText());
-        boolean quartoOcupado = cbxQuartoOcupado.isSelected();
+
+    private void atualizarQuarto() {
+        String nome = txtNomeQuartoEdicao.getText();
+        String tipoQuarto = (String) cmbTipoQuartoEdicao.getSelectedItem();
+        byte numeroCamas = Byte.parseByte(txtNumeroCamasEdicao.getText());
+        boolean quartoOcupado = cbxQuartoOcupadoEdicao.isSelected();
         Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamas, quartoOcupado);
-        tipoService.atulizarQuarto(quarto);
+        System.out.println("quarto id " + selecionarQuarto());
+        tipoService.atulizarQuartoService(selecionarQuarto(), quarto);
     }
-    
-    private void pesquisar(){
+
+    private void deletar() {
+        if (validaEdicao()) {
+            tipoService.deletarQuartoService(selecionarQuarto());
+        }
+    }
+
+    private void pesquisar() {
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
-        String pesquisa = (String) cbmCampoPesquisa.getSelectedItem();
-        String valor = txtCampoPesquisa.getText(); 
-        tabela.addRow(tipoService.pesquisaQuarto(pesquisa, valor));
+        String campo = (String) cbmCampoPesquisa.getSelectedItem();
+        String valor = txtCampoPesquisa.getText();
+        List<Object[]> objeto = tipoService.pesquisaQuarto(campo, valor);
+        if (objeto == null) {
+            JOptionPane.showInternalMessageDialog(null, "O valor pesquisado não foi encrontrado.");
+        } else {
+            for (Object[] linha : objeto) {
+                tabela.addRow(linha);
+            }
+        }
     }
-  
-    public JComboBox<String> getComboBoxColunas(JComboBox<String> comboBox){
+
+    private void editar() {
+        if (validaEdicao()) {
+            Quarto quarto = tipoRepository.buscarPorIdQuarto(selecionarQuarto());
+            if (quarto != null) {
+                lblId.setText(String.valueOf(quarto.getId()));
+                txtNomeQuartoEdicao.setText(quarto.getNome());
+                cmbTipoQuartoEdicao.setSelectedItem(quarto.getTipoQuarto());
+                txtNumeroCamasEdicao.setText(String.valueOf(quarto.getNumeroCamas()));
+                cbxQuartoOcupadoEdicao.setSelected(quarto.isStatus());
+                telaEditar.setVisible(true);
+            } else {
+                System.out.println("O quarto selecionado não foi encontrado");
+            }
+        }
+    }
+
+    private boolean validaEdicao() {
+        if (selecionarQuarto() < 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public JComboBox<String> getComboBoxColunas(JComboBox<String> comboBox) {
         comboBox.removeAllItems();
-         
+
         for (int i = 0; i < getTbQuatos().getColumnCount(); i++) {
             String nomeColuna = getTbQuatos().getColumnName(i);
             comboBox.addItem(nomeColuna);
-        }  
+        }
         return comboBox;
     }
 
     public JTable getTbQuatos() {
         return tbQuartos;
-    }   
+    }
 }
