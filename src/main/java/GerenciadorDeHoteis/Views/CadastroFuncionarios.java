@@ -43,114 +43,138 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         lblSobrenome = new javax.swing.JLabel();
         lblCpf = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
+        btnSalvar1 = new javax.swing.JButton();
         lblSenha = new javax.swing.JLabel();
         lblConfimacao = new javax.swing.JLabel();
-        lblCadastroFuncionarios = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         lblFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Funcionários");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtNome.setToolTipText("nome do funcionario");
-        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 380, 30));
+        txtNome.setToolTipText("Nome do Funcionario");
+        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 260, 30));
 
         txtSobrenome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtSobrenome.setToolTipText("sobrenome do funcionario");
-        getContentPane().add(txtSobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 380, 30));
+        txtSobrenome.setToolTipText("Sobrenome do Funcionario");
+        getContentPane().add(txtSobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 270, 30));
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpf.setToolTipText("Escreva seu CPF");
         txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCpfActionPerformed(evt);
             }
         });
-        getContentPane().add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 380, 30));
+        getContentPane().add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 260, 30));
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtTelefone.setToolTipText("telefone do usuario");
+        txtTelefone.setToolTipText("Telefone do Usuário");
         txtTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefoneActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 219, 380, 30));
+        getContentPane().add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 270, 30));
 
-        txtSenha.setToolTipText("senha desejada");
-        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 380, 30));
+        txtSenha.setToolTipText("Digite Senha Desejada");
+        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 260, 30));
 
-        txtConfirmacao.setToolTipText("cofirme a senha desejada");
+        txtConfirmacao.setToolTipText("Cofirme a Senha Desejada");
         txtConfirmacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmacaoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtConfirmacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 380, 30));
+        getContentPane().add(txtConfirmacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 570, 280, 30));
 
-        lblNome.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        lblNome.setFont(new java.awt.Font("MingLiU-ExtB", 1, 20)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(0, 0, 0));
+        lblNome.setIcon(new javax.swing.ImageIcon("C:\\Users\\Julia\\Desktop\\Projeto imagens\\Icone_Usuario.png")); // NOI18N
         lblNome.setText("Nome:");
-        getContentPane().add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 70, 30));
+        getContentPane().add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 100, 30));
 
-        lblSobrenome.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        lblSobrenome.setFont(new java.awt.Font("MingLiU-ExtB", 1, 20)); // NOI18N
+        lblSobrenome.setForeground(new java.awt.Color(0, 0, 0));
+        lblSobrenome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone_Usuario.png"))); // NOI18N
         lblSobrenome.setText("Sobrenome:");
-        getContentPane().add(lblSobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 120, 30));
+        getContentPane().add(lblSobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, 160, 30));
 
-        lblCpf.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        lblCpf.setFont(new java.awt.Font("MingLiU-ExtB", 1, 20)); // NOI18N
+        lblCpf.setForeground(new java.awt.Color(0, 0, 0));
         lblCpf.setText("Cpf:");
-        getContentPane().add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 50, 30));
+        getContentPane().add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 50, 30));
 
-        lblTelefone.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        lblTelefone.setFont(new java.awt.Font("MingLiU-ExtB", 1, 20)); // NOI18N
+        lblTelefone.setForeground(new java.awt.Color(0, 0, 0));
+        lblTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone_Telefone.png"))); // NOI18N
         lblTelefone.setText("Telefone:");
-        getContentPane().add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 100, 30));
+        getContentPane().add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 460, 140, 30));
 
-        lblSenha.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        btnSalvar1.setBackground(new java.awt.Color(102, 102, 102));
+        btnSalvar1.setFont(new java.awt.Font("MingLiU-ExtB", 1, 14)); // NOI18N
+        btnSalvar1.setForeground(new java.awt.Color(0, 0, 0));
+        btnSalvar1.setText("Ajuda");
+        btnSalvar1.setToolTipText("Necessário preencher todos os Campos. Após prencher todos os campos, aclique com o cursor Salvar");
+        btnSalvar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalvar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 90, 50));
+
+        lblSenha.setFont(new java.awt.Font("MingLiU-ExtB", 1, 20)); // NOI18N
+        lblSenha.setForeground(new java.awt.Color(0, 0, 0));
         lblSenha.setText("Senha:");
-        getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 70, 30));
+        getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, 70, 30));
 
-        lblConfimacao.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        lblConfimacao.setFont(new java.awt.Font("MingLiU-ExtB", 1, 20)); // NOI18N
+        lblConfimacao.setForeground(new java.awt.Color(0, 0, 0));
         lblConfimacao.setText("Confirmar Senha:");
-        getContentPane().add(lblConfimacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 170, 30));
+        getContentPane().add(lblConfimacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 170, 30));
 
-        lblCadastroFuncionarios.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        lblCadastroFuncionarios.setText("Cadastro de funcionarios");
-        getContentPane().add(lblCadastroFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 290, 40));
-
-        btnSalvar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSalvar.setBackground(new java.awt.Color(102, 102, 102));
+        btnSalvar.setFont(new java.awt.Font("MingLiU-ExtB", 1, 14)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Julia\\Desktop\\Projeto imagens\\Icone_Salvar.png")); // NOI18N
         btnSalvar.setText("Salvar");
-        btnSalvar.setToolTipText("finaliza o cadastro");
-        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSalvar.setToolTipText("Finaliza o Cadastro");
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 130, 30));
+        getContentPane().add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 780, 120, 40));
 
-        btnSair.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSair.setBackground(new java.awt.Color(102, 102, 102));
+        btnSair.setFont(new java.awt.Font("MingLiU-ExtB", 1, 14)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(0, 0, 0));
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone_Sair.png"))); // NOI18N
         btnSair.setText("Voltar");
-        btnSair.setToolTipText("volta a tela de login");
-        btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSair.setToolTipText("Volta a tela de Login");
+        btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 130, 30));
+        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, 120, 40));
 
-        lblFundo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblFundo.setText("Fundo");
-        getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 680, 910));
+        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagem_Cadastro_Funcionario.png"))); // NOI18N
+        getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1060, 880));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -175,6 +199,10 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,7 +249,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel lblCadastroFuncionarios;
+    private javax.swing.JButton btnSalvar1;
     private javax.swing.JLabel lblConfimacao;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblFundo;
