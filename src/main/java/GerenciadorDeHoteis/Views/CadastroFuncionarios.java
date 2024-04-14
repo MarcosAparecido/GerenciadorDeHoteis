@@ -128,7 +128,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         btnSalvar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setToolTipText("finaliza o cadastro");
-        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -139,7 +139,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         btnSair.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnSair.setText("Voltar");
         btnSair.setToolTipText("volta a tela de login");
-        btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
@@ -148,8 +148,9 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 130, 30));
 
         lblFundo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagemdeFundo.jpg"))); // NOI18N
         lblFundo.setText("Fundo");
-        getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 400));
+        getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 680, 910));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
