@@ -126,6 +126,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         getContentPane().add(lblCadastroFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 290, 40));
 
         btnSalvar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnSalvar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Julia\\Desktop\\Projeto imagens\\Icone_Salvar.png")); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setToolTipText("finaliza o cadastro");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -148,7 +149,6 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 130, 30));
 
         lblFundo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagemdeFundo.jpg"))); // NOI18N
         lblFundo.setText("Fundo");
         getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 680, 910));
 
