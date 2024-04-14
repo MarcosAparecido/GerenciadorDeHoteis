@@ -21,7 +21,6 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
 
     TipoService tipoService = new TipoService();
     TipoRepository tipoRepository = new TipoRepository();
-    //private int quartoId = 0;
 
     /**
      * Creates new form GerenciamentoDeQuarto
@@ -76,7 +75,6 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         txtNomeQuarto = new javax.swing.JTextField();
         cmbTipoQuarto = new javax.swing.JComboBox<>();
         txtNumeroCamas = new javax.swing.JTextField();
-        cbxQuartoOcupado = new javax.swing.JCheckBox();
         btnRegistarQuarto = new javax.swing.JButton();
         btnPesquisarQuarto = new javax.swing.JToggleButton();
         btnEditarQuarto = new javax.swing.JToggleButton();
@@ -221,10 +219,6 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         txtNumeroCamas.setToolTipText("numero de camas no quarto");
         getContentPane().add(txtNumeroCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 270, 30));
 
-        cbxQuartoOcupado.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        cbxQuartoOcupado.setText("Quarto Ocupado");
-        getContentPane().add(cbxQuartoOcupado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 170, 40));
-
         btnRegistarQuarto.setText("Registrar Quarto");
         btnRegistarQuarto.setToolTipText("efetua o registro de um quarto");
         btnRegistarQuarto.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +226,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 btnRegistarQuartoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 160, 40));
+        getContentPane().add(btnRegistarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 160, 40));
 
         btnPesquisarQuarto.setText("Pesquisar Quarto");
         btnPesquisarQuarto.setToolTipText("abre a tela de pesquisa");
@@ -241,7 +235,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 btnPesquisarQuartoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPesquisarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 120, -1));
+        getContentPane().add(btnPesquisarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 120, -1));
 
         btnEditarQuarto.setText("Editar Quarto");
         btnEditarQuarto.setToolTipText("seleciona um quarto para editar");
@@ -250,7 +244,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 btnEditarQuartoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 120, -1));
+        getContentPane().add(btnEditarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 120, -1));
 
         btnDeletar.setText("Excluir Quarto");
         btnDeletar.setToolTipText("efetua a edição");
@@ -259,7 +253,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 btnDeletarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 120, -1));
+        getContentPane().add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 120, -1));
 
         btnRefersh.setText("Recarregar/Julinha Mude S2");
         btnRefersh.setToolTipText("recarrega a tabela");
@@ -411,7 +405,6 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistarQuarto;
     private javax.swing.JToggleButton btnSair;
     private javax.swing.JComboBox<String> cbmCampoPesquisa;
-    private javax.swing.JCheckBox cbxQuartoOcupado;
     private javax.swing.JCheckBox cbxQuartoOcupadoEdicao;
     private javax.swing.JComboBox<String> cmbTipoQuarto;
     private javax.swing.JComboBox<String> cmbTipoQuartoEdicao;
@@ -447,7 +440,6 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
         String nome = txtNomeQuarto.getText().trim();
         String tipoQuarto = (String) cmbTipoQuarto.getSelectedItem();
         String numeroCamas = txtNumeroCamas.getText().trim();
-        boolean quartoOcupado = cbxQuartoOcupado.isSelected();
 
         try {
             numeroCamasNumero = Byte.parseByte(numeroCamas);
@@ -455,7 +447,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
             JOptionPane.showInternalMessageDialog(null, "O campo cama deve ser um número válido.");
             return;
         }
-        Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamasNumero, quartoOcupado);
+        Quarto quarto = new Quarto(nome, tipoQuarto, numeroCamasNumero, false);
         tipoService.salvarQuarto(quarto);
     }
 

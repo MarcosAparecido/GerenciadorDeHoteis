@@ -8,7 +8,6 @@ import GerenciadorDeHoteis.Types.Funcionario;
 import GerenciadorDeHoteis.Types.Quarto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -29,22 +28,18 @@ public class TipoRepository {
 
     //Funcionario Repository
     public Funcionario buscarPorCPFFuncionario(String cpf) {
-        try {
-            TypedQuery<Funcionario> query = em.createQuery("SELECT f FROM Funcionario f WHERE f.cpf = :cpf", Funcionario.class);
-            query.setParameter("cpf", cpf);
-            List<Funcionario> resultados = query.getResultList();
+        TypedQuery<Funcionario> query = em.createQuery("SELECT f FROM Funcionario f WHERE f.cpf = :cpf", Funcionario.class);
+        query.setParameter("cpf", cpf);
+        List<Funcionario> resultados = query.getResultList();
 
-            if (resultados.size() == 1) {
-                return resultados.get(0); // Retorna o único funcionário encontrado
+        if (resultados.size() == 1) {
+            return resultados.get(0);
 
-            } else if (resultados.isEmpty()) {
-                return null; // Retorna null se nenhum funcionário for encontrado com o CPF fornecido
+        } else if (resultados.isEmpty()) {
+            return null;
 
-            } else {
-                throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!"); // Lança uma exceção se mais de um funcionário for encontrado com o mesmo CPF
-            }
-        } catch (NoResultException e) {
-            return null; // Se nenhum funcionário for encontrado com o CPF fornecido
+        } else {
+            throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!");
         }
     }
 
@@ -56,42 +51,43 @@ public class TipoRepository {
 
     //Quarto Repository   
     public Quarto buscarPorNomeQuarto(String quarto) {
-        try {
-            TypedQuery<Quarto> query = em.createQuery("SELECT f FROM Quarto f WHERE f.nome= :nome", Quarto.class);
-            query.setParameter("nome", quarto);
-            List<Quarto> resultados = query.getResultList();
+        TypedQuery<Quarto> query = em.createQuery("SELECT f FROM Quarto f WHERE f.nome= :nome", Quarto.class);
+        query.setParameter("nome", quarto);
+        List<Quarto> resultados = query.getResultList();
 
-            if (resultados.size() == 1) {
-                return resultados.get(0); // Retorna o único funcionário encontrado
+        if (resultados.size() == 1) {
+            return resultados.get(0);
 
-            } else if (resultados.isEmpty()) {
-                return null; // Retorna null se nenhum funcionário for encontrado com o CPF fornecido
+        } else if (resultados.isEmpty()) {
+            return null;
 
-            } else {
-                throw new IllegalStateException("Mais de um quarto encontrado com o mesmo nome!"); // Lança uma exceção se mais de um funcionário for encontrado com o mesmo CPF
-            }
-        } catch (NoResultException e) {
-            return null; // Se nenhum funcionário for encontrado com o CPF fornecido
+        } else {
+            throw new IllegalStateException("Mais de um quarto encontrado com o mesmo nome!");
         }
     }
+    
+    /*public Quarto buscarPorNomeQuarto(String quarto) {
+        Quarto quartoEncontrado = em.find(Quarto.class, quarto);
+        if (quartoEncontrado != null) {
+            return quartoEncontrado;
+        } else {
+            return null;
+        }
+    }*/
 
     public Quarto buscarPorIdQuarto(int id) {
-        try {
-            TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q WHERE q.id = :id", Quarto.class);
-            query.setParameter("id", id);
-            List<Quarto> resultados = query.getResultList();
+        TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q WHERE q.id = :id", Quarto.class);
+        query.setParameter("id", id);
+        List<Quarto> resultados = query.getResultList();
 
-            if (resultados.size() == 1) {
-                return resultados.get(0); // Retorna o único funcionário encontrado
+        if (resultados.size() == 1) {
+            return resultados.get(0);
 
-            } else if (resultados.isEmpty()) {
-                return null; // Retorna null se nenhum funcionário for encontrado com o CPF fornecido
+        } else if (resultados.isEmpty()) {
+            return null;
 
-            } else {
-                throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!"); // Lança uma exceção se mais de um funcionário for encontrado com o mesmo CPF
-            }
-        } catch (NoResultException e) {
-            return null; // Se nenhum funcionário for encontrado com o CPF fornecido
+        } else {
+            throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!");
         }
     }
 
@@ -124,7 +120,6 @@ public class TipoRepository {
 
     public List<Quarto> pesquisaCampoQuarto(String campo, Object valor) {
         String pesquisa = "SELECT q FROM Quarto q WHERE ";
-
         if ("Id".equals(campo)) {
             pesquisa += "q.id = :valor";
 
@@ -148,57 +143,33 @@ public class TipoRepository {
         return query.getResultList();
     }
 
-    public void atualizarQuarto(int id, Quarto quartoAtualizado) {
-        try {
-            em.getTransaction().begin();
+    public void atualizarQuarto(int id, Quarto quarto) {
+        em.getTransaction().begin();
+        Quarto quartoExistente = em.find(Quarto.class, id);
 
-            // Busca o quarto pelo ID
-            Quarto quartoExistente = em.find(Quarto.class, id);
-
-            // Verifica se o quarto existe
-            if (quartoExistente == null) {
-                // Se o quarto não existir, lança uma exceção ou trata conforme necessário
-                throw new IllegalArgumentException("Quarto não encontrado para atualização");
-            }
-
-            // Aplica as atualizações nos campos do quarto existente com os valores do quarto atualizado
-            quartoExistente.setNome(quartoAtualizado.getNome());
-            quartoExistente.setTipoQuarto(quartoAtualizado.getTipoQuarto());
-            quartoExistente.setNumeroCamas(quartoAtualizado.getNumeroCamas());
-            quartoExistente.setStatus(quartoAtualizado.isStatus());
-
-            // Realiza a atualização no banco de dados
-            em.merge(quartoExistente);
-
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction() != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            System.err.println("Erro ao atualizar o quarto: " + e.getMessage());
+        if (quartoExistente == null) {
+            System.out.println("Quarto não encontrado para atualização");
+            return;
         }
+
+        quartoExistente.setNome(quarto.getNome());
+        quartoExistente.setTipoQuarto(quarto.getTipoQuarto());
+        quartoExistente.setNumeroCamas(quarto.getNumeroCamas());
+        quartoExistente.setStatus(quarto.isStatus());
+        em.merge(quartoExistente);
+        em.getTransaction().commit();
     }
 
     public void deletarQuartoPorId(int id) {
-        try {
-            em.getTransaction().begin();
-
-            // Busca o quarto pelo ID
-            Quarto quarto = em.find(Quarto.class, id);
-
-            if (quarto != null) {
-                // Remove o quarto do banco de dados
-                em.remove(quarto);
-                em.getTransaction().commit();
-                System.out.println("Quarto deletado com sucesso!");
-            } else {
-                System.out.println("Quarto não encontrado");
-            }
-        } catch (Exception e) {
-            if (em.getTransaction() != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            System.err.println("Erro ao deletar quarto: " + e.getMessage());
+        em.getTransaction().begin();
+        Quarto quarto = em.find(Quarto.class, id);
+        if (quarto == null) {
+            System.out.println("Quarto não encontrado");
+        } else {
+            em.remove(quarto);
+            em.getTransaction().commit();
+            System.out.println("Quarto deletado com sucesso!");
+            System.out.println("Quarto não encontrado");
         }
     }
 

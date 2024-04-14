@@ -9,9 +9,21 @@ import GerenciadorDeHoteis.Types.Quarto;
 import GerenciadorDeHoteis.Repository.TipoRepository;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -291,4 +303,89 @@ public class TipoService {
             return null;
         }
     }
+    
+    //Lista de Paises
+    public String[] listaPaises() {
+        String[] paises = {
+            "Afeganistão", "Albânia", "Argélia", "Andorra", "Angola", "Antígua e Barbuda", "Argentina", "Armênia", "Austrália", "Áustria",
+            "Azerbaijão", "Bahamas", "Bahrein", "Bangladesh", "Barbados", "Belarus", "Bélgica", "Belize", "Benin", "Butão", "Bolívia",
+            "Bósnia e Herzegovina", "Botswana", "Brasil", "Brunei", "Bulgária", "Burkina Faso", "Burundi", "Cabo Verde", "Camboja",
+            "Camarões", "Canadá", "República Centro-Africana", "Chade", "Chile", "China", "Colômbia", "Comores", "Congo", "Costa Rica",
+            "Croácia", "Cuba", "Chipre", "República Tcheca", "República Democrática do Congo", "Dinamarca", "Djibouti", "Dominica",
+            "República Dominicana", "Timor-Leste", "Equador", "Egito", "El Salvador", "Guiné Equatorial", "Eritreia", "Estônia",
+            "Eswatini", "Etiópia", "Fiji", "Finlândia", "França", "Gabão", "Gâmbia", "Geórgia", "Alemanha", "Gana", "Grécia",
+            "Granada", "Guatemala", "Guiné", "Guiné-Bissau", "Guiana", "Haiti", "Honduras", "Hungria", "Islândia", "Índia", "Indonésia",
+            "Irã", "Iraque", "Irlanda", "Israel", "Itália", "Costa do Marfim", "Jamaica", "Japão", "Jordânia", "Cazaquistão", "Quênia",
+            "Kiribati", "Kuwait", "Quirguistão", "Laos", "Letônia", "Líbano", "Lesoto", "Libéria", "Líbia", "Liechtenstein", "Lituânia",
+            "Luxemburgo", "Madagascar", "Malawi", "Malásia", "Maldivas", "Mali", "Malta", "Ilhas Marshall", "Mauritânia", "Maurício",
+            "México", "Micronésia", "Moldávia", "Mônaco", "Mongólia", "Montenegro", "Marrocos", "Moçambique", "Myanmar", "Namíbia",
+            "Nauru", "Nepal", "Países Baixos", "Nova Zelândia", "Nicarágua", "Níger", "Nigéria", "Coreia do Norte", "Macedônia do Norte",
+            "Noruega", "Omã", "Paquistão", "Palau", "Palestina", "Panamá", "Papua Nova Guiné", "Paraguai", "Peru", "Filipinas", "Polônia",
+            "Portugal", "Catar", "Romênia", "Rússia", "Ruanda", "São Cristóvão e Nevis", "Santa Lúcia", "Samoa", "San Marino",
+            "São Tomé e Príncipe", "Arábia Saudita", "Senegal", "Sérvia", "Seychelles", "Serra Leoa", "Singapura", "Eslováquia", "Eslovênia",
+            "Ilhas Salomão", "Somália", "África do Sul", "Coreia do Sul", "Sudão do Sul", "Espanha", "Sri Lanka", "Sudão", "Suriname",
+            "Suécia", "Suíça", "Síria", "Tajiquistão", "Tanzânia", "Tailândia", "Togo", "Tonga", "Trinidad e Tobago", "Tunísia",
+            "Turquia", "Turcomenistão", "Tuvalu", "Uganda", "Ucrânia", "Emirados Árabes Unidos", "Reino Unido", "Estados Unidos",
+            "Uruguai", "Uzbequistão", "Vanuatu", "Cidade do Vaticano", "Venezuela", "Vietnã", "Iêmen", "Zâmbia", "Zimbábue", "Outro"
+        };
+        return paises;
+    }
+    
+    private Date obtemDataHoje(JLabel lblDataCheckIn){
+        LocalDateTime dataAtual = LocalDateTime.now();
+        Date dataConvertida = Date.from(dataAtual.atZone(ZoneId.systemDefault()).toInstant());
+        SimpleDateFormat formatoData = new SimpleDateFormat("ddMMyyyy", new Locale("pt", "BR"));
+        String dataString = formatoData.format(dataConvertida);
+        lblDataCheckIn.setText(dataString);
+        return dataConvertida;
+    }
+    
+    private  Date obtemDataNascimento(String dataNascimento){
+        Date data = null;
+        String dataString = dataNascimento;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            data = formato.parse(dataString);
+
+        } catch (ParseException e) {
+            System.out.println("Erro ao convrter string da data: " + e.getMessage());
+        }
+        return data;
+    }
+    
+    private boolean validaIdade(String dataNascimento){
+        LocalDate nascimento = LocalDate.parse(dataNascimento);
+        LocalDate hoje = LocalDate.now();
+        Period periodo = Period.between(nascimento, hoje);
+        int idade = periodo.getYears();
+        
+        if (idade >= 18) {
+            return true;
+            
+        }else{
+            System.out.println("O Hospede não possui mais de 18 anos.");
+            return false;
+        }         
+    }
+    
+   /* private void preencherComboBoxTipoQuarto(){
+        cmbTipoQuarto.removeAllItems();
+        String tp = "";
+        
+        try {
+            List<Quarto> quartos = quartoDAO.buscarTipoQuarto();
+            Set<String> tiposQuarto = new HashSet<>();
+            
+            for (Quarto quarto : quartos){
+                if(!tp.equalsIgnoreCase(quarto.getTipoQuarto())){
+                    cmbTipoQuarto.addItem(quarto.getTipoQuarto());
+                    tp = quarto.getTipoQuarto();
+                }
+            }
+            
+        } catch (SQLException e){
+            System.out.println("Erro ao preencher tabela");
+        }
+    }*/
 }
