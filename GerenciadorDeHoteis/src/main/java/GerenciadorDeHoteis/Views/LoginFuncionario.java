@@ -53,14 +53,12 @@ public class LoginFuncionario extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCpf.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        lblCpf.setForeground(new java.awt.Color(0, 0, 0));
         lblCpf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/do-utilizador (2).png"))); // NOI18N
         lblCpf.setText("CPF :");
         jPanel1.add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 120, -1));
 
         txtCpf.setBackground(new java.awt.Color(153, 153, 153));
         txtCpf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtCpf.setForeground(new java.awt.Color(0, 0, 0));
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -72,14 +70,12 @@ public class LoginFuncionario extends javax.swing.JFrame {
 
         txtSenha.setBackground(new java.awt.Color(153, 153, 153));
         txtSenha.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        txtSenha.setForeground(new java.awt.Color(0, 0, 0));
         txtSenha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 200, 30));
 
         btnCriarNovoFuncionario.setBackground(new java.awt.Color(153, 153, 153));
         btnCriarNovoFuncionario.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
-        btnCriarNovoFuncionario.setForeground(new java.awt.Color(0, 0, 0));
         btnCriarNovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/perfil (1).png"))); // NOI18N
         btnCriarNovoFuncionario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCriarNovoFuncionario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -91,14 +87,12 @@ public class LoginFuncionario extends javax.swing.JFrame {
         jPanel1.add(btnCriarNovoFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 50, 40));
 
         lblSenha.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(0, 0, 0));
         lblSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/senha (3).png"))); // NOI18N
         lblSenha.setText("SENHA :");
         jPanel1.add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 110, -1));
 
         btnEntrar.setBackground(new java.awt.Color(153, 153, 153));
         btnEntrar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        btnEntrar.setForeground(new java.awt.Color(0, 0, 0));
         btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/entrar.png"))); // NOI18N
         btnEntrar.setText("Entrar");
         btnEntrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -114,7 +108,6 @@ public class LoginFuncionario extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 490, 250));
 
         jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("LOGIN");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

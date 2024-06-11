@@ -78,7 +78,22 @@ public class TipoRepository {
         em.persist(funcionario);
         em.getTransaction().commit();
     }
+      public Funcionario buscarPorIdFuncionario(int id) {
+        TypedQuery<Funcionario> query = em.createQuery("SELECT q FROM Funcionario q WHERE q.id = :id", Funcionario.class);
+        query.setParameter("id", id);
+        List<Funcionario> resultados = query.getResultList();
 
+        if (resultados.size() == 1) {
+            return resultados.get(0);
+
+        } else if (resultados.isEmpty()) {
+            return null;
+
+        } else {
+            throw new IllegalStateException("Mais de um Funcionario encontrado com o mesmo nome!");
+        }
+    }
+      
     //Quarto Repository   
     public Quarto buscarPorNomeQuarto(String quarto) {
         TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q WHERE q.nome= :nome", Quarto.class);

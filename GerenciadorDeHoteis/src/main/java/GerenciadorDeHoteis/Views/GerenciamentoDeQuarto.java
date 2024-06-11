@@ -141,7 +141,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
 
         lblTipoQuarto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         lblTipoQuarto.setText("Tipo de Quarto :");
-        jPanel1.add(lblTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 100, 30));
+        jPanel1.add(lblTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 110, 30));
 
         btnRefersh.setBackground(new java.awt.Color(153, 153, 153));
         btnRefersh.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
@@ -158,25 +158,25 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
 
         lblNomeQuarto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         lblNomeQuarto.setText("Nome do Quarto :");
-        jPanel1.add(lblNomeQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 100, 30));
+        jPanel1.add(lblNomeQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 120, 30));
 
         lblQuartoSelecionado.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         lblQuartoSelecionado.setText("Quarto Selecionado :");
-        jPanel1.add(lblQuartoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 120, -1));
+        jPanel1.add(lblQuartoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 140, -1));
 
         lblQuarto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        jPanel1.add(lblQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 250, 30));
+        jPanel1.add(lblQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 250, 30));
 
         lblNumeroCamas.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         lblNumeroCamas.setText("Nº de Camas :");
-        jPanel1.add(lblNumeroCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 80, 30));
+        jPanel1.add(lblNumeroCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 110, 30));
 
         txtNomeQuarto.setBackground(new java.awt.Color(153, 153, 153));
         txtNomeQuarto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         txtNomeQuarto.setToolTipText("numero do quarto");
         txtNomeQuarto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNomeQuarto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(txtNomeQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 270, 30));
+        jPanel1.add(txtNomeQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 270, 30));
 
         cmbTipoQuarto.setBackground(new java.awt.Color(102, 102, 102));
         cmbTipoQuarto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -189,14 +189,14 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 cmbTipoQuartoActionPerformed(evt);
             }
         });
-        jPanel1.add(cmbTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 200, 30));
+        jPanel1.add(cmbTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 200, 30));
 
         txtNumeroCamas.setBackground(new java.awt.Color(153, 153, 153));
         txtNumeroCamas.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         txtNumeroCamas.setToolTipText("Número de camas no quarto");
         txtNumeroCamas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNumeroCamas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(txtNumeroCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 140, 30));
+        jPanel1.add(txtNumeroCamas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 140, 30));
 
         btnSalvar.setBackground(new java.awt.Color(153, 153, 153));
         btnSalvar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -224,7 +224,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 btnPesquisarQuartoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPesquisarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 120, 40));
+        jPanel1.add(btnPesquisarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 120, 40));
 
         btnDesselecionarQuarto.setBackground(new java.awt.Color(153, 153, 153));
         btnDesselecionarQuarto.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
@@ -238,7 +238,7 @@ public class GerenciamentoDeQuarto extends javax.swing.JFrame {
                 btnDesselecionarQuartoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDesselecionarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 120, 40));
+        jPanel1.add(btnDesselecionarQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 120, 40));
 
         btnLimparCampos.setBackground(new java.awt.Color(153, 153, 153));
         btnLimparCampos.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N

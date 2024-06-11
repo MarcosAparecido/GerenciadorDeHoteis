@@ -63,8 +63,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lblBemVindo.setText("SEJA BEM-VINDO:");
         getContentPane().add(lblBemVindo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
+        lblFuncionario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblFuncionario.setText("Funcionario");
-        getContentPane().add(lblFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 230, 20));
+        getContentPane().add(lblFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 230, 30));
 
         lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Imagem_FundoMenuPrincipal (1).png"))); // NOI18N
         getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -80, 2000, 1200));
