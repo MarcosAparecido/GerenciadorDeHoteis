@@ -51,23 +51,28 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         txtCampoPesquisa = new javax.swing.JTextField();
         btnPesquisa = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblMargensBotoes = new javax.swing.JLabel();
+        btnSair = new javax.swing.JToggleButton();
+        txtValorProduto = new javax.swing.JFormattedTextField();
+        txtQuantidadeProduto = new javax.swing.JTextField();
+        txtNomeProduto = new javax.swing.JTextField();
+        lblValorProduto = new javax.swing.JLabel();
         lblNomeProduto = new javax.swing.JLabel();
         lblQuantidadeProduto = new javax.swing.JLabel();
-        lblValorProduto = new javax.swing.JLabel();
-        lblProdutoSelecionado = new javax.swing.JLabel();
         lblProduto = new javax.swing.JLabel();
-        txtNomeProduto = new javax.swing.JTextField();
-        txtQuantidadeProduto = new javax.swing.JTextField();
-        txtValorProduto = new javax.swing.JFormattedTextField();
+        lblProdutoSelecionado = new javax.swing.JLabel();
+        scpProdutos = new javax.swing.JScrollPane();
+        tbProdutos = new javax.swing.JTable();
+        lblImagem = new javax.swing.JLabel();
         btnRegistarProduto = new javax.swing.JButton();
         btnDesselecionarProduto = new javax.swing.JToggleButton();
+        lblDadosGerais = new javax.swing.JLabel();
         btnPesquisarProduto = new javax.swing.JToggleButton();
         btnLimparCampos = new javax.swing.JToggleButton();
         btnDeletarProduto = new javax.swing.JToggleButton();
         btnRefersh = new javax.swing.JToggleButton();
-        btnSair = new javax.swing.JToggleButton();
-        scpProdutos = new javax.swing.JScrollPane();
-        tbProdutos = new javax.swing.JTable();
+        lblMargem = new javax.swing.JLabel();
 
         telaPesquisa.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -111,139 +116,11 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1060, 850));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNomeProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        lblNomeProduto.setText("Produto / Serviço :");
-        getContentPane().add(lblNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 220, 30));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblQuantidadeProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        lblQuantidadeProduto.setText("Quantidade Produto :");
-        getContentPane().add(lblQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 240, 30));
-
-        lblValorProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        lblValorProduto.setText("Valor Produto R$:");
-        getContentPane().add(lblValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 200, 30));
-
-        lblProdutoSelecionado.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        lblProdutoSelecionado.setText("Produto Selecionado : ");
-        getContentPane().add(lblProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
-
-        lblProduto.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        getContentPane().add(lblProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 330, 20));
-
-        txtNomeProduto.setBackground(new java.awt.Color(153, 153, 153));
-        txtNomeProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        txtNomeProduto.setToolTipText("Nome do Produto");
-        txtNomeProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtNomeProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 260, 30));
-
-        txtQuantidadeProduto.setBackground(new java.awt.Color(153, 153, 153));
-        txtQuantidadeProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        txtQuantidadeProduto.setToolTipText("Quatidade de intens para o estoque");
-        txtQuantidadeProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtQuantidadeProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtQuantidadeProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantidadeProdutoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 140, 30));
-
-        txtValorProduto.setBackground(new java.awt.Color(153, 153, 153));
-        txtValorProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtValorProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
-        txtValorProduto.setToolTipText("Preço dos itens");
-        txtValorProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtValorProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        txtValorProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorProdutoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 210, 30));
-
-        btnRegistarProduto.setBackground(new java.awt.Color(153, 153, 153));
-        btnRegistarProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnRegistarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Salvar.png"))); // NOI18N
-        btnRegistarProduto.setText("Salvar");
-        btnRegistarProduto.setToolTipText("efetua o registro de um quarto");
-        btnRegistarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegistarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistarProdutoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 120, 40));
-
-        btnDesselecionarProduto.setBackground(new java.awt.Color(153, 153, 153));
-        btnDesselecionarProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnDesselecionarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Desmarcar.png"))); // NOI18N
-        btnDesselecionarProduto.setText("Desselecionar ");
-        btnDesselecionarProduto.setToolTipText("Desseleciona Produto");
-        btnDesselecionarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDesselecionarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnDesselecionarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDesselecionarProdutoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDesselecionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 360, 170, -1));
-
-        btnPesquisarProduto.setBackground(new java.awt.Color(153, 153, 153));
-        btnPesquisarProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Pesquisar.png"))); // NOI18N
-        btnPesquisarProduto.setText("Pesquisar");
-        btnPesquisarProduto.setToolTipText("Abre a tela de pesquisa de produto ou Quarto");
-        btnPesquisarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnPesquisarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarProdutoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 250, 170, -1));
-
-        btnLimparCampos.setBackground(new java.awt.Color(153, 153, 153));
-        btnLimparCampos.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_LimparTela.png"))); // NOI18N
-        btnLimparCampos.setText("Limpar Campos");
-        btnLimparCampos.setToolTipText("Limpa Campos");
-        btnLimparCampos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnLimparCampos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparCamposActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 420, 170, -1));
-
-        btnDeletarProduto.setBackground(new java.awt.Color(153, 153, 153));
-        btnDeletarProduto.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnDeletarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/excluir.png"))); // NOI18N
-        btnDeletarProduto.setText("Excluir");
-        btnDeletarProduto.setToolTipText("Exclui Produto ou Serviço");
-        btnDeletarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDeletarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnDeletarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarProdutoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDeletarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 170, 40));
-
-        btnRefersh.setBackground(new java.awt.Color(153, 153, 153));
-        btnRefersh.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        btnRefersh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Atualizar.png"))); // NOI18N
-        btnRefersh.setToolTipText("Recarregar a tabela");
-        btnRefersh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRefersh.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRefersh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefershActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRefersh, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 60, -1));
+        lblMargensBotoes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(lblMargensBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, 250));
 
         btnSair.setBackground(new java.awt.Color(153, 153, 153));
         btnSair.setForeground(new java.awt.Color(153, 153, 153));
@@ -256,10 +133,61 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
                 btnSairActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 0, 50, 50));
+        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 0, 50, 40));
+
+        txtValorProduto.setBackground(new java.awt.Color(153, 153, 153));
+        txtValorProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtValorProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtValorProduto.setToolTipText("Preço dos itens");
+        txtValorProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtValorProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtValorProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 210, 30));
+
+        txtQuantidadeProduto.setBackground(new java.awt.Color(153, 153, 153));
+        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtQuantidadeProduto.setToolTipText("Quatidade de intens para o estoque");
+        txtQuantidadeProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtQuantidadeProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtQuantidadeProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantidadeProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 140, 30));
+
+        txtNomeProduto.setBackground(new java.awt.Color(153, 153, 153));
+        txtNomeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtNomeProduto.setToolTipText("Nome do Produto");
+        txtNomeProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNomeProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 260, 30));
+
+        lblValorProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblValorProduto.setText("Valor Produto R$:");
+        jPanel1.add(lblValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 200, 30));
+
+        lblNomeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblNomeProduto.setText("Produto / Serviço :");
+        jPanel1.add(lblNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 220, 30));
+
+        lblQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblQuantidadeProduto.setText("Quantidade Produto :");
+        jPanel1.add(lblQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 240, 30));
+
+        lblProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel1.add(lblProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 330, 30));
+
+        lblProdutoSelecionado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblProdutoSelecionado.setText("Produto Selecionado : ");
+        jPanel1.add(lblProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
 
         tbProdutos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tbProdutos.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        tbProdutos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -286,7 +214,107 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
             tbProdutos.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        getContentPane().add(scpProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 1040, 350));
+        jPanel1.add(scpProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 1040, 350));
+
+        lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/produtos (1).png"))); // NOI18N
+        lblImagem.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(lblImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 140, 120));
+
+        btnRegistarProduto.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegistarProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnRegistarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Salvar.png"))); // NOI18N
+        btnRegistarProduto.setText("Salvar");
+        btnRegistarProduto.setToolTipText("efetua o registro de um quarto");
+        btnRegistarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRegistarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistarProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegistarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 120, 40));
+
+        btnDesselecionarProduto.setBackground(new java.awt.Color(153, 153, 153));
+        btnDesselecionarProduto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnDesselecionarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Desmarcar.png"))); // NOI18N
+        btnDesselecionarProduto.setText("Desselecionar ");
+        btnDesselecionarProduto.setToolTipText("Desseleciona Produto");
+        btnDesselecionarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDesselecionarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDesselecionarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesselecionarProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDesselecionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 120, -1));
+
+        lblDadosGerais.setBackground(new java.awt.Color(204, 204, 204));
+        lblDadosGerais.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados Gerais Produto"));
+        jPanel1.add(lblDadosGerais, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 660, 370));
+
+        btnPesquisarProduto.setBackground(new java.awt.Color(153, 153, 153));
+        btnPesquisarProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Pesquisar.png"))); // NOI18N
+        btnPesquisarProduto.setText("Pesquisar");
+        btnPesquisarProduto.setToolTipText("Abre a tela de pesquisa de produto ou Quarto");
+        btnPesquisarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPesquisarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 120, -1));
+
+        btnLimparCampos.setBackground(new java.awt.Color(153, 153, 153));
+        btnLimparCampos.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_LimparTela.png"))); // NOI18N
+        btnLimparCampos.setText("Limpar Campos");
+        btnLimparCampos.setToolTipText("Limpa Campos");
+        btnLimparCampos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimparCampos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 120, -1));
+
+        btnDeletarProduto.setBackground(new java.awt.Color(153, 153, 153));
+        btnDeletarProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnDeletarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/excluir.png"))); // NOI18N
+        btnDeletarProduto.setText("Excluir");
+        btnDeletarProduto.setToolTipText("Exclui Produto ou Serviço");
+        btnDeletarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDeletarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDeletarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 120, 40));
+
+        btnRefersh.setBackground(new java.awt.Color(153, 153, 153));
+        btnRefersh.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        btnRefersh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Atualizar.png"))); // NOI18N
+        btnRefersh.setToolTipText("Recarregar a tabela");
+        btnRefersh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRefersh.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRefersh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefershActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRefersh, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 60, -1));
+
+        lblMargem.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        lblMargem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMargem.setText("Cadastrar Produtos");
+        lblMargem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblMargem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -407,7 +435,12 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnSair;
     private javax.swing.JComboBox<String> cbmCampoPesquisa;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCampoPesquisa;
+    private javax.swing.JLabel lblDadosGerais;
+    private javax.swing.JLabel lblImagem;
+    private javax.swing.JLabel lblMargem;
+    private javax.swing.JLabel lblMargensBotoes;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblProduto;
     private javax.swing.JLabel lblProdutoSelecionado;

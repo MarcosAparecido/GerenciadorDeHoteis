@@ -7,6 +7,8 @@ package GerenciadorDeHoteis.Views;
 import GerenciadorDeHoteis.Entity.Hospede;
 import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Utils.DatasUtil;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -20,7 +22,8 @@ public class CadastrarHospede extends javax.swing.JFrame {
     private static String cpfFuncionario;
     private static String cpfHospede;
     private static String passaporteHospede;
-
+    private int idSelecionado = -1;
+    
     /**
      * Creates new form CadastroHospede
      */
@@ -30,6 +33,8 @@ public class CadastrarHospede extends javax.swing.JFrame {
         initComponents();
         preencherPaises();
         this.setLocationRelativeTo(null);
+        preencherAtualizarTabela();
+        selecionarHospede();
     }
 
     /**
@@ -59,14 +64,18 @@ public class CadastrarHospede extends javax.swing.JFrame {
         bntCheckIn = new javax.swing.JToggleButton();
         lblNome = new javax.swing.JLabel();
         lblNome1 = new javax.swing.JLabel();
+        lblHospede = new javax.swing.JLabel();
         lblNome2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblPassaporte = new javax.swing.JLabel();
         btnLimparCampos = new javax.swing.JButton();
+        btnDesselecionar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         lblMargensBotoes = new javax.swing.JLabel();
         lblDadosGerais = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbHospedes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CADASTRO DE HOSPEDE");
@@ -78,40 +87,33 @@ public class CadastrarHospede extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTelefone.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblTelefone.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefone.setText("Telefone :");
-        jPanel1.add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 50, -1));
+        jPanel1.add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 80, -1));
 
         lblCpf.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblCpf.setForeground(new java.awt.Color(0, 0, 0));
         lblCpf.setText("CPF :");
-        jPanel1.add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 40, -1));
+        jPanel1.add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 40, -1));
 
         lblEmail.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("Email :");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 40, -1));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 50, -1));
 
         lblPais.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblPais.setForeground(new java.awt.Color(0, 0, 0));
         lblPais.setText("Pais :");
-        jPanel1.add(lblPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 50, -1));
+        jPanel1.add(lblPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 50, -1));
 
         lblDataNascimento.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblDataNascimento.setForeground(new java.awt.Color(0, 0, 0));
         lblDataNascimento.setText("Data Nascimento :");
-        jPanel1.add(lblDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
+        jPanel1.add(lblDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
 
         txtNome.setBackground(new java.awt.Color(153, 153, 153));
         txtNome.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        txtNome.setForeground(new java.awt.Color(0, 0, 0));
         txtNome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 220, 30));
+        jPanel1.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 220, 30));
 
         txtEmail.setBackground(new java.awt.Color(153, 153, 153));
         txtEmail.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
         txtEmail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -119,11 +121,10 @@ public class CadastrarHospede extends javax.swing.JFrame {
                 txtEmailActionPerformed(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 230, 30));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 220, 30));
 
         txtPassaporte.setBackground(new java.awt.Color(153, 153, 153));
         txtPassaporte.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        txtPassaporte.setForeground(new java.awt.Color(0, 0, 0));
         txtPassaporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtPassaporte.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtPassaporte.addActionListener(new java.awt.event.ActionListener() {
@@ -131,11 +132,10 @@ public class CadastrarHospede extends javax.swing.JFrame {
                 txtPassaporteActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, 220, 30));
+        jPanel1.add(txtPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 220, 30));
 
         txtCpf.setBackground(new java.awt.Color(153, 153, 153));
         txtCpf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtCpf.setForeground(new java.awt.Color(0, 0, 0));
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -147,7 +147,6 @@ public class CadastrarHospede extends javax.swing.JFrame {
 
         txtTelefone.setBackground(new java.awt.Color(153, 153, 153));
         txtTelefone.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtTelefone.setForeground(new java.awt.Color(0, 0, 0));
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -155,21 +154,19 @@ public class CadastrarHospede extends javax.swing.JFrame {
         }
         txtTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtTelefone.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jPanel1.add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 220, 30));
+        jPanel1.add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 220, 30));
 
         cmbPais.setBackground(new java.awt.Color(153, 153, 153));
         cmbPais.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        cmbPais.setForeground(new java.awt.Color(0, 0, 0));
         cmbPais.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cmbPais.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(cmbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 230, 30));
+        jPanel1.add(cmbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 220, 30));
 
         lblTxtPrecoDiaria.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jPanel1.add(lblTxtPrecoDiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 420, 210, 30));
 
         txtDataNascimento.setBackground(new java.awt.Color(153, 153, 153));
         txtDataNascimento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtDataNascimento.setForeground(new java.awt.Color(0, 0, 0));
         try {
             txtDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -182,11 +179,10 @@ public class CadastrarHospede extends javax.swing.JFrame {
                 txtDataNascimentoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 230, 30));
+        jPanel1.add(txtDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 230, 30));
 
         bntSalvar.setBackground(new java.awt.Color(153, 153, 153));
         bntSalvar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        bntSalvar.setForeground(new java.awt.Color(0, 0, 0));
         bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Salvar_1.png"))); // NOI18N
         bntSalvar.setText("Salvar ");
         bntSalvar.setToolTipText("");
@@ -197,11 +193,10 @@ public class CadastrarHospede extends javax.swing.JFrame {
                 bntSalvarActionPerformed(evt);
             }
         });
-        jPanel1.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 110, 40));
+        jPanel1.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 110, 40));
 
         bntCheckIn.setBackground(new java.awt.Color(153, 153, 153));
-        bntCheckIn.setFont(new java.awt.Font("Arial Narrow", 1, 12)); // NOI18N
-        bntCheckIn.setForeground(new java.awt.Color(0, 0, 0));
+        bntCheckIn.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
         bntCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/check-in.png"))); // NOI18N
         bntCheckIn.setText("Check In");
         bntCheckIn.setToolTipText("ir Para Check -in");
@@ -214,29 +209,28 @@ public class CadastrarHospede extends javax.swing.JFrame {
         jPanel1.add(bntCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 110, 40));
 
         lblNome.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(0, 0, 0));
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNome.setText("Cadastro de Hospede");
         lblNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 40));
 
         lblNome1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblNome1.setForeground(new java.awt.Color(0, 0, 0));
         lblNome1.setText("Hospede:");
-        jPanel1.add(lblNome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 60, -1));
+        jPanel1.add(lblNome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 70, -1));
+
+        lblHospede.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel1.add(lblHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 200, 30));
 
         lblNome2.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblNome2.setForeground(new java.awt.Color(0, 0, 0));
         lblNome2.setText("Nome :");
-        jPanel1.add(lblNome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 40, -1));
+        jPanel1.add(lblNome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 50, -1));
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Pesquisar.png"))); // NOI18N
-        jButton2.setText("Pesquisar");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 110, 40));
+        btnPesquisar.setBackground(new java.awt.Color(153, 153, 153));
+        btnPesquisar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Pesquisar.png"))); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 110, 40));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/aperto-de-mao.png"))); // NOI18N
@@ -244,13 +238,11 @@ public class CadastrarHospede extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 130, 120));
 
         lblPassaporte.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblPassaporte.setForeground(new java.awt.Color(0, 0, 0));
         lblPassaporte.setText("Passaporte :");
-        jPanel1.add(lblPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, 70, -1));
+        jPanel1.add(lblPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 90, -1));
 
         btnLimparCampos.setBackground(new java.awt.Color(153, 153, 153));
         btnLimparCampos.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        btnLimparCampos.setForeground(new java.awt.Color(0, 0, 0));
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_LimparTela.png"))); // NOI18N
         btnLimparCampos.setText("Limpar");
         btnLimparCampos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -259,11 +251,23 @@ public class CadastrarHospede extends javax.swing.JFrame {
                 btnLimparCamposActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 110, 40));
+        jPanel1.add(btnLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 110, 40));
+
+        btnDesselecionar.setBackground(new java.awt.Color(153, 153, 153));
+        btnDesselecionar.setFont(new java.awt.Font("Arial Narrow", 0, 10)); // NOI18N
+        btnDesselecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Desmarcar.png"))); // NOI18N
+        btnDesselecionar.setText("Desselecionar");
+        btnDesselecionar.setToolTipText("Limpar Campo");
+        btnDesselecionar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDesselecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesselecionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDesselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 110, 40));
 
         btnSair.setBackground(new java.awt.Color(153, 153, 153));
         btnSair.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        btnSair.setForeground(new java.awt.Color(0, 0, 0));
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Sair_1.png"))); // NOI18N
         btnSair.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -274,11 +278,34 @@ public class CadastrarHospede extends javax.swing.JFrame {
         jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 60, 40));
 
         lblMargensBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.add(lblMargensBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 130, 250));
+        jPanel1.add(lblMargensBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 130, 270));
 
         lblDadosGerais.setBackground(new java.awt.Color(204, 204, 204));
-        lblDadosGerais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 14), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel1.add(lblDadosGerais, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 660, 370));
+        lblDadosGerais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 14))); // NOI18N
+        jPanel1.add(lblDadosGerais, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 710, 370));
+
+        tbHospedes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nome", "Cpf", "Passaporte"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbHospedes);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 960, 310));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 780));
 
@@ -316,6 +343,10 @@ public class CadastrarHospede extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void btnDesselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesselecionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDesselecionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,16 +401,19 @@ public class CadastrarHospede extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton bntCheckIn;
     private javax.swing.JButton bntSalvar;
+    private javax.swing.JButton btnDesselecionar;
     private javax.swing.JButton btnLimparCampos;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JComboBox<String> cmbPais;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblDadosGerais;
     private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblHospede;
     private javax.swing.JLabel lblMargensBotoes;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
@@ -388,6 +422,7 @@ public class CadastrarHospede extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassaporte;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblTxtPrecoDiaria;
+    private javax.swing.JTable tbHospedes;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
@@ -447,10 +482,38 @@ public class CadastrarHospede extends javax.swing.JFrame {
         cmbPais.setSelectedItem(1);
         txtDataNascimento.setText("");
     }
-
+       private void selecionarHospede() {
+        tbHospedes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            DatasUtil datasUtil = new DatasUtil();
+                    if (e.getClickCount() == 2) {
+                        int index = tbHospedes.getSelectedRow();
+                        if (index != -1) {
+                            idSelecionado = (int) tbHospedes.getValueAt(index, 0);
+                            Hospede hospede = tipoService.retornaIdHospede(getIdSelecionado());
+                            lblHospede.setText(hospede.getNome());
+                            txtNome.setText(hospede.getNome());
+                            txtCpf.setText(hospede.getCpf());
+                            txtTelefone.setText(hospede.getTelefone());
+                            txtEmail.setText(hospede.getEmail());
+                            cmbPais.setSelectedItem(hospede.getPais());
+                            txtPassaporte.setText(hospede.getPassaporte());
+                            txtDataNascimento.setText(datasUtil.converterDataParaString(hospede.getDataNascimento(), "dd/MM/yyyy"));
+     
+                    }
+                } 
+            }
+        });
+    }
+       
     public static String getCpfFuncionario() {
         return cpfFuncionario;
     }
+       private int getIdSelecionado() {
+        return idSelecionado;
+    }
+
 
     public static void setCpfFuncionario(String cpfFuncionario) {
         CadastrarHospede.cpfFuncionario = cpfFuncionario;
@@ -466,6 +529,10 @@ public class CadastrarHospede extends javax.swing.JFrame {
 
     public static String getPassaporteHospede() {
         return passaporteHospede;
+    }
+    
+    private void preencherAtualizarTabela() {
+        tipoService.preencherTabelaHospedeCheckIn(tbHospedes);
     }
 
     public static void setPassaporteHospede(String passaporteHospede) {

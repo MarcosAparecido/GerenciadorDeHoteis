@@ -159,7 +159,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         lblDataHoje.setBackground(new java.awt.Color(0, 0, 0));
         lblDataHoje.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         lblDataHoje.setText("data");
-        jPanel1.add(lblDataHoje, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 50, 80, -1));
+        jPanel1.add(lblDataHoje, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 50, 150, -1));
 
         bntLimparCampos.setBackground(new java.awt.Color(153, 153, 153));
         bntLimparCampos.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
@@ -173,11 +173,11 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 bntLimparCamposActionPerformed(evt);
             }
         });
-        jPanel1.add(bntLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 720, 120, 50));
+        jPanel1.add(bntLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 660, 120, 50));
 
         lblProdutoSelecionado.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         lblProdutoSelecionado.setText("Produto Selecionado :");
-        jPanel1.add(lblProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 500, 170, 20));
+        jPanel1.add(lblProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 500, 180, 20));
 
         lblTabelaProdutos.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         lblTabelaProdutos.setText("PRODUTOS");
@@ -267,22 +267,22 @@ public class GerenciamentoConta extends javax.swing.JFrame {
 
         lblPesquisarProduto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         lblPesquisarProduto.setText("Pesquisar Produto :");
-        jPanel1.add(lblPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 650, 140, -1));
+        jPanel1.add(lblPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 870, 140, -1));
 
         lblGerenciamentoDeContas.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         lblGerenciamentoDeContas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblGerenciamentoDeContas.setText("Gerenciamento de Contas");
-        jPanel1.add(lblGerenciamentoDeContas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1500, -1));
+        jPanel1.add(lblGerenciamentoDeContas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1470, -1));
 
-        lblHospedeSelecionado.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        lblHospedeSelecionado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblHospedeSelecionado.setText("Hospede Selecionado :");
-        jPanel1.add(lblHospedeSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 170, 20));
+        jPanel1.add(lblHospedeSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 200, 20));
 
-        lblHospedePassaporte.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        lblHospedePassaporte.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblHospedePassaporte.setText("Hospede Passaporte :");
-        jPanel1.add(lblHospedePassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 160, 20));
+        jPanel1.add(lblHospedePassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 190, 20));
 
-        lblHospedeCpf.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        lblHospedeCpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblHospedeCpf.setText("Hospede CPF :");
         jPanel1.add(lblHospedeCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 280, -1, 20));
 
@@ -303,7 +303,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 txtPesquisarProdutoKeyPressed(evt);
             }
         });
-        jPanel1.add(txtPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 640, 230, 30));
+        jPanel1.add(txtPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 860, 230, 30));
 
         lblQuantidadeProduto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         lblQuantidadeProduto.setText("Quantidade Produto :");
@@ -321,12 +321,11 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 bntPesquisarProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(bntPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 480, 120, 50));
+        jPanel1.add(bntPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 460, 120, 50));
 
-        lblHospede.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblHospede.setText("hospede");
+        lblHospede.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblHospede.setToolTipText("");
-        jPanel1.add(lblHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 220, 120, 20));
+        jPanel1.add(lblHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 220, 210, 20));
 
         btnAdicionarHospede.setBackground(new java.awt.Color(153, 153, 153));
         btnAdicionarHospede.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -340,25 +339,21 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 btnAdicionarHospedeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdicionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 330, 120, 50));
+        jPanel1.add(btnAdicionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 330, 120, 50));
 
-        lblPassaporte.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblPassaporte.setText("passaporte");
+        lblPassaporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPassaporte.setToolTipText("");
-        jPanel1.add(lblPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 340, 150, 20));
+        jPanel1.add(lblPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 340, 200, 20));
 
-        lblCPF.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblCPF.setText("cpf");
+        lblCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblCPF.setToolTipText("");
-        jPanel1.add(lblCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 280, 60, 20));
+        jPanel1.add(lblCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 280, 250, 20));
 
-        lblProduto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblProduto.setText("produto");
+        lblProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblProduto.setToolTipText("");
-        jPanel1.add(lblProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 500, 90, 20));
+        jPanel1.add(lblProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 500, 210, 20));
 
-        lblValor.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblValor.setText("valor");
+        lblValor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblValor.setToolTipText("");
         jPanel1.add(lblValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 550, 270, 20));
 
@@ -370,7 +365,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 txtQuantidadeProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 590, 90, 30));
+        jPanel1.add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 600, 90, 30));
 
         bntPesquisaHospede.setBackground(new java.awt.Color(153, 153, 153));
         bntPesquisaHospede.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -384,7 +379,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 bntPesquisaHospedeActionPerformed(evt);
             }
         });
-        jPanel1.add(bntPesquisaHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 210, 120, 50));
+        jPanel1.add(bntPesquisaHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 210, 120, 50));
 
         btnAdicionarproduto.setBackground(new java.awt.Color(153, 153, 153));
         btnAdicionarproduto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -398,20 +393,21 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 btnAdicionarprodutoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdicionarproduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 620, 120, 50));
+        jPanel1.add(btnAdicionarproduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 580, 120, 50));
 
         bntRealizarCheckIn.setBackground(new java.awt.Color(153, 153, 153));
         bntRealizarCheckIn.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        bntRealizarCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/check-in.png"))); // NOI18N
-        bntRealizarCheckIn.setText("Check In");
-        bntRealizarCheckIn.setToolTipText("Realizar o Check IN");
+        bntRealizarCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Salvar.png"))); // NOI18N
+        bntRealizarCheckIn.setText("Registrar");
+        bntRealizarCheckIn.setToolTipText("Registrar Consumo do Hospede");
+        bntRealizarCheckIn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntRealizarCheckIn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntRealizarCheckIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntRealizarCheckInActionPerformed(evt);
             }
         });
-        jPanel1.add(bntRealizarCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 720, 150, 50));
+        jPanel1.add(bntRealizarCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 690, 150, 50));
 
         bntDesselecionarHospede.setBackground(new java.awt.Color(153, 153, 153));
         bntDesselecionarHospede.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
@@ -425,7 +421,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 bntDesselecionarHospedeActionPerformed(evt);
             }
         });
-        jPanel1.add(bntDesselecionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 270, 120, 50));
+        jPanel1.add(bntDesselecionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 270, 120, 50));
 
         bntDesselecionarProduto.setBackground(new java.awt.Color(153, 153, 153));
         bntDesselecionarProduto.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
@@ -439,7 +435,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 bntDesselecionarProdutoActionPerformed(evt);
             }
         });
-        jPanel1.add(bntDesselecionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 550, 120, 50));
+        jPanel1.add(bntDesselecionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 520, 120, 50));
 
         btnSair.setBackground(new java.awt.Color(153, 153, 153));
         btnSair.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
@@ -452,25 +448,25 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 btnSairActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 0, 60, 40));
+        jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 0, 60, 40));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1550, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1480, 40));
 
         lblTitleProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hospede", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 18))); // NOI18N
-        jPanel1.add(lblTitleProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 180, 140, 210));
+        jPanel1.add(lblTitleProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 180, 140, 210));
 
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         jLabel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hospede", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 18))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 540, 210));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 430, 210));
 
         lblTitleProduto1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 18))); // NOI18N
-        jPanel1.add(lblTitleProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 450, 540, 230));
+        jPanel1.add(lblTitleProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 450, 410, 210));
 
         lblTitleProduto2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 18))); // NOI18N
-        jPanel1.add(lblTitleProduto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 440, 140, 240));
+        jPanel1.add(lblTitleProduto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 420, 140, 240));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1610, 1030));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1550, 1030));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

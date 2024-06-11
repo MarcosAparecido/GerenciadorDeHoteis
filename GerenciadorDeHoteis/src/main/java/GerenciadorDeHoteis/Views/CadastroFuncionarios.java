@@ -9,6 +9,8 @@ import GerenciadorDeHoteis.Entity.Funcionario;
 import GerenciadorDeHoteis.Utils.SenhaUtil;
 import GerenciadorDeHoteis.Utils.ValidacaoUtil;
 import static GerenciadorDeHoteis.Views.GerenciamentoCheckInCheckOut.setCpfFuncionario;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +18,9 @@ import javax.swing.JOptionPane;
  * @author Marcos
  */
 public class CadastroFuncionarios extends javax.swing.JFrame {
+
     private TipoService tipoService = new TipoService();
+    private int idSelecionado = -1;
 
     /**
      * Creates new form CadastroFuncionarios
@@ -24,6 +28,9 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
     public CadastroFuncionarios() {
         initComponents();
         this.setLocationRelativeTo(null);
+        selecionarFuncionario();
+        preencherAtualizarTabela();
+        getIdSelecionado();
     }
 
     /**
@@ -51,17 +58,20 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         lblConfimacao = new javax.swing.JLabel();
         lblSenha1 = new javax.swing.JLabel();
+        lbFuncionarioSelecionado1 = new javax.swing.JLabel();
         lblMargem = new javax.swing.JLabel();
+        btnPesquisar = new javax.swing.JButton();
         lblImagem = new javax.swing.JLabel();
+        lblSobrenome1 = new javax.swing.JLabel();
         lblSalario = new javax.swing.JLabel();
         btnDesselecionar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         lblDadosGerais = new javax.swing.JLabel();
-        lblSobrenome1 = new javax.swing.JLabel();
         lblMargensBotoes = new javax.swing.JLabel();
-        lbFuncionarioSelecionado1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbFuncionarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE FUNCIONÁRIO");
@@ -70,15 +80,13 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNome.setBackground(new java.awt.Color(153, 153, 153));
         txtNome.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        txtNome.setForeground(new java.awt.Color(0, 0, 0));
         txtNome.setToolTipText("Nome do Funcionario");
         txtNome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 220, 30));
+        jPanel1.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 220, 30));
 
         txtSobrenome.setBackground(new java.awt.Color(153, 153, 153));
         txtSobrenome.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -89,7 +97,6 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
 
         txtCpf.setBackground(new java.awt.Color(153, 153, 153));
         txtCpf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtCpf.setForeground(new java.awt.Color(0, 0, 0));
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -103,11 +110,10 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
                 txtCpfActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 220, 30));
+        jPanel1.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 220, 30));
 
         txtTelefone.setBackground(new java.awt.Color(153, 153, 153));
         txtTelefone.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtTelefone.setForeground(new java.awt.Color(0, 0, 0));
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -133,7 +139,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
                 txtSenhaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 220, 30));
+        jPanel1.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 220, 30));
 
         txtSalario.setBackground(new java.awt.Color(153, 153, 153));
         txtSalario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -146,7 +152,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
                 txtSalarioActionPerformed(evt);
             }
         });
-        jPanel1.add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 220, 30));
+        jPanel1.add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 220, 30));
 
         txtEmail.setBackground(new java.awt.Color(153, 153, 153));
         txtEmail.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -156,7 +162,6 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
 
         txtConfirmacao.setBackground(new java.awt.Color(153, 153, 153));
         txtConfirmacao.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        txtConfirmacao.setForeground(new java.awt.Color(0, 0, 0));
         txtConfirmacao.setToolTipText("Cofirme a Senha Desejada");
         txtConfirmacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtConfirmacao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -168,59 +173,64 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         jPanel1.add(txtConfirmacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 360, 220, 30));
 
         lblNome.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(0, 0, 0));
         lblNome.setText("Nome:");
-        jPanel1.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 40, 30));
+        jPanel1.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 50, 30));
 
         lbSelecionado.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lbSelecionado.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(lbSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 330, 30));
+        jPanel1.add(lbSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 330, 30));
 
         lblCpf.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblCpf.setForeground(new java.awt.Color(0, 0, 0));
         lblCpf.setText("CPF:");
-        jPanel1.add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 40, 30));
+        jPanel1.add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 40, 30));
 
         lblTelefone.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblTelefone.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefone.setText("Telefone:");
-        jPanel1.add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 50, 30));
+        jPanel1.add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 220, 70, 30));
 
         lblSenha.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(0, 0, 0));
         lblSenha.setText("E-mail:");
-        jPanel1.add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 50, 30));
+        jPanel1.add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 290, 50, 30));
 
         lblConfimacao.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblConfimacao.setForeground(new java.awt.Color(0, 0, 0));
         lblConfimacao.setText("Confirmar :");
-        jPanel1.add(lblConfimacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 60, 30));
+        jPanel1.add(lblConfimacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, 90, 30));
 
         lblSenha1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblSenha1.setForeground(new java.awt.Color(0, 0, 0));
         lblSenha1.setText("Senha:");
-        jPanel1.add(lblSenha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 40, 30));
+        jPanel1.add(lblSenha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 60, 30));
+
+        lbFuncionarioSelecionado1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        lbFuncionarioSelecionado1.setText("Funcionário:");
+        jPanel1.add(lbFuncionarioSelecionado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 80, 30));
 
         lblMargem.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        lblMargem.setForeground(new java.awt.Color(0, 0, 0));
         lblMargem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMargem.setText("Cadastrar Funcionários");
         lblMargem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(lblMargem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 40));
+
+        btnPesquisar.setBackground(new java.awt.Color(153, 153, 153));
+        btnPesquisar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Pesquisar.png"))); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 110, 40));
 
         lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/funcionarios (1).png"))); // NOI18N
         lblImagem.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.add(lblImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 130, 120));
 
+        lblSobrenome1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        lblSobrenome1.setText("Sobrenome:");
+        jPanel1.add(lblSobrenome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 80, 30));
+
         lblSalario.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblSalario.setForeground(new java.awt.Color(0, 0, 0));
         lblSalario.setText("Salário R$:");
-        jPanel1.add(lblSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 60, 30));
+        jPanel1.add(lblSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 80, 30));
 
         btnDesselecionar.setBackground(new java.awt.Color(153, 153, 153));
-        btnDesselecionar.setFont(new java.awt.Font("Arial Narrow", 0, 12)); // NOI18N
-        btnDesselecionar.setForeground(new java.awt.Color(0, 0, 0));
+        btnDesselecionar.setFont(new java.awt.Font("Arial Narrow", 0, 10)); // NOI18N
         btnDesselecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Desmarcar.png"))); // NOI18N
         btnDesselecionar.setText("Desselecionar");
         btnDesselecionar.setToolTipText("Limpar Campo");
@@ -234,7 +244,6 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
 
         btnLimpar.setBackground(new java.awt.Color(153, 153, 153));
         btnLimpar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_LimparTela.png"))); // NOI18N
         btnLimpar.setText("Limpar");
         btnLimpar.setToolTipText("Limpar Campo");
@@ -244,11 +253,10 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 110, 40));
+        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 110, 40));
 
         btnSalvar.setBackground(new java.awt.Color(153, 153, 153));
         btnSalvar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Salvar.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setToolTipText("Finaliza o Cadastro");
@@ -264,10 +272,8 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
 
         btnSair.setBackground(new java.awt.Color(153, 153, 153));
         btnSair.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        btnSair.setForeground(new java.awt.Color(0, 0, 0));
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Sair_1.png"))); // NOI18N
         btnSair.setToolTipText("Finaliza o Cadastro");
-        btnSair.setActionCommand("");
         btnSair.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -278,21 +284,41 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         jPanel1.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 0, 60, 40));
 
         lblDadosGerais.setBackground(new java.awt.Color(204, 204, 204));
-        lblDadosGerais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 14), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel1.add(lblDadosGerais, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 660, 430));
-
-        lblSobrenome1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lblSobrenome1.setForeground(new java.awt.Color(0, 0, 0));
-        lblSobrenome1.setText("Sobrenome:");
-        jPanel1.add(lblSobrenome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 70, 30));
+        lblDadosGerais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 0, 14))); // NOI18N
+        jPanel1.add(lblDadosGerais, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 700, 400));
 
         lblMargensBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.add(lblMargensBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 130, 250));
+        jPanel1.add(lblMargensBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 130, 250));
 
-        lbFuncionarioSelecionado1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        lbFuncionarioSelecionado1.setForeground(new java.awt.Color(0, 0, 0));
-        lbFuncionarioSelecionado1.setText("Funcionário:");
-        jPanel1.add(lbFuncionarioSelecionado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 70, 30));
+        tbFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nome", "Cpf", "Salario", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbFuncionarios);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 960, 310));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 0, 1000, 800));
 
@@ -383,9 +409,11 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDesselecionar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbFuncionarioSelecionado1;
     private javax.swing.JLabel lbSelecionado;
     private javax.swing.JLabel lblConfimacao;
@@ -400,6 +428,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenha1;
     private javax.swing.JLabel lblSobrenome1;
     private javax.swing.JLabel lblTelefone;
+    private javax.swing.JTable tbFuncionarios;
     private javax.swing.JPasswordField txtConfirmacao;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
@@ -414,7 +443,7 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         SenhaUtil senhaUtils = new SenhaUtil();
         ValidacaoUtil validacaoUtil = new ValidacaoUtil();
         double salarioNumero = 0;
-        
+
         String nome = txtNome.getText();
         String sobrenome = txtSobrenome.getText();
         String cpf = txtCpf.getText();
@@ -422,9 +451,9 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         String senha = txtSenha.getText();
         String confirmacao = txtConfirmacao.getText();
         String salario = txtSalario.getText();
-        try{
+        try {
             salarioNumero = Double.parseDouble(salario);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Numero inválido");
         }
         if (!validacaoUtil.validaConfirmacaoSenha(senha, confirmacao, txtConfirmacao) && validacaoUtil.validaTamanhoSenhaFuncionario(txtSenha)) {
@@ -432,13 +461,44 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
             txtConfirmacao.setText("");
             return;
         }
-        Funcionario funcionario = new Funcionario(nome, sobrenome, telefone, cpf, salarioNumero, senhaUtils.criptografarSenha(senha),true);
+        Funcionario funcionario = new Funcionario(nome, sobrenome, telefone, cpf, salarioNumero, senhaUtils.criptografarSenha(senha), true);
         tipoService.salvarFuncionario(funcionario);
         setCpfFuncionario(cpf);
         limparCampos();
     }
-    
-    private void limparCampos(){
+
+    private void selecionarFuncionario() {
+        tbFuncionarios.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = tbFuncionarios.getSelectedRow();
+                    if (index != -1) {
+                        idSelecionado = (int) tbFuncionarios.getValueAt(index, 0);
+                        Funcionario funcionario = tipoService.retornaIdFuncionario(getIdSelecionado());
+
+                        txtNome.setText(funcionario.getNome());
+                        txtSobrenome.setText(funcionario.getSobrenome());
+                        txtCpf.setText(funcionario.getCpf());
+                        txtTelefone.setText(funcionario.getTelefone());
+                        txtSalario.setText(String.valueOf(funcionario.getSalario()));
+                        // txtEmail.setText(funcionario.getEmail());
+
+                    }
+                }
+            }
+        });
+    }
+
+    private int getIdSelecionado() {
+        return idSelecionado;
+    }
+
+    private void preencherAtualizarTabela() {
+        tipoService.preencherTabelaFuncionario(tbFuncionarios);
+    }
+
+    private void limparCampos() {
         txtNome.setText("");
         txtSenha.setText("");
         txtConfirmacao.setText("");
@@ -446,6 +506,6 @@ public class CadastroFuncionarios extends javax.swing.JFrame {
         txtTelefone.setText("");
         txtSalario.setText("");
         txtEmail.setText("");
-        txtSobrenome.setText("");       
+        txtSobrenome.setText("");
     }
 }

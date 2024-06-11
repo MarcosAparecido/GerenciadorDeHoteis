@@ -84,6 +84,31 @@ public class TipoService {
         }
         return null;
     }
+     public Funcionario retornaIdFuncionario(int id) {
+        Funcionario funcionario = tipoRepository.buscarPorIdFuncionario(id);
+        return funcionario;
+    }
+     public void preencherTabelaFuncionario(JTable tbFuncionarios) {
+        DefaultTableModel tabela = (DefaultTableModel) tbFuncionarios.getModel();
+        tabela.setRowCount(0);
+        List<Funcionario> funcionarios = tipoRepository.listarTodosFuncionarios();
+        List<Object[]> objeto = new ArrayList<>();
+        for (Funcionario funcionario : funcionarios) {
+            Object[] linha = {funcionario.getId(), funcionario.getNome(), funcionario.getCpf(),funcionario.getSalario(), funcionario.isStatus()};
+            objeto.add(linha);
+        }
+        if (tabela == null) {
+            System.out.println("Erro ao retornar tabela, tabela esta nula");
+
+        } else {
+            for (Object[] linha : objeto) {
+                tabela.addRow(linha);
+            }
+            System.out.println("tabela retornada com sucesso");
+        }
+    }
+     
+     
 
     //Service Quartos
     public void deletarQuartoService(int id) {

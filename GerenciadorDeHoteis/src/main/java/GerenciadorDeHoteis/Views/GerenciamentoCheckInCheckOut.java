@@ -294,7 +294,7 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         });
         scpAcompanhantes.setViewportView(tbAcompanhantes);
 
-        getContentPane().add(scpAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 410, 370));
+        getContentPane().add(scpAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 410, 370));
 
         lblRealizaCheckInCheckOut.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         lblRealizaCheckInCheckOut.setText("Realizar Check-in / Check-out");
