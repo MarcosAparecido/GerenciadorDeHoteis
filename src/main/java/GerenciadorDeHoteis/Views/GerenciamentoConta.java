@@ -9,6 +9,7 @@ import GerenciadorDeHoteis.Entity.ProdutoEServico;
 import GerenciadorDeHoteis.Entity.Reserva;
 import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Entity.ReservaDespesa;
+import GerenciadorDeHoteis.Entity.ReservaDespesaId;
 import GerenciadorDeHoteis.Repository.TipoRepository;
 import GerenciadorDeHoteis.Utils.DatasUtil;
 import GerenciadorDeHoteis.Utils.FormatoStringUtil;
@@ -537,8 +538,8 @@ public class GerenciamentoConta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarHospedeActionPerformed
 
     private void btnAdicionarprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarprodutoActionPerformed
-    GerenciamentoDeProdutosEServico gerenciamentoDeProdutosEServico = new GerenciamentoDeProdutosEServico();
-    gerenciamentoDeProdutosEServico.setVisible(true);
+        GerenciamentoDeProdutosEServico gerenciamentoDeProdutosEServico = new GerenciamentoDeProdutosEServico();
+        gerenciamentoDeProdutosEServico.setVisible(true);
     }//GEN-LAST:event_btnAdicionarprodutoActionPerformed
 
     /**
@@ -566,111 +567,6 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GerenciamentoConta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -758,6 +654,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
     private void criarReservaDespesa() {
         TipoRepository tipoRepository = new TipoRepository();
         DatasUtil datasUtil = new DatasUtil();
+        
         double valorProdutoNumero;
         int quantidadeProdutoNumero;
         int idReserva = tipoService.buscarIdReserva(lblCPF.getText(), lblPassaporte.getText());
@@ -767,10 +664,10 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         String quantidadeProduto = txtQuantidadeProduto.getText();
         Date dataConsumo = datasUtil.converterStringParaDataHoras(lblDataHoje.getText());
         double total = tipoService.ultimoTotal(idReserva);
-        
+
         Reserva reserva = tipoRepository.buscarReservaPorId(idReserva);
-        ProdutoEServico produtoEServico = tipoRepository.buscarPorNomeProduto(produto);
-        
+        ProdutoEServico produtoEServico = tipoRepository.buscarPorNomeProduto(produto);                     
+
         try {
             quantidadeProdutoNumero = Integer.parseInt(quantidadeProduto);
             valorProdutoNumero = Double.parseDouble(valorProduto);
@@ -783,11 +680,14 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         double valorSoma = valorProdutoNumero * quantidadeProdutoNumero;
         double totalSoma = total + valorSoma;
         
-        ReservaDespesa reservaDespesa = new ReservaDespesa(reserva, produtoEServico, nome, produto, dataConsumo, quantidadeProdutoNumero, valorSoma, totalSoma);
+        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(produtoEServico.getId(), reserva.getId()); 
+        ReservaDespesa reservaDespesa = new ReservaDespesa(reservaDespesaId, reserva, produtoEServico, nome, produto, dataConsumo, quantidadeProdutoNumero, valorSoma, totalSoma);       
+        
         alterarStoque(quantidadeProdutoNumero, produto);
+        
         tipoService.salvarReservaDespesa(reservaDespesa, reserva, false);
     }
-     
+
     private void criarDespesa() {
         criarReservaDespesa();
     }

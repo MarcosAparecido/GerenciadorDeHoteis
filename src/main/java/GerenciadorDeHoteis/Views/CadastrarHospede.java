@@ -23,7 +23,7 @@ public class CadastrarHospede extends javax.swing.JFrame {
     private static String cpfHospede;
     private static String passaporteHospede;
     private int idSelecionado = -1;
-    
+
     /**
      * Creates new form CadastroHospede
      */
@@ -482,38 +482,39 @@ public class CadastrarHospede extends javax.swing.JFrame {
         cmbPais.setSelectedItem(1);
         txtDataNascimento.setText("");
     }
-       private void selecionarHospede() {
+
+    private void selecionarHospede() {
         tbHospedes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            DatasUtil datasUtil = new DatasUtil();
-                    if (e.getClickCount() == 2) {
-                        int index = tbHospedes.getSelectedRow();
-                        if (index != -1) {
-                            idSelecionado = (int) tbHospedes.getValueAt(index, 0);
-                            Hospede hospede = tipoService.retornaIdHospede(getIdSelecionado());
-                            lblHospede.setText(hospede.getNome());
-                            txtNome.setText(hospede.getNome());
-                            txtCpf.setText(hospede.getCpf());
-                            txtTelefone.setText(hospede.getTelefone());
-                            txtEmail.setText(hospede.getEmail());
-                            cmbPais.setSelectedItem(hospede.getPais());
-                            txtPassaporte.setText(hospede.getPassaporte());
-                            txtDataNascimento.setText(datasUtil.converterDataParaString(hospede.getDataNascimento(), "dd/MM/yyyy"));
-     
+                DatasUtil datasUtil = new DatasUtil();
+                if (e.getClickCount() == 2) {
+                    int index = tbHospedes.getSelectedRow();
+                    if (index != -1) {
+                        idSelecionado = (int) tbHospedes.getValueAt(index, 0);
+                        Hospede hospede = tipoService.retornaIdHospede(getIdSelecionado());
+                        lblHospede.setText(hospede.getNome());
+                        txtNome.setText(hospede.getNome());
+                        txtCpf.setText(hospede.getCpf());
+                        txtTelefone.setText(hospede.getTelefone());
+                        txtEmail.setText(hospede.getEmail());
+                        cmbPais.setSelectedItem(hospede.getPais());
+                        txtPassaporte.setText(hospede.getPassaporte());
+                        txtDataNascimento.setText(datasUtil.converterDataParaString(hospede.getDataNascimento(), "dd/MM/yyyy"));
+
                     }
-                } 
+                }
             }
         });
     }
-       
+
     public static String getCpfFuncionario() {
         return cpfFuncionario;
     }
-       private int getIdSelecionado() {
+
+    private int getIdSelecionado() {
         return idSelecionado;
     }
-
 
     public static void setCpfFuncionario(String cpfFuncionario) {
         CadastrarHospede.cpfFuncionario = cpfFuncionario;
@@ -530,7 +531,7 @@ public class CadastrarHospede extends javax.swing.JFrame {
     public static String getPassaporteHospede() {
         return passaporteHospede;
     }
-    
+
     private void preencherAtualizarTabela() {
         tipoService.preencherTabelaHospedeCheckIn(tbHospedes);
     }
@@ -538,11 +539,11 @@ public class CadastrarHospede extends javax.swing.JFrame {
     public static void setPassaporteHospede(String passaporteHospede) {
         CadastrarHospede.passaporteHospede = passaporteHospede;
     }
-    
+
     public void verificarCpf(String cpfFuncionario) {
-        if(cpfFuncionario == null){
-           JOptionPane.showInternalMessageDialog(null, "Erro o Cpf de funcionario esta nulo. Tente relogar.");
-           throw new IllegalArgumentException("CPF esta nulo");
-        }   
+        if (cpfFuncionario == null) {
+            JOptionPane.showInternalMessageDialog(null, "Erro o Cpf de funcionario esta nulo. Tente relogar.");
+            throw new IllegalArgumentException("CPF esta nulo");
+        }
     }
 }

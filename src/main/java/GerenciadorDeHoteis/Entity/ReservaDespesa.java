@@ -5,17 +5,15 @@
 package GerenciadorDeHoteis.Entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
-
 /**
  *
  * @author Marcos
@@ -23,17 +21,18 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_reserva_produtoeservico")
 public class ReservaDespesa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private Integer id;
+    
+    @EmbeddedId
+    private ReservaDespesaId id;
     
     @ManyToOne
+    @MapsId("reservaId")
     @JoinColumn(name = "reserva_id")
     private Reserva reserva;
     
     @ManyToOne
-    @JoinColumn(name = "despesa_id", nullable = false, unique = false)
+    @MapsId("despesaId")
+    @JoinColumn(name = "despesa_id")
     private ProdutoEServico produtoEServico;
     
     @Column(name = "nome", nullable = false, unique = false)
@@ -55,7 +54,8 @@ public class ReservaDespesa {
     @Column(name = "total", nullable = true, unique = false)
     private double total;
 
-    public ReservaDespesa(Reserva reserva, ProdutoEServico produtoEServico, String nome, String produtoServico, Date dataConsumo, int quantidade, double valor, double total) {
+    public ReservaDespesa(ReservaDespesaId id, Reserva reserva, ProdutoEServico produtoEServico, String nome, String produtoServico, Date dataConsumo, int quantidade, double valor, double total) {
+        this.id = id;
         this.reserva = reserva;
         this.produtoEServico = produtoEServico;
         this.nome = nome;
@@ -64,6 +64,14 @@ public class ReservaDespesa {
         this.quantidade = quantidade;
         this.valor = valor;
         this.total = total;
+    }
+
+    public ReservaDespesaId getId() {
+        return id;
+    }
+
+    public void setId(ReservaDespesaId id) {
+        this.id = id;
     }
     
     public ReservaDespesa() {
@@ -84,21 +92,13 @@ public class ReservaDespesa {
     public void setProdutoEServico(ProdutoEServico produtoEServico) {
         this.produtoEServico = produtoEServico;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
+ 
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getProdutoServico() {

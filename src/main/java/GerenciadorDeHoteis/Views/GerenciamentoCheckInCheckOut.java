@@ -11,6 +11,7 @@ import GerenciadorDeHoteis.Entity.Quarto;
 import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Entity.Reserva;
 import GerenciadorDeHoteis.Entity.ReservaDespesa;
+import GerenciadorDeHoteis.Entity.ReservaDespesaId;
 import GerenciadorDeHoteis.Repository.TipoRepository;
 import GerenciadorDeHoteis.Utils.DatasUtil;
 import GerenciadorDeHoteis.Utils.FormatoStringUtil;
@@ -556,67 +557,6 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -720,7 +660,8 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             Hospede hospede = tipoRepository.buscarPorIdHospede((Integer) value);
             hospedes.add(hospede);
         }
-
+        
+        
         Reserva reserva = new Reserva(funcionario, quarto, nome, numeroHospedesNumero, nomeQuarto, true, dataCheckIn, null);
         reserva.setHospede(hospedes);
         tipoService.salvarReserva(reserva);
@@ -749,8 +690,9 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             System.out.println("O campo VALOR DIARIA ou Total deve ser um número válido." + e.getMessage());
             return;
         }
-
-        ReservaDespesa reservaDespesa = new ReservaDespesa(reserva, produtoEServico, nome, produto, dataCheckIn, 1, valorDiariaNumero, valorDiariaNumero);
+        
+        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(produtoEServico.getId(), reserva.getId()); 
+        ReservaDespesa reservaDespesa = new ReservaDespesa(reservaDespesaId, reserva, produtoEServico, nome, produto, dataCheckIn, 1, valorDiariaNumero, valorDiariaNumero);
         tipoService.salvarReservaDespesa(reservaDespesa, reserva, gasto);
         tipoService.mudarStatusQuarto((String) cmbNomeQuarto.getSelectedItem(), true);
     }
@@ -777,7 +719,8 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             return;
         }
         double valorSoma = total + valorDiariaNumero;
-        ReservaDespesa reservaDespesa = new ReservaDespesa(reserva, produtoEServico, nome, produto, dataConsumo, 1, valorDiariaNumero, valorSoma);
+        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(produtoEServico.getId(), reserva.getId());
+        ReservaDespesa reservaDespesa = new ReservaDespesa(reservaDespesaId, reserva, produtoEServico, nome, produto, dataConsumo, 1, valorDiariaNumero, valorSoma);
         tipoService.salvarReservaDespesa(reservaDespesa, reserva, gasto);
     }
 

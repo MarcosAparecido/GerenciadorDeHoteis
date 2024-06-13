@@ -48,7 +48,7 @@ public class TipoRepository {
         } else {
             throw new IllegalStateException("Mais de um funcionário encontrado com o mesmo CPF!");
         }
-    }        
+    }
 
     public Funcionario buscarIformacaoLogin(String cpf, String senha) {
         TypedQuery<Funcionario> query = em.createQuery("SELECT f FROM Funcionario f WHERE f.cpf = :cpf", Funcionario.class);
@@ -78,7 +78,8 @@ public class TipoRepository {
         em.persist(funcionario);
         em.getTransaction().commit();
     }
-      public Funcionario buscarPorIdFuncionario(int id) {
+
+    public Funcionario buscarPorIdFuncionario(int id) {
         TypedQuery<Funcionario> query = em.createQuery("SELECT q FROM Funcionario q WHERE q.id = :id", Funcionario.class);
         query.setParameter("id", id);
         List<Funcionario> resultados = query.getResultList();
@@ -93,7 +94,7 @@ public class TipoRepository {
             throw new IllegalStateException("Mais de um Funcionario encontrado com o mesmo nome!");
         }
     }
-      
+
     //Quarto Repository   
     public Quarto buscarPorNomeQuarto(String quarto) {
         TypedQuery<Quarto> query = em.createQuery("SELECT q FROM Quarto q WHERE q.nome= :nome", Quarto.class);
@@ -592,14 +593,15 @@ public class TipoRepository {
         }
     }
 
-    public void inserirReservaDespesa(ReservaDespesa ReservaDespesa) {
-        if (em.getTransaction().isActive()) {
-            System.out.println("transmição acontecendo em atualizar, fechendo transmição");
-            em.getTransaction().rollback();
-            em.close();
-        }
+    public void inserirReservaDespesa(ReservaDespesa reservaDespesa) {
+//        if (em.getTransaction().isActive()) {
+//            System.out.println("transmição acontecendo em atualizar, fechendo transmição");
+//            em.getTransaction().rollback();
+//            em.close();
+//        }
         em.getTransaction().begin();
-        em.persist(ReservaDespesa);
+        ReservaDespesa mergedReservaDespesa = em.merge(reservaDespesa); // Reattaching the detached entity
+        em.persist(mergedReservaDespesa);
         em.getTransaction().commit();
     }
 
