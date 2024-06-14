@@ -346,7 +346,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="140" width="410" height="720"/>
+              <AbsoluteConstraints x="10" y="140" width="440" height="720"/>
             </Constraint>
           </Constraints>
 
@@ -367,7 +367,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="0">
-                    <Column editable="false" title="Id" type="java.lang.Object"/>
+                    <Column editable="false" title="Reserva_id" type="java.lang.Object"/>
                     <Column editable="false" title="Nome Hospede" type="java.lang.Object"/>
                     <Column editable="false" title="CPF" type="java.lang.Object"/>
                     <Column editable="false" title="Passaporte" type="java.lang.Object"/>
@@ -380,17 +380,17 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -410,7 +410,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="440" y="140" width="410" height="720"/>
+              <AbsoluteConstraints x="450" y="140" width="410" height="720"/>
             </Constraint>
           </Constraints>
 

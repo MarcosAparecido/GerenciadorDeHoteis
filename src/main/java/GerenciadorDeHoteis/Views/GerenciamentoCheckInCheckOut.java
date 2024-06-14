@@ -12,6 +12,7 @@ import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Entity.Reserva;
 import GerenciadorDeHoteis.Entity.ReservaDespesa;
 import GerenciadorDeHoteis.Entity.ReservaDespesaId;
+import GerenciadorDeHoteis.Entity.ReservaHospede;
 import GerenciadorDeHoteis.Repository.TipoRepository;
 import GerenciadorDeHoteis.Utils.DatasUtil;
 import GerenciadorDeHoteis.Utils.FormatoStringUtil;
@@ -34,7 +35,9 @@ import javax.swing.table.DefaultTableModel;
 public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
 
     private int idSelecionado = -1;
+    private int idReserva = -1;
     private int idAcompanhanteSelecionado = -1;
+    private int idASelecionadoHospede = -1;
     private TipoService tipoService = new TipoService();
     private static String cpfFuncionario;
     private static String cpfHospede;
@@ -63,7 +66,7 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         telaPesquisa.setSize(445, 450);
         telaCheckOut.setSize(820, 600);
         telaPesquisa.setLocationRelativeTo(null);
-        telaCheckOut.setLocationRelativeTo(null);      
+        telaCheckOut.setLocationRelativeTo(null);
         this.setLocationRelativeTo(null);
         lblCPF.setText(cpfHospede);
         lblPassaporte.setText(passaporteHospede);
@@ -175,14 +178,14 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Hospede_id", "Nome", "CPF", "Passaporte", "Nº Hospede", "Nº Quarto", "Check-in", "Status"
+                "Hospede_id", "Reserva_id", "Nome", "CPF", "Passaporte", "Nº Hospede", "Nº Quarto", "Check-in", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -556,8 +559,6 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -660,26 +661,24 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             Hospede hospede = tipoRepository.buscarPorIdHospede((Integer) value);
             hospedes.add(hospede);
         }
-        
-        
+
         Reserva reserva = new Reserva(funcionario, quarto, nome, numeroHospedesNumero, nomeQuarto, true, dataCheckIn, null);
         reserva.setHospede(hospedes);
         tipoService.salvarReserva(reserva);
-        limparAcompanhantes();    
+        limparAcompanhantes();
     }
 
     private void criarReservaDespesa(boolean gasto) {
         TipoRepository tipoRepository = new TipoRepository();
         DatasUtil datasUtil = new DatasUtil();
-
         double valorDiariaNumero;
-        int idReserva = tipoService.buscarIdReserva(lblCPF.getText(), lblPassaporte.getText());
+        
         String nome = lblHospede.getText();
         String produto = tipoService.obterNomeProdutoPorTipo((String) cmbTipoQuarto.getSelectedItem());
         String valorDiaria = lblTxtValorDiaria.getText();
         Date dataCheckIn = datasUtil.converterStringParaDataHoras(lblTxtDataCheckIn.getText());
 
-        Reserva reserva = tipoRepository.buscarReservaPorId(idReserva);
+        Reserva reserva = tipoRepository.buscarUltimaReservaPorDataCheckin();
         ProdutoEServico produtoEServico = tipoRepository.buscarPorNomeProduto(produto);
 
         try {
@@ -690,9 +689,11 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             System.out.println("O campo VALOR DIARIA ou Total deve ser um número válido." + e.getMessage());
             return;
         }
-        
-        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(produtoEServico.getId(), reserva.getId()); 
-        ReservaDespesa reservaDespesa = new ReservaDespesa(reservaDespesaId, reserva, produtoEServico, nome, produto, dataCheckIn, 1, valorDiariaNumero, valorDiariaNumero);
+
+        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(reserva.getId(), produtoEServico.getId());
+        ReservaDespesa reservaDespesa = new ReservaDespesa(reserva, produtoEServico, nome, produto, dataCheckIn, 1, valorDiariaNumero, valorDiariaNumero);
+        reservaDespesa.setId(reservaDespesaId);
+
         tipoService.salvarReservaDespesa(reservaDespesa, reserva, gasto);
         tipoService.mudarStatusQuarto((String) cmbNomeQuarto.getSelectedItem(), true);
     }
@@ -719,8 +720,11 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             return;
         }
         double valorSoma = total + valorDiariaNumero;
+
         ReservaDespesaId reservaDespesaId = new ReservaDespesaId(produtoEServico.getId(), reserva.getId());
-        ReservaDespesa reservaDespesa = new ReservaDespesa(reservaDespesaId, reserva, produtoEServico, nome, produto, dataConsumo, 1, valorDiariaNumero, valorSoma);
+        ReservaDespesa reservaDespesa = new ReservaDespesa(reserva, produtoEServico, nome, produto, dataConsumo, 1, valorDiariaNumero, valorSoma);
+        reservaDespesa.setId(reservaDespesaId);
+        
         tipoService.salvarReservaDespesa(reservaDespesa, reserva, gasto);
     }
 
@@ -814,14 +818,14 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
                 if (e.getClickCount() == 2) {
                     int index = tbReserva.getSelectedRow();
                     if (index != -1) {
-                        idSelecionado = (int) tbReserva.getValueAt(index, 0);
-                        Hospede hospede = tipoService.retornaIdHospede(getIdSelecionado());
-                        lblHospedeSelecionadoCheckOut.setText(hospede.getNome());
-                        lblCpfSelecionadoCheckOut.setText(hospede.getCpf());
-                        lblPassaporteSelecionadoCheckOut.setText(hospede.getPassaporte());
-                        lblNomeQuartoOculto.setText(tipoService.obterNomeProdutoPorTipo(tipoService.buscarNomeQuartoPorTipo(hospede.getCpf(), hospede.getPassaporte())));
-                        lblValorOculto.setText(String.valueOf(tipoService.buscarValorProduto(tipoService.obterNomeProdutoPorTipo(tipoService.buscarNomeQuartoPorTipo(hospede.getCpf(), hospede.getPassaporte())))));
-                        lblCheckInOculto.setText(datasUtil.converterDataParaString(tipoService.buscarPorCheckIn(hospede.getCpf(), hospede.getPassaporte()), "dd/MM/yyyy"));
+                        idASelecionadoHospede = (int) tbReserva.getValueAt(index, 1);
+                        ReservaHospede reservaHospede = tipoService.retornaIdReservaHospede(getIdASelecionadoHospede());
+                        lblHospedeSelecionadoCheckOut.setText(reservaHospede.getHospede().getNome());
+                        lblCpfSelecionadoCheckOut.setText(reservaHospede.getHospede().getCpf());
+                        lblPassaporteSelecionadoCheckOut.setText(reservaHospede.getHospede().getPassaporte());
+                        lblNomeQuartoOculto.setText(tipoService.obterNomeProdutoPorTipo(tipoService.buscarNomeQuartoPorTipo(reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte())));
+                        lblValorOculto.setText(String.valueOf(tipoService.buscarValorProduto(tipoService.obterNomeProdutoPorTipo(tipoService.buscarNomeQuartoPorTipo(reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte())))));
+                        lblCheckInOculto.setText(datasUtil.converterDataParaString(tipoService.buscarPorCheckIn(reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte()), "dd/MM/yyyy"));
                     }
                 }
             }
@@ -923,6 +927,14 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         }
     }
 
+    public int getIdASelecionadoHospede() {
+        return idASelecionadoHospede;
+    }
+
+    public void setIdAcompanhanteHospede(int idASelecionadoHospede) {
+        this.idASelecionadoHospede = idASelecionadoHospede;
+    }
+    
     public int getIdAcompanhanteSelecionado() {
         return idAcompanhanteSelecionado;
     }
@@ -930,4 +942,13 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
     public void setIdAcompanhanteSelecionado(int idAcompanhanteSelecionado) {
         this.idAcompanhanteSelecionado = idAcompanhanteSelecionado;
     }
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
+    }
+    
 }

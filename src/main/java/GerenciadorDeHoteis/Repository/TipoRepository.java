@@ -10,6 +10,7 @@ import GerenciadorDeHoteis.Entity.ProdutoEServico;
 import GerenciadorDeHoteis.Entity.Quarto;
 import GerenciadorDeHoteis.Entity.Reserva;
 import GerenciadorDeHoteis.Entity.ReservaDespesa;
+import GerenciadorDeHoteis.Entity.ReservaDespesaId;
 import GerenciadorDeHoteis.Entity.ReservaHospede;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -19,6 +20,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Session;
 
 /**
  *
@@ -500,6 +502,18 @@ public class TipoRepository {
         }
     }
 
+    public Reserva buscarUltimaReservaPorDataCheckin() {
+        TypedQuery<Reserva> query = em.createQuery("SELECT r FROM Reserva r ORDER BY r.checkIn DESC", Reserva.class);
+        query.setMaxResults(1);
+        List<Reserva> resultados = query.getResultList();
+
+        if (!resultados.isEmpty()) {
+            return resultados.get(0);
+        } else {
+            return null;
+        }
+    }
+
     public Reserva buscarPorNomeQuartoPorIdHospede(int id) {
         TypedQuery<Reserva> query = em.createQuery("SELECT h FROM Reserva h WHERE h.hospede_id = :nomeQuarto", Reserva.class);
         query.setParameter("nomeQuarto", id);
@@ -577,7 +591,7 @@ public class TipoRepository {
         System.out.println("Status do quarto atualizado com sucesso!");
     }
 
-    //ReservaDespesa Repoditory
+    //ReservaDespesa Repository
     public ReservaDespesa buscaUltimaEntradaPorIdReserva(int idReserva) {
         String consultaSql = "SELECT r FROM ReservaDespesa r WHERE r.reserva.id = :reserva_id ORDER BY r.dataConsumo DESC";
 
@@ -593,14 +607,42 @@ public class TipoRepository {
         }
     }
 
-    public void inserirReservaDespesa(ReservaDespesa reservaDespesa) {
-//        if (em.getTransaction().isActive()) {
-//            System.out.println("transmição acontecendo em atualizar, fechendo transmição");
-//            em.getTransaction().rollback();
-//            em.close();
-//        }
+    public void atualizarReservaDespesa(int id, ReservaDespesa reservaDespesa) {
+        if (em.getTransaction().isActive()) {
+            System.out.println("transmição acontecendo em atualizar, fechendo transmição");
+            em.getTransaction().rollback();
+            em.close();
+        }
+
         em.getTransaction().begin();
-        ReservaDespesa mergedReservaDespesa = em.merge(reservaDespesa); // Reattaching the detached entity
+        ReservaDespesa produtoExistente = em.find(ReservaDespesa.class, id);
+        if (produtoExistente == null) {
+            System.out.println("Produto não encontrado para atualização");
+            return;
+        }
+        produtoExistente.setNome(reservaDespesa.getNome());
+        produtoExistente.setQuantidade(reservaDespesa.getQuantidade());
+        produtoExistente.setValor(reservaDespesa.getValor());
+        em.merge(produtoExistente);
+        em.getTransaction().commit();
+        System.out.println("produto atualizado");
+    }
+
+    public void inserirReservaDespesa(ReservaDespesa reservaDespesa) {
+        /*Session session = em.unwrap(Session.class);
+        if (session.isOpen()) {
+            session.clear();
+
+        } else 
+         */
+        if (em.getTransaction().isActive()) {
+            System.out.println("transmição acontecendo em atualizar, fechendo transmição");
+            em.getTransaction().rollback();
+            em.close();
+        }
+
+        em.getTransaction().begin();
+        ReservaDespesa mergedReservaDespesa = em.merge(reservaDespesa);
         em.persist(mergedReservaDespesa);
         em.getTransaction().commit();
     }
@@ -619,6 +661,24 @@ public class TipoRepository {
             Object[] resultado = resultados.get(0);
             return new ReservaHospede((Reserva) resultado[0], (Hospede) resultado[1]);
 
+        } else {
+            return null;
+        }
+    }
+
+    public ReservaHospede buscarPorIdReservaPorIdReserva(int id) {
+        Reserva reserva = buscarReservaPorId(id);
+        if (reserva == null) {
+            return null;
+        }
+
+        TypedQuery<Object[]> query = em.createQuery("SELECT r, h FROM Reserva r JOIN r.hospede h WHERE r.id = :id", Object[].class);
+        query.setParameter("id", reserva.getId());
+        List<Object[]> resultados = query.getResultList();
+
+        if (!resultados.isEmpty()) {
+            Object[] resultado = resultados.get(0);
+            return new ReservaHospede((Reserva) resultado[0], (Hospede) resultado[1]);
         } else {
             return null;
         }

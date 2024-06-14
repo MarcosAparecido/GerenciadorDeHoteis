@@ -227,7 +227,7 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         btnRegistarProduto.setText("Salvar");
         btnRegistarProduto.setToolTipText("efetua o registro de um quarto");
         btnRegistarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistarProdutoActionPerformed(evt);
@@ -241,7 +241,7 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         btnDesselecionarProduto.setText("Desselecionar ");
         btnDesselecionarProduto.setToolTipText("Desseleciona Produto");
         btnDesselecionarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDesselecionarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDesselecionarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDesselecionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesselecionarProdutoActionPerformed(evt);
@@ -259,7 +259,7 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         btnPesquisarProduto.setText("Pesquisar");
         btnPesquisarProduto.setToolTipText("Abre a tela de pesquisa de produto ou Quarto");
         btnPesquisarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnPesquisarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPesquisarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarProdutoActionPerformed(evt);
@@ -273,7 +273,7 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         btnLimparCampos.setText("Limpar Campos");
         btnLimparCampos.setToolTipText("Limpa Campos");
         btnLimparCampos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnLimparCampos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimparCampos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparCamposActionPerformed(evt);
@@ -287,7 +287,7 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         btnDeletarProduto.setText("Excluir");
         btnDeletarProduto.setToolTipText("Exclui Produto ou Serviço");
         btnDeletarProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDeletarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDeletarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletarProdutoActionPerformed(evt);
@@ -400,21 +400,6 @@ public class GerenciamentoDeProdutosEServico extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

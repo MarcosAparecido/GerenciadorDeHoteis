@@ -10,6 +10,7 @@ import GerenciadorDeHoteis.Entity.Reserva;
 import GerenciadorDeHoteis.Service.TipoService;
 import GerenciadorDeHoteis.Entity.ReservaDespesa;
 import GerenciadorDeHoteis.Entity.ReservaDespesaId;
+import GerenciadorDeHoteis.Entity.ReservaHospede;
 import GerenciadorDeHoteis.Repository.TipoRepository;
 import GerenciadorDeHoteis.Utils.DatasUtil;
 import GerenciadorDeHoteis.Utils.FormatoStringUtil;
@@ -27,6 +28,7 @@ import javax.swing.JTable;
 public class GerenciamentoConta extends javax.swing.JFrame {
 
     private int idSelecionado = -1;
+    private int idSelecionadoHospede = -1;
     private TipoService tipoService = new TipoService();
 
     /**
@@ -220,7 +222,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome Hospede", "CPF", "Passaporte"
+                "Reserva_id", "Nome Hospede", "CPF", "Passaporte"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -232,13 +234,8 @@ public class GerenciamentoConta extends javax.swing.JFrame {
             }
         });
         scpHospedes.setViewportView(tbHospedes);
-        if (tbHospedes.getColumnModel().getColumnCount() > 0) {
-            tbHospedes.getColumnModel().getColumn(1).setResizable(false);
-            tbHospedes.getColumnModel().getColumn(2).setResizable(false);
-            tbHospedes.getColumnModel().getColumn(3).setResizable(false);
-        }
 
-        jPanel1.add(scpHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 410, 720));
+        jPanel1.add(scpHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 440, 720));
 
         tbProduto.setBackground(new java.awt.Color(153, 153, 153));
         tbProduto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -264,7 +261,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         });
         scpProdutos.setViewportView(tbProduto);
 
-        jPanel1.add(scpProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 410, 720));
+        jPanel1.add(scpProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 410, 720));
 
         lblPesquisarProduto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         lblPesquisarProduto.setText("Pesquisar Produto :");
@@ -569,27 +566,6 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -654,10 +630,10 @@ public class GerenciamentoConta extends javax.swing.JFrame {
     private void criarReservaDespesa() {
         TipoRepository tipoRepository = new TipoRepository();
         DatasUtil datasUtil = new DatasUtil();
-        
+
         double valorProdutoNumero;
         int quantidadeProdutoNumero;
-        int idReserva = tipoService.buscarIdReserva(lblCPF.getText(), lblPassaporte.getText());
+        int idReserva = getIdSelecionadoHospede();
         String nome = lblHospede.getText();
         String produto = lblProduto.getText();
         String valorProduto = lblValor.getText();
@@ -666,7 +642,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
         double total = tipoService.ultimoTotal(idReserva);
 
         Reserva reserva = tipoRepository.buscarReservaPorId(idReserva);
-        ProdutoEServico produtoEServico = tipoRepository.buscarPorNomeProduto(produto);                     
+        ProdutoEServico produtoEServico = tipoRepository.buscarPorNomeProduto(produto);
 
         try {
             quantidadeProdutoNumero = Integer.parseInt(quantidadeProduto);
@@ -677,14 +653,15 @@ public class GerenciamentoConta extends javax.swing.JFrame {
             System.out.println("O campo VALOR DIARIA e/ou CAMPO DE QUANTIDADE DE PRODUTO deve ser um número válido." + e.getMessage());
             return;
         }
+        
         double valorSoma = valorProdutoNumero * quantidadeProdutoNumero;
         double totalSoma = total + valorSoma;
-        
-        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(produtoEServico.getId(), reserva.getId()); 
-        ReservaDespesa reservaDespesa = new ReservaDespesa(reservaDespesaId, reserva, produtoEServico, nome, produto, dataConsumo, quantidadeProdutoNumero, valorSoma, totalSoma);       
-        
+
+        ReservaDespesaId reservaDespesaId = new ReservaDespesaId(reserva.getId(), produtoEServico.getId());
+        ReservaDespesa reservaDespesa = new ReservaDespesa(reserva, produtoEServico, nome, produto, dataConsumo, quantidadeProdutoNumero, valorSoma, totalSoma);
+        reservaDespesa.setId(reservaDespesaId);
+
         alterarStoque(quantidadeProdutoNumero, produto);
-        
         tipoService.salvarReservaDespesa(reservaDespesa, reserva, false);
     }
 
@@ -750,11 +727,11 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 if (e.getClickCount() == 2) {
                     int index = tbHospedes.getSelectedRow();
                     if (index != -1) {
-                        idSelecionado = (int) tbHospedes.getValueAt(index, 0);
-                        Hospede hospede = tipoService.retornaIdHospede(getIdSelecionado());
-                        lblHospede.setText(hospede.getNome());
-                        lblCPF.setText(hospede.getCpf());
-                        lblPassaporte.setText(hospede.getPassaporte());
+                        idSelecionadoHospede = (int) tbHospedes.getValueAt(index, 0);
+                        ReservaHospede reservaHospede = tipoService.retornaIdReservaHospede(getIdSelecionadoHospede());
+                        lblHospede.setText(reservaHospede.getHospede().getNome());
+                        lblCPF.setText(reservaHospede.getHospede().getCpf());
+                        lblPassaporte.setText(reservaHospede.getHospede().getPassaporte());
                     }
                 }
             }
@@ -818,6 +795,10 @@ public class GerenciamentoConta extends javax.swing.JFrame {
 
     private int getIdSelecionado() {
         return idSelecionado;
+    }
+    
+    private int getIdSelecionadoHospede() {
+        return idSelecionadoHospede;
     }
 
     private void obtemDataConsumo() {

@@ -54,8 +54,7 @@ public class ReservaDespesa {
     @Column(name = "total", nullable = true, unique = false)
     private double total;
 
-    public ReservaDespesa(ReservaDespesaId id, Reserva reserva, ProdutoEServico produtoEServico, String nome, String produtoServico, Date dataConsumo, int quantidade, double valor, double total) {
-        this.id = id;
+    public ReservaDespesa(Reserva reserva, ProdutoEServico produtoEServico, String nome, String produtoServico, Date dataConsumo, int quantidade, double valor, double total) {
         this.reserva = reserva;
         this.produtoEServico = produtoEServico;
         this.nome = nome;

@@ -11,6 +11,7 @@ import GerenciadorDeHoteis.Repository.TipoRepository;
 import GerenciadorDeHoteis.Entity.ProdutoEServico;
 import GerenciadorDeHoteis.Entity.Reserva;
 import GerenciadorDeHoteis.Entity.ReservaDespesa;
+import GerenciadorDeHoteis.Entity.ReservaDespesaId;
 import GerenciadorDeHoteis.Entity.ReservaHospede;
 import GerenciadorDeHoteis.Utils.DatasUtil;
 import GerenciadorDeHoteis.Utils.PaisesUtil;
@@ -32,12 +33,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Marcos
  */
 public class TipoService {
-
+    
     private TipoRepository tipoRepository;
     private PopUpUtil deletePopUpUtil = new PopUpUtil();
     private ValidacaoUtil validacaoUtil = new ValidacaoUtil();
     private PaisesUtil paisesUtil = new PaisesUtil();
-
+    
     public TipoService() {
         this.tipoRepository = new TipoRepository();
     }
@@ -54,7 +55,7 @@ public class TipoService {
             }
         }
     }
-
+    
     public int buscarIdFuncionario(String cpfFuncionario) {
         List<Funcionario> funcionario = tipoRepository.listarTodosFuncionarios();
         if (funcionario != null) {
@@ -69,7 +70,7 @@ public class TipoService {
         }
         return -1;
     }
-
+    
     public Funcionario buscarFuncionarioPorId(String cpf) {
         List<Funcionario> funcionario = tipoRepository.listarTodosFuncionarios();
         if (funcionario != null) {
@@ -84,22 +85,24 @@ public class TipoService {
         }
         return null;
     }
-     public Funcionario retornaIdFuncionario(int id) {
+    
+    public Funcionario retornaIdFuncionario(int id) {
         Funcionario funcionario = tipoRepository.buscarPorIdFuncionario(id);
         return funcionario;
     }
-     public void preencherTabelaFuncionario(JTable tbFuncionarios) {
+    
+    public void preencherTabelaFuncionario(JTable tbFuncionarios) {
         DefaultTableModel tabela = (DefaultTableModel) tbFuncionarios.getModel();
         tabela.setRowCount(0);
         List<Funcionario> funcionarios = tipoRepository.listarTodosFuncionarios();
         List<Object[]> objeto = new ArrayList<>();
         for (Funcionario funcionario : funcionarios) {
-            Object[] linha = {funcionario.getId(), funcionario.getNome(), funcionario.getCpf(),funcionario.getSalario(), funcionario.isStatus()};
+            Object[] linha = {funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getSalario(), funcionario.isStatus()};
             objeto.add(linha);
         }
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
@@ -107,8 +110,6 @@ public class TipoService {
             System.out.println("tabela retornada com sucesso");
         }
     }
-     
-     
 
     //Service Quartos
     public void deletarQuartoService(int id) {
@@ -122,7 +123,7 @@ public class TipoService {
             System.out.println("Operação cancelada.");
         }
     }
-
+    
     public void preencherTabelaQuarto(JTable tbQuartos) {
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
@@ -134,7 +135,7 @@ public class TipoService {
         }
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
@@ -142,12 +143,12 @@ public class TipoService {
             System.out.println("tabela retornada com sucesso");
         }
     }
-
+    
     public Quarto retornaIdQuarto(int id) {
         Quarto quarto = tipoRepository.buscarPorIdQuarto(id);
         return quarto;
     }
-
+    
     public void pesquisaQuarto(String campo, String valor, JTable tbQuartos) {
         DefaultTableModel tabela = (DefaultTableModel) tbQuartos.getModel();
         tabela.setRowCount(0);
@@ -166,7 +167,7 @@ public class TipoService {
             System.out.println("erro ao preencher tabela");
         }
     }
-
+    
     public void salvarQuarto(int id, Quarto quarto) {
         if (validacaoUtil.validaDadosQuarto(quarto) && validacaoUtil.validaDuplicidadeDadosQuarto(quarto) && id == -1) {
             if (quarto.getId() == null) {
@@ -174,7 +175,7 @@ public class TipoService {
                 tipoRepository.inserirQuarto(quarto);
                 JOptionPane.showInternalMessageDialog(null, "Quarto cadastrado com sucesso");
             }
-
+            
         } else if (validacaoUtil.validaDadosQuarto(quarto) && validacaoUtil.validaDuplicidadeDadosQuartoAtualizar(id, quarto)) {
             System.out.println("Dados validados com sucesso");
             System.out.println("id encontrato com sucesso");
@@ -183,7 +184,7 @@ public class TipoService {
             JOptionPane.showInternalMessageDialog(null, "Quarto atualizado com sucesso");
         }
     }
-
+    
     public int buscarIdQuarto(String numeroQuarto) {
         List<Quarto> quarto = tipoRepository.listarTodosQuartos();
         if (quarto != null) {
@@ -198,15 +199,15 @@ public class TipoService {
         }
         return -1;
     }
-
+    
     public void mudarStatusQuarto(String numeroQuarto, boolean status) {
         Quarto quarto = tipoRepository.buscarPorNomeQuarto(numeroQuarto);
         if (quarto != null) {
             tipoRepository.atualizarStatusQuarto(quarto.getId(), status);
-
+            
         } else {
             System.out.println("Numero de quarto não existente.");
-
+            
         }
     }
 
@@ -215,7 +216,7 @@ public class TipoService {
         ProdutoEServico produto = tipoRepository.buscarPorNomeProduto(nomeProduto);
         if (produto != null) {
             return produto.getId();
-
+            
         } else if (produto == null) {
             System.out.println("produto nulo, retorna -1");
             return -1;
@@ -223,7 +224,7 @@ public class TipoService {
         System.out.println("produto nulo, retorna -1");
         return -1;
     }
-
+    
     public int buscarQuantidadeProduto(String nomeProduto) {
         List<ProdutoEServico> produto = tipoRepository.listarTodosProdutos();
         for (ProdutoEServico produtos : produto) {
@@ -233,12 +234,12 @@ public class TipoService {
         }
         return -1;
     }
-
+    
     public double buscarValorProduto(String nomeProduto) {
         ProdutoEServico produto = tipoRepository.buscarPorNomeProduto(nomeProduto);
         if (produto != null) {
             return produto.getValor();
-
+            
         } else if (produto == null) {
             System.out.println("produto nulo, retorna -1");
             return -1;
@@ -246,7 +247,7 @@ public class TipoService {
         System.out.println("produto nulo, retorna -1");
         return -1;
     }
-
+    
     public void preencherTabelaProduto(JTable tbProdutos) {
         DefaultTableModel tabela = (DefaultTableModel) tbProdutos.getModel();
         tabela.setRowCount(0);
@@ -265,7 +266,7 @@ public class TipoService {
             }
         }
     }
-
+    
     public void preencherTabelaProdutoConta(JTable tbProdutos) {
         DefaultTableModel tabela = (DefaultTableModel) tbProdutos.getModel();
         tabela.setRowCount(0);
@@ -286,13 +287,13 @@ public class TipoService {
             }
         }
     }
-
+    
     public void pesquisaProduto(String campo, String valor, JTable tbProdutos) {
         DefaultTableModel tabela = (DefaultTableModel) tbProdutos.getModel();
         tabela.setRowCount(0);
         List<ProdutoEServico> produtos = tipoRepository.pesquisaCampoProduto(campo, valor);
         List<Object[]> objeto = new ArrayList<>();
-
+        
         for (ProdutoEServico produto : produtos) {
             Object[] linha = {produto.getId(), produto.getNome(), produto.getEstoque(), produto.getValor()};
             objeto.add(linha);
@@ -306,15 +307,15 @@ public class TipoService {
             System.out.println("erro ao preencher tabela");
         }
     }
-
+    
     public ProdutoEServico retornaIdProdutoEServico(int id) {
         ProdutoEServico produto = tipoRepository.buscarPorIdProduto(id);
         return produto;
     }
-
+    
     public void atualizarQuantidadeEstoque(int id, int novaQuantidade) {
         ProdutoEServico produto = tipoRepository.buscarPorIdProduto(id);
-
+        
         if (produto != null) {
             produto.setEstoque(novaQuantidade);
             tipoRepository.atualizarProduto(id, produto);
@@ -323,7 +324,7 @@ public class TipoService {
             System.out.println("Produto não encontrado para atualização de estoque.");
         }
     }
-
+    
     public void deletarProdutoService(int id) {
         ProdutoEServico produto = tipoRepository.buscarPorIdProduto(id);
         System.out.println("produto: " + produto.getNome());
@@ -331,12 +332,12 @@ public class TipoService {
             JOptionPane.showInternalMessageDialog(null, "Produto deletado com sucesso");
             System.out.println("O Produto foi deletado.");
             tipoRepository.deletarProdutoPorId(id);
-
+            
         } else {
             System.out.println("Operação cancelada.");
         }
     }
-
+    
     public void salvarProduto(int id, ProdutoEServico produtoEServico) {
         if (validacaoUtil.validaDadosProduto(produtoEServico) && validacaoUtil.validaDuplicidadeDadosProduto(produtoEServico) && id == -1) {
             if (produtoEServico.getId() == null) {
@@ -344,7 +345,7 @@ public class TipoService {
                 tipoRepository.inserirProduto(produtoEServico);
                 JOptionPane.showInternalMessageDialog(null, "Produto cadastrado com sucesso");
             }
-
+            
         } else if (validacaoUtil.validaDadosProduto(produtoEServico) && validacaoUtil.validaDuplicidadeDadosProdutoAtualizar(id, produtoEServico)) {
             System.out.println("Dados validados com sucesso");
             System.out.println("id encontrato com sucesso");
@@ -361,38 +362,38 @@ public class TipoService {
             cmbPais.addItem(pais);
         }
     }
-
+    
     public void preencherTabelaHospede(JTable tbHospede) {
         DatasUtil datasUtil = new DatasUtil();
         DefaultTableModel tabela = (DefaultTableModel) tbHospede.getModel();
         tabela.setRowCount(0);
-        List<Hospede> hospede = tipoRepository.listarTodosHospede();
+        
         List<ReservaHospede> reservaHospedes = tipoRepository.litarReservaHospede();
-        List<Reserva> reserva = tipoRepository.listarTodosReservasStatus();
         List<Object[]> objeto = new ArrayList<>();
-
-        for (Hospede hospedes : hospede) {
-            ReservaHospede reservaHospede = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(hospedes.getCpf(), hospedes.getPassaporte());
-            if (reservaHospede != null) {
-                if (reservaHospede.getReserva().isStatus()) {
+        List<Integer> id = new ArrayList<>();
+        
+        for (ReservaHospede reservaHospede : reservaHospedes) {
+            if (reservaHospede.getReserva().isStatus()) {
+                if (!id.contains(reservaHospede.getReserva().getId())) {
                     String data = datasUtil.converterDataParaString(reservaHospede.getReserva().getCheckIn(), "dd/MM/yyyy");
-                    Object[] linha = {reservaHospede.getHospede().getId(), hospedes.getNome(), reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte(), reservaHospede.getReserva().getNumeroHospedes(), reservaHospede.getReserva().getNomeQuarto(), data, reservaHospede.getReserva().isStatus()};
+                    Object[] linha = {reservaHospede.getReserva().getId(), reservaHospede.getHospede().getNome(), reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte(), reservaHospede.getReserva().getNumeroHospedes(), reservaHospede.getReserva().getNomeQuarto(), data, reservaHospede.getReserva().isStatus()};
                     objeto.add(linha);
+                    id.add(reservaHospede.getReserva().getId());
                 }
             }
         }
+        
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
             }
             System.out.println("tabela retornada com sucesso");
         }
-    
     }
-
+    
     public void preencherTabelaHospedeCheckIn(JTable tbHospede) {
         DefaultTableModel tabela = (DefaultTableModel) tbHospede.getModel();
         tabela.setRowCount(0);
@@ -415,7 +416,7 @@ public class TipoService {
         }
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
@@ -423,7 +424,7 @@ public class TipoService {
             System.out.println("tabela retornada com sucesso");
         }
     }
-
+    
     public void pesquisaHospede(String campo, String valor, JTable tbHospede) {
         DefaultTableModel tabela = (DefaultTableModel) tbHospede.getModel();
         tabela.setRowCount(0);
@@ -442,12 +443,12 @@ public class TipoService {
             System.out.println("erro ao preencher tabela");
         }
     }
-
+    
     public Hospede retornaIdHospede(int id) {
         Hospede hospede = tipoRepository.buscarPorIdHospede(id);
         return hospede;
     }
-
+    
     public void buscarPrecoPorTipoDeQuarto(JComboBox cmbNumeroQuarto, JLabel lblValor) {
         cmbNumeroQuarto.addActionListener(new ActionListener() {
             @Override
@@ -456,12 +457,12 @@ public class TipoService {
                 Quarto quarto = tipoRepository.buscarPorNomeQuarto(numeroSelecionado);
                 if (quarto != null) {
                     String tipoSelecionado = quarto.getTipoQuarto();
-
+                    
                     ProdutoEServico produto = tipoRepository.buscarPorNomeProduto(obterNomeProdutoPorTipo(tipoSelecionado));
-
+                    
                     if (produto != null) {
                         lblValor.setText(String.valueOf(produto.getValor()));
-
+                        
                     } else {
                         lblValor.setText("Produto não encontrado");
                     }
@@ -469,7 +470,7 @@ public class TipoService {
             }
         });
     }
-
+    
     public String obterNomeProdutoPorTipo(String tipoQuarto) {
         switch (tipoQuarto) {
             case "Solteiro":
@@ -486,7 +487,7 @@ public class TipoService {
                 return null;
         }
     }
-
+    
     public void preencherComboBoxTipoQuarto(JComboBox cmbNomeQuarto, JComboBox cmbTipoQuarto) {
         cmbTipoQuarto.removeAllItems();
         String tp = "";
@@ -497,7 +498,7 @@ public class TipoService {
                 tp = quarto.getTipoQuarto();
             }
         }
-
+        
         cmbTipoQuarto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -506,7 +507,7 @@ public class TipoService {
             }
         });
     }
-
+    
     private void preencherComboBoxNomeQuarto(JComboBox cmbNomeQuarto, String tipoSelecionado) {
         cmbNomeQuarto.removeAllItems();
         List<Quarto> quartos = tipoRepository.buscarPorNomeEspecificoQuarto(tipoSelecionado);
@@ -516,7 +517,7 @@ public class TipoService {
             }
         }
     }
-
+    
     public void salvarHospede(Hospede hospede) {
         if (validacaoUtil.validaDadosHospede(hospede)) {
             if (hospede.getId() == null) {
@@ -532,7 +533,7 @@ public class TipoService {
         ReservaHospede reserva = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(cpf, passaporte);
         if (reserva != null) {
             return reserva.getReserva().getId();
-
+            
         } else if (reserva == null) {
             System.out.println("hospede nulo, retorna -11");
             return -1;
@@ -540,12 +541,12 @@ public class TipoService {
         System.out.println("hospede nulo, retorna -1");
         return - 1;
     }
-
+    
     public Date buscarPorCheckIn(String cpf, String passaporte) {
         ReservaHospede reserva = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(cpf, passaporte);
         if (reserva != null) {
             return reserva.getReserva().getCheckIn();
-
+            
         } else if (reserva == null) {
             System.out.println("hospede nulo, retorna -11");
             return null;
@@ -553,12 +554,12 @@ public class TipoService {
         System.out.println("hospede nulo, retorna -1");
         return null;
     }
-
+    
     public String buscarNomeQuartoPorHospedeId(String cpf, String passaporte) {
         ReservaHospede reserva = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(cpf, passaporte);
         if (reserva != null) {
             return reserva.getReserva().getNomeQuarto();
-
+            
         } else if (reserva == null) {
             System.out.println("hospede nulo, retorna nulo");
             return null;
@@ -566,18 +567,18 @@ public class TipoService {
         System.out.println("hospede nulo, retorna null");
         return null;
     }
-
+    
     public String buscarNomeQuartoPorTipo(String cpf, String passaporte) {
         ReservaHospede reserva = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(cpf, passaporte);
         if (reserva == null) {
             System.out.println("reserva nulo, retorna nula");
             return null;
-
+            
         } else {
             Quarto quarto = tipoRepository.buscarPorNomeQuarto(reserva.getReserva().getNomeQuarto());
             if (quarto != null) {
                 return quarto.getTipoQuarto();
-
+                
             } else if (reserva == null) {
                 System.out.println("quarto nulo, retorna nulo");
                 return null;
@@ -586,29 +587,31 @@ public class TipoService {
         System.out.println("reserva nulo, retorna null");
         return null;
     }
-
+    
     public void preencherTabelaReserva(JTable tbReserva) {
         DatasUtil datasUtil = new DatasUtil();
         DefaultTableModel tabela = (DefaultTableModel) tbReserva.getModel();
         tabela.setRowCount(0);
         List<Hospede> hospede = tipoRepository.listarTodosHospede();
-        List<ReservaHospede> reservaHospedes = tipoRepository.litarReservaHospede();
-        List<Reserva> reserva = tipoRepository.listarTodosReservasStatus();
         List<Object[]> objeto = new ArrayList<>();
-
+        List<Integer> id = new ArrayList<>();
+        
         for (Hospede hospedes : hospede) {
             ReservaHospede reservaHospede = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(hospedes.getCpf(), hospedes.getPassaporte());
             if (reservaHospede != null) {
                 if (reservaHospede.getReserva().isStatus()) {
-                    String data = datasUtil.converterDataParaString(reservaHospede.getReserva().getCheckIn(), "dd/MM/yyyy");
-                    Object[] linha = {reservaHospede.getHospede().getId(), hospedes.getNome(), reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte(), reservaHospede.getReserva().getNumeroHospedes(), reservaHospede.getReserva().getNomeQuarto(), data, reservaHospede.getReserva().isStatus()};
-                    objeto.add(linha);
+                    if (!id.contains(reservaHospede.getReserva().getId())) {
+                        String data = datasUtil.converterDataParaString(reservaHospede.getReserva().getCheckIn(), "dd/MM/yyyy");
+                        Object[] linha = {reservaHospede.getHospede().getId(), reservaHospede.getReserva().getId(), hospedes.getNome(), reservaHospede.getHospede().getCpf(), reservaHospede.getHospede().getPassaporte(), reservaHospede.getReserva().getNumeroHospedes(), reservaHospede.getReserva().getNomeQuarto(), data, reservaHospede.getReserva().isStatus()};
+                        objeto.add(linha);
+                        id.add(reservaHospede.getReserva().getId());
+                    }
                 }
             }
         }
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
@@ -616,18 +619,23 @@ public class TipoService {
             System.out.println("tabela retornada com sucesso");
         }
     }
-
+    
     public void mudarStatusReserva(String cpf, String Passaporte) {
         ReservaHospede reserva = tipoRepository.buscarPorIdReservaPorCpfEPassaporteHospede(cpf, Passaporte);
         if (reserva != null) {
             tipoRepository.atualizarStatusReserva(reserva.getReserva().getId(), false);
-
+            
         } else {
             System.out.println("Numero de quarto não existente.");
-
+            
         }
     }
-
+    
+    public ReservaHospede retornaIdReservaHospede(int id) {
+        ReservaHospede hospede = tipoRepository.buscarPorIdReservaPorIdReserva(id);
+        return hospede;
+    }
+    
     public void salvarReserva(Reserva reserva) {
         //if (validacaoUtil.validaDadosReserva(reserva)) {
         if (reserva.getId() == null) {
@@ -643,7 +651,7 @@ public class TipoService {
         ReservaDespesa reservaDespesa = tipoRepository.buscaUltimaEntradaPorIdReserva(idReserva);
         if (reservaDespesa == null) {
             JOptionPane.showInternalMessageDialog(null, "Não existe essa reserva.");
-
+            
         } else {
             if (reservaDespesa.getTotal() <= 0) {
                 JOptionPane.showInternalMessageDialog(null, "O total não pode ser menor que 0.");
@@ -653,7 +661,7 @@ public class TipoService {
         System.out.println("reserva nulo, retorna -1");
         return -1;
     }
-
+    
     public void salvarReservaDespesa(ReservaDespesa reservaDespesa, Reserva reserva, boolean gasto) {
         //if (validacaoUtil.validaDadosReservaDespesa(reservaDespesa, reserva)) {
         System.out.println("Inserindo os dados");
@@ -681,7 +689,7 @@ public class TipoService {
         }
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
@@ -689,7 +697,7 @@ public class TipoService {
             System.out.println("tabela retornada com sucesso");
         }
     }
-
+    
     public void preencherTabelaHospedeListaTelaCheckIn(JTable tbAcompanhanteCheckIn, int id) {
         DefaultTableModel tabela = (DefaultTableModel) tbAcompanhanteCheckIn.getModel();
         List<Hospede> hospedeLista = new ArrayList<>();
@@ -702,7 +710,7 @@ public class TipoService {
         }
         if (tabela == null) {
             System.out.println("Erro ao retornar tabela, tabela esta nula");
-
+            
         } else {
             for (Object[] linha : objeto) {
                 tabela.addRow(linha);
