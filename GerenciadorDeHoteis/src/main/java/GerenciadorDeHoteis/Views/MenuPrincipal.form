@@ -153,20 +153,21 @@
               </Border>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Icone/Icone_Rel&#xe1;torio64.png"/>
+              <Image iconType="3" name="/Icone/pagamento-em-dinheiro.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="REL&#xc1;TORIOS"/>
+            <Property name="text" type="java.lang.String" value="CONTA"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="btnReserva">
+            <Menu class="javax.swing.JMenu" name="btnGerenciamentodeContas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reservas"/>
+                <Property name="text" type="java.lang.String" value="Gerenciamento de Contas"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Variable" size="12" style="1"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnReservaMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGerenciamentodeContasMouseClicked"/>
               </Events>
             </Menu>
           </SubComponents>
@@ -193,6 +194,32 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCadastrarFuncionarioMouseClicked"/>
+              </Events>
+            </Menu>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuFuncionario1">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icone/Icone_Rel&#xe1;torio64.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="REL&#xc1;TORIO"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="btnCadastrarFuncionario1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reservas"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI Variable" size="12" style="1"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCadastrarFuncionario1MouseClicked"/>
               </Events>
             </Menu>
           </SubComponents>
@@ -305,7 +332,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="-80" width="2000" height="1200"/>
+          <AbsoluteConstraints x="-190" y="-120" width="2000" height="1200"/>
         </Constraint>
       </Constraints>
     </Component>

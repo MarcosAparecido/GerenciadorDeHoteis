@@ -47,9 +47,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MenuReserva = new javax.swing.JMenu();
         btnCheckInCheckOut = new javax.swing.JMenu();
         MenuRelatorio = new javax.swing.JMenu();
-        btnReserva = new javax.swing.JMenu();
+        btnGerenciamentodeContas = new javax.swing.JMenu();
         MenuFuncionario = new javax.swing.JMenu();
         btnCadastrarFuncionario = new javax.swing.JMenu();
+        MenuFuncionario1 = new javax.swing.JMenu();
+        btnCadastrarFuncionario1 = new javax.swing.JMenu();
         MenuSair = new javax.swing.JMenu();
         btnLogout = new javax.swing.JMenu();
         btnSair = new javax.swing.JMenu();
@@ -68,7 +70,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().add(lblFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 230, 30));
 
         lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Imagem_FundoMenuPrincipal (1).png"))); // NOI18N
-        getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -80, 2000, 1200));
+        getContentPane().add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-190, -120, 2000, 1200));
 
         mBarMenu.setBackground(new java.awt.Color(204, 204, 204));
         mBarMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -151,17 +153,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mBarMenu.add(MenuReserva);
 
         MenuRelatorio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Relátorio64.png"))); // NOI18N
-        MenuRelatorio.setText("RELÁTORIOS");
+        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/pagamento-em-dinheiro.png"))); // NOI18N
+        MenuRelatorio.setText("CONTA");
+        MenuRelatorio.setToolTipText("");
 
-        btnReserva.setText("Reservas");
-        btnReserva.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
-        btnReserva.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGerenciamentodeContas.setText("Gerenciamento de Contas");
+        btnGerenciamentodeContas.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        btnGerenciamentodeContas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReservaMouseClicked(evt);
+                btnGerenciamentodeContasMouseClicked(evt);
             }
         });
-        MenuRelatorio.add(btnReserva);
+        MenuRelatorio.add(btnGerenciamentodeContas);
 
         mBarMenu.add(MenuRelatorio);
 
@@ -179,6 +182,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MenuFuncionario.add(btnCadastrarFuncionario);
 
         mBarMenu.add(MenuFuncionario);
+
+        MenuFuncionario1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        MenuFuncionario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Relátorio64.png"))); // NOI18N
+        MenuFuncionario1.setText("RELÁTORIO");
+
+        btnCadastrarFuncionario1.setText("Reservas");
+        btnCadastrarFuncionario1.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        btnCadastrarFuncionario1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadastrarFuncionario1MouseClicked(evt);
+            }
+        });
+        MenuFuncionario1.add(btnCadastrarFuncionario1);
+
+        mBarMenu.add(MenuFuncionario1);
 
         MenuSair.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/exit.png"))); // NOI18N
@@ -250,9 +268,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         checkInCheckOut.setVisible(true);
     }//GEN-LAST:event_btnCheckInCheckOutMouseClicked
 
-    private void btnReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservaMouseClicked
+    private void btnGerenciamentodeContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerenciamentodeContasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnReservaMouseClicked
+    }//GEN-LAST:event_btnGerenciamentodeContasMouseClicked
 
     private void btnCadastrarFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarFuncionarioMouseClicked
         // TODO add your handling code here:
@@ -276,6 +294,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuSairMouseClicked
 
+    private void btnCadastrarFuncionario1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarFuncionario1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadastrarFuncionario1MouseClicked
+
+    private void btnGerenciamentodeContasClicked (java.awt.event.MouseEvent evt){
+        GerenciamentoConta gerenciamentoConta = new  GerenciamentoConta();
+        gerenciamentoConta.setVisible(true);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -317,16 +344,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuFuncionario;
+    private javax.swing.JMenu MenuFuncionario1;
     private javax.swing.JMenu MenuRelatorio;
     private javax.swing.JMenu MenuReserva;
     private javax.swing.JMenu MenuSair;
     private javax.swing.JMenu btnCadastrarCliente;
     private javax.swing.JMenu btnCadastrarFuncionario;
+    private javax.swing.JMenu btnCadastrarFuncionario1;
     private javax.swing.JMenu btnCheckInCheckOut;
+    private javax.swing.JMenu btnGerenciamentodeContas;
     private javax.swing.JMenu btnGerenciarProduto;
     private javax.swing.JMenu btnGerenciarQuarto;
     private javax.swing.JMenu btnLogout;
-    private javax.swing.JMenu btnReserva;
     private javax.swing.JMenu btnSair;
     private javax.swing.JLabel lblBemVindo;
     private javax.swing.JLabel lblFuncionario;

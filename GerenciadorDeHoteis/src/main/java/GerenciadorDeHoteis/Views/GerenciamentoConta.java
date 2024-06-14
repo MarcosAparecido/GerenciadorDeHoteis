@@ -267,7 +267,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
 
         lblPesquisarProduto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         lblPesquisarProduto.setText("Pesquisar Produto :");
-        jPanel1.add(lblPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 870, 140, -1));
+        jPanel1.add(lblPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 760, 180, -1));
 
         lblGerenciamentoDeContas.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
         lblGerenciamentoDeContas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -303,7 +303,7 @@ public class GerenciamentoConta extends javax.swing.JFrame {
                 txtPesquisarProdutoKeyPressed(evt);
             }
         });
-        jPanel1.add(txtPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 860, 230, 30));
+        jPanel1.add(txtPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 790, 230, 30));
 
         lblQuantidadeProduto.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         lblQuantidadeProduto.setText("Quantidade Produto :");

@@ -60,7 +60,7 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         obtemDataCheckIn();
         obtemDataHoje();
         telaPesquisa.setSize(445, 450);
-        telaCheckOut.setSize(820, 600);
+        telaCheckOut.setSize(1005, 605);
         telaPesquisa.setLocationRelativeTo(null);
         telaCheckOut.setLocationRelativeTo(null);      
         this.setLocationRelativeTo(null);
@@ -98,43 +98,48 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         btnSairCheckOut = new javax.swing.JToggleButton();
         btnRealizarCheckOut = new javax.swing.JToggleButton();
         btnAtualizarCheckOut = new javax.swing.JToggleButton();
+        lblQuartoNomeReseva1 = new javax.swing.JLabel();
+        lblGerenciamentoDeContas1 = new javax.swing.JLabel();
+        lblQuartoNomeReseva2 = new javax.swing.JLabel();
         lblNomeQuartoOculto = new javax.swing.JLabel();
         lblValorOculto = new javax.swing.JLabel();
         lblCheckInOculto = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         scpHospedes = new javax.swing.JScrollPane();
         tbHospedes = new javax.swing.JTable();
         scpAcompanhantes = new javax.swing.JScrollPane();
         tbAcompanhantes = new javax.swing.JTable();
-        lblRealizaCheckInCheckOut = new javax.swing.JLabel();
-        lblTipoQuarto = new javax.swing.JLabel();
         lblNumeroQuarto = new javax.swing.JLabel();
-        lblNumeroHospede = new javax.swing.JLabel();
-        lblDataCheckIn = new javax.swing.JLabel();
-        lblValorDiaria = new javax.swing.JLabel();
-        lblHospedeSelecionado = new javax.swing.JLabel();
-        lblHospedeCpf = new javax.swing.JLabel();
-        lblHospedePassaporte = new javax.swing.JLabel();
-        cmbTipoQuarto = new javax.swing.JComboBox<>();
-        cmbNomeQuarto = new javax.swing.JComboBox<>();
-        txtNumeroHospedes = new javax.swing.JTextField();
-        lblTxtDataCheckIn = new javax.swing.JLabel();
-        lblTxtValorDiaria = new javax.swing.JLabel();
-        lblHospede = new javax.swing.JLabel();
-        lblCPF = new javax.swing.JLabel();
-        lblPassaporte = new javax.swing.JLabel();
+        lblTipoQuarto = new javax.swing.JLabel();
         bntRealizarCheckIn = new javax.swing.JButton();
         bntRealizarCheckOut = new javax.swing.JButton();
         bntPesquisaHospede = new javax.swing.JButton();
         bntDesselecionarHospede = new javax.swing.JButton();
         bntLimparCampos = new javax.swing.JButton();
         bntSair = new javax.swing.JButton();
-        teste = new javax.swing.JToggleButton();
-        lblData = new javax.swing.JLabel();
         lblDataHoje = new javax.swing.JLabel();
         lblAcompanhantes = new javax.swing.JLabel();
         lblHospedes = new javax.swing.JLabel();
-        lblNomeHospede = new javax.swing.JLabel();
         btnLimparAcompanhantes = new javax.swing.JToggleButton();
+        lblGerenciamentoDeContas = new javax.swing.JLabel();
+        lblHospedeSelecionado = new javax.swing.JLabel();
+        lblNumeroHospede = new javax.swing.JLabel();
+        cmbTipoQuarto = new javax.swing.JComboBox<>();
+        lblCPF = new javax.swing.JLabel();
+        lblHospedePassaporte = new javax.swing.JLabel();
+        lblHospedeCpf = new javax.swing.JLabel();
+        lblPassaporte = new javax.swing.JLabel();
+        txtNumeroHospedes = new javax.swing.JTextField();
+        lblTxtValorDiaria = new javax.swing.JLabel();
+        lblTxtDataCheckIn = new javax.swing.JLabel();
+        cmbNomeQuarto = new javax.swing.JComboBox<>();
+        lblValorDiaria = new javax.swing.JLabel();
+        lblBotoes1 = new javax.swing.JLabel();
+        lblHospede = new javax.swing.JLabel();
+        lblDataCheckIn = new javax.swing.JLabel();
+        lblNomeHospede1 = new javax.swing.JLabel();
+        lblQuartoNomeReseva = new javax.swing.JLabel();
+        lblNomeHospede2 = new javax.swing.JLabel();
 
         telaPesquisa.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -167,8 +172,11 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         });
         telaPesquisa.getContentPane().add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 130, -1));
 
+        telaCheckOut.setTitle("GERENCIAMENTO DE CHECK OUT");
         telaCheckOut.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tbReserva.setBackground(new java.awt.Color(153, 153, 153));
+        tbReserva.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbReserva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -194,52 +202,93 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         });
         scpReserva.setViewportView(tbReserva);
 
-        telaCheckOut.getContentPane().add(scpReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 410));
+        telaCheckOut.getContentPane().add(scpReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 800, 360));
 
+        lblPassaporteSelecionadoCheckOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPassaporteSelecionadoCheckOut.setText("passporte");
-        telaCheckOut.getContentPane().add(lblPassaporteSelecionadoCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 180, -1));
+        telaCheckOut.getContentPane().add(lblPassaporteSelecionadoCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 180, -1));
 
+        lblCpfSelecionadoCheckOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblCpfSelecionadoCheckOut.setText("cpf");
-        telaCheckOut.getContentPane().add(lblCpfSelecionadoCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 190, 20));
+        telaCheckOut.getContentPane().add(lblCpfSelecionadoCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 190, 20));
 
+        lblHospedeSelecionadoCheckOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblHospedeSelecionadoCheckOut.setText("nome");
-        telaCheckOut.getContentPane().add(lblHospedeSelecionadoCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 170, -1));
+        telaCheckOut.getContentPane().add(lblHospedeSelecionadoCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 170, -1));
 
+        lblPassporteCheckOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPassporteCheckOut.setText("Passaporte Selecionado : ");
-        telaCheckOut.getContentPane().add(lblPassporteCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, -1, -1));
+        telaCheckOut.getContentPane().add(lblPassporteCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
 
+        lblCpfCheckOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblCpfCheckOut.setText("CPF Selecionado :");
-        telaCheckOut.getContentPane().add(lblCpfCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 110, 20));
+        telaCheckOut.getContentPane().add(lblCpfCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 150, 20));
 
+        lblHospedeCheckOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblHospedeCheckOut.setText("Hospede Selecionado: ");
-        telaCheckOut.getContentPane().add(lblHospedeCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, -1, -1));
+        telaCheckOut.getContentPane().add(lblHospedeCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
-        btnDesselecionarHospede.setText("Desselecionar Hospede");
-        telaCheckOut.getContentPane().add(btnDesselecionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, -1, -1));
+        btnDesselecionarHospede.setBackground(new java.awt.Color(153, 153, 153));
+        btnDesselecionarHospede.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        btnDesselecionarHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Desmarcar.png"))); // NOI18N
+        btnDesselecionarHospede.setText("Desselecionar ");
+        btnDesselecionarHospede.setToolTipText("Desselecionar Hospede");
+        btnDesselecionarHospede.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDesselecionarHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        telaCheckOut.getContentPane().add(btnDesselecionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 120, 50));
 
-        btnSairCheckOut.setText("Voltar");
+        btnSairCheckOut.setBackground(new java.awt.Color(153, 153, 153));
+        btnSairCheckOut.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnSairCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Sair.png"))); // NOI18N
+        btnSairCheckOut.setToolTipText("Voltar");
+        btnSairCheckOut.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSairCheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSairCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairCheckOutActionPerformed(evt);
             }
         });
-        telaCheckOut.getContentPane().add(btnSairCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 530, 110, -1));
+        telaCheckOut.getContentPane().add(btnSairCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 60, 50));
 
-        btnRealizarCheckOut.setText("Realizar Check-out");
+        btnRealizarCheckOut.setBackground(new java.awt.Color(153, 153, 153));
+        btnRealizarCheckOut.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnRealizarCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/check-in.png"))); // NOI18N
+        btnRealizarCheckOut.setText("Check-out");
+        btnRealizarCheckOut.setToolTipText("Realizar Check-out");
+        btnRealizarCheckOut.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRealizarCheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRealizarCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRealizarCheckOutActionPerformed(evt);
             }
         });
-        telaCheckOut.getContentPane().add(btnRealizarCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 170, -1));
+        telaCheckOut.getContentPane().add(btnRealizarCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 120, 50));
 
-        btnAtualizarCheckOut.setText("Atualizar");
+        btnAtualizarCheckOut.setBackground(new java.awt.Color(153, 153, 153));
+        btnAtualizarCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Atualizar.png"))); // NOI18N
+        btnAtualizarCheckOut.setToolTipText("Atualizar");
+        btnAtualizarCheckOut.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAtualizarCheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtualizarCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarCheckOutActionPerformed(evt);
             }
         });
-        telaCheckOut.getContentPane().add(btnAtualizarCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 340, 100, -1));
+        telaCheckOut.getContentPane().add(btnAtualizarCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 50, 40));
+
+        lblQuartoNomeReseva1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblQuartoNomeReseva1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Check Out", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        telaCheckOut.getContentPane().add(lblQuartoNomeReseva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, 140, 350));
+
+        lblGerenciamentoDeContas1.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        lblGerenciamentoDeContas1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGerenciamentoDeContas1.setText("Gerenciamento de Check Out");
+        lblGerenciamentoDeContas1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        telaCheckOut.getContentPane().add(lblGerenciamentoDeContas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, -1));
+
+        lblQuartoNomeReseva2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblQuartoNomeReseva2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Check Out", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        telaCheckOut.getContentPane().add(lblQuartoNomeReseva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 740, 160));
 
         lblNomeQuartoOculto.setText("jLabel1");
 
@@ -248,9 +297,15 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         lblCheckInOculto.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("GERENCIAMENTO DE CHECK IN ");
         setMinimumSize(new java.awt.Dimension(1060, 850));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbHospedes.setBackground(new java.awt.Color(153, 153, 153));
+        tbHospedes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbHospedes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -274,8 +329,10 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
             tbHospedes.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        getContentPane().add(scpHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 460, 740));
+        jPanel1.add(scpHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 460, 370));
 
+        tbAcompanhantes.setBackground(new java.awt.Color(153, 153, 153));
+        tbAcompanhantes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbAcompanhantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -294,165 +351,213 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         });
         scpAcompanhantes.setViewportView(tbAcompanhantes);
 
-        getContentPane().add(scpAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 410, 370));
+        jPanel1.add(scpAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 410, 370));
 
-        lblRealizaCheckInCheckOut.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        lblRealizaCheckInCheckOut.setText("Realizar Check-in / Check-out");
-        getContentPane().add(lblRealizaCheckInCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 400, -1));
+        lblNumeroQuarto.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblNumeroQuarto.setText("Nome do Quarto:");
+        jPanel1.add(lblNumeroQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, -1, -1));
 
-        lblTipoQuarto.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblTipoQuarto.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTipoQuarto.setText("Tipo Quarto :");
-        getContentPane().add(lblTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, -1, 20));
+        jPanel1.add(lblTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, 20));
 
-        lblNumeroQuarto.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNumeroQuarto.setText("Numero do Quarto :");
-        getContentPane().add(lblNumeroQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 550, -1, -1));
-
-        lblNumeroHospede.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNumeroHospede.setText("Numero de Hospedes:");
-        getContentPane().add(lblNumeroHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, -1, -1));
-
-        lblDataCheckIn.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblDataCheckIn.setText("Data Check-In :");
-        getContentPane().add(lblDataCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 470, -1, 30));
-
-        lblValorDiaria.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblValorDiaria.setText("Valor Diaria :");
-        getContentPane().add(lblValorDiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 720, -1, 30));
-
-        lblHospedeSelecionado.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        lblHospedeSelecionado.setText("Hospede Nome :");
-        getContentPane().add(lblHospedeSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 150, 140, -1));
-
-        lblHospedeCpf.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        lblHospedeCpf.setText("Hospede CPF :");
-        getContentPane().add(lblHospedeCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 180, 130, 20));
-
-        lblHospedePassaporte.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        lblHospedePassaporte.setText("Hospede Passaporte :");
-        getContentPane().add(lblHospedePassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 180, -1));
-
-        cmbTipoQuarto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbTipoQuartoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cmbTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 260, 30));
-
-        getContentPane().add(cmbNomeQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 580, 220, 30));
-        getContentPane().add(txtNumeroHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 660, 270, -1));
-
-        lblTxtDataCheckIn.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        lblTxtDataCheckIn.setText("data check-in");
-        getContentPane().add(lblTxtDataCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 500, 170, 30));
-
-        lblTxtValorDiaria.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        lblTxtValorDiaria.setText("valor da diaria");
-        getContentPane().add(lblTxtValorDiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 750, 170, 30));
-
-        lblHospede.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblHospede.setText("nome");
-        lblHospede.setToolTipText("");
-        getContentPane().add(lblHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 150, 320, 20));
-
-        lblCPF.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblCPF.setText("cpf");
-        lblCPF.setToolTipText("");
-        getContentPane().add(lblCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 180, 330, -1));
-
-        lblPassaporte.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblPassaporte.setText("passaporte");
-        lblPassaporte.setToolTipText("");
-        getContentPane().add(lblPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 210, 250, -1));
-
-        bntRealizarCheckIn.setText("Fazer Check-in");
+        bntRealizarCheckIn.setBackground(new java.awt.Color(153, 153, 153));
+        bntRealizarCheckIn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        bntRealizarCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/check-in.png"))); // NOI18N
+        bntRealizarCheckIn.setText("Check-in");
+        bntRealizarCheckIn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntRealizarCheckIn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntRealizarCheckIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntRealizarCheckInActionPerformed(evt);
             }
         });
-        getContentPane().add(bntRealizarCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 620, 130, 50));
+        jPanel1.add(bntRealizarCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 420, 130, 50));
 
-        bntRealizarCheckOut.setText("Realiza Check-out");
+        bntRealizarCheckOut.setBackground(new java.awt.Color(153, 153, 153));
+        bntRealizarCheckOut.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        bntRealizarCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/check-in.png"))); // NOI18N
+        bntRealizarCheckOut.setText("Check-out");
+        bntRealizarCheckOut.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntRealizarCheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntRealizarCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntRealizarCheckOutActionPerformed(evt);
             }
         });
-        getContentPane().add(bntRealizarCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 690, 130, 50));
+        jPanel1.add(bntRealizarCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 420, 130, 50));
 
-        bntPesquisaHospede.setText("Pesquisar Hospede");
+        bntPesquisaHospede.setBackground(new java.awt.Color(153, 153, 153));
+        bntPesquisaHospede.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        bntPesquisaHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Pesquisar.png"))); // NOI18N
+        bntPesquisaHospede.setText("Pesquisar ");
+        bntPesquisaHospede.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntPesquisaHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntPesquisaHospede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntPesquisaHospedeActionPerformed(evt);
             }
         });
-        getContentPane().add(bntPesquisaHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 400, 200, -1));
+        jPanel1.add(bntPesquisaHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 260, 120, 50));
 
-        bntDesselecionarHospede.setText("Desselecionar Hospede");
+        bntDesselecionarHospede.setBackground(new java.awt.Color(153, 153, 153));
+        bntDesselecionarHospede.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        bntDesselecionarHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Desmarcar.png"))); // NOI18N
+        bntDesselecionarHospede.setText("Desselecionar");
+        bntDesselecionarHospede.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntDesselecionarHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntDesselecionarHospede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntDesselecionarHospedeActionPerformed(evt);
             }
         });
-        getContentPane().add(bntDesselecionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 270, 200, -1));
+        jPanel1.add(bntDesselecionarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 120, 120, 50));
 
+        bntLimparCampos.setBackground(new java.awt.Color(153, 153, 153));
+        bntLimparCampos.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        bntLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_LimparTela.png"))); // NOI18N
         bntLimparCampos.setText("Limpar Campos");
+        bntLimparCampos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntLimparCampos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntLimparCamposActionPerformed(evt);
             }
         });
-        getContentPane().add(bntLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 500, 200, -1));
+        jPanel1.add(bntLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 190, 120, 50));
 
-        bntSair.setText("Voltar/Julinha altere");
-        bntSair.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bntSair.setBackground(new java.awt.Color(153, 153, 153));
+        bntSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_Sair_1.png"))); // NOI18N
+        bntSair.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bntSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bntSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntSairActionPerformed(evt);
             }
         });
-        getContentPane().add(bntSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 790, -1, -1));
+        jPanel1.add(bntSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 0, 50, 50));
 
-        teste.setText("jToggleButton4");
-        teste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                testeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(teste, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 110, -1, -1));
-
-        lblData.setText("Data:");
-        getContentPane().add(lblData, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 10, -1, -1));
-
-        lblDataHoje.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lblDataHoje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDataHoje.setText("data check-in");
-        getContentPane().add(lblDataHoje, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, 130, 20));
+        jPanel1.add(lblDataHoje, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 50, 130, 20));
 
-        lblAcompanhantes.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblAcompanhantes.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblAcompanhantes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAcompanhantes.setText("Acompanhantes");
-        getContentPane().add(lblAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 140, -1));
+        lblAcompanhantes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 360, -1));
 
-        lblHospedes.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblHospedes.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblHospedes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHospedes.setText("Hospedes");
-        getContentPane().add(lblHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 90, -1));
+        lblHospedes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 450, -1));
 
-        lblNomeHospede.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNomeHospede.setText("Hospede Reserva:");
-        getContentPane().add(lblNomeHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 120, -1, -1));
-
-        btnLimparAcompanhantes.setText("Limpar Tabela Acompanhantes");
+        btnLimparAcompanhantes.setBackground(new java.awt.Color(153, 153, 153));
+        btnLimparAcompanhantes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnLimparAcompanhantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icone/Icone_LimparTela.png"))); // NOI18N
+        btnLimparAcompanhantes.setToolTipText("Limpar Tabela Acompanhantes");
+        btnLimparAcompanhantes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimparAcompanhantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparAcompanhantesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimparAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 450, -1, -1));
+        jPanel1.add(btnLimparAcompanhantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 50, -1));
+
+        lblGerenciamentoDeContas.setFont(new java.awt.Font("Arial Narrow", 1, 36)); // NOI18N
+        lblGerenciamentoDeContas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGerenciamentoDeContas.setText("Gerenciamento Check In ");
+        lblGerenciamentoDeContas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblGerenciamentoDeContas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1470, -1));
+
+        lblHospedeSelecionado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblHospedeSelecionado.setText("Hospede Nome :");
+        jPanel1.add(lblHospedeSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 120, 140, -1));
+
+        lblNumeroHospede.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblNumeroHospede.setText("Número de Hospedes:");
+        jPanel1.add(lblNumeroHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, -1, -1));
+
+        cmbTipoQuarto.setBackground(new java.awt.Color(153, 153, 153));
+        cmbTipoQuarto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cmbTipoQuarto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cmbTipoQuarto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmbTipoQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoQuartoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbTipoQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 260, 30));
+
+        lblCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblCPF.setText("cpf");
+        lblCPF.setToolTipText("");
+        jPanel1.add(lblCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 180, 330, -1));
+
+        lblHospedePassaporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblHospedePassaporte.setText("Hospede Passaporte :");
+        jPanel1.add(lblHospedePassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 240, 180, -1));
+
+        lblHospedeCpf.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblHospedeCpf.setText("Hospede CPF :");
+        jPanel1.add(lblHospedeCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 180, 130, 20));
+
+        lblPassaporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblPassaporte.setText("passaporte");
+        lblPassaporte.setToolTipText("");
+        jPanel1.add(lblPassaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 240, 250, -1));
+
+        txtNumeroHospedes.setBackground(new java.awt.Color(153, 153, 153));
+        txtNumeroHospedes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtNumeroHospedes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNumeroHospedes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(txtNumeroHospedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 650, 160, 30));
+
+        lblTxtValorDiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTxtValorDiaria.setText("valor da diária");
+        jPanel1.add(lblTxtValorDiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 710, 170, 30));
+
+        lblTxtDataCheckIn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblTxtDataCheckIn.setText("data check-in");
+        jPanel1.add(lblTxtDataCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 490, 170, 30));
+
+        cmbNomeQuarto.setBackground(new java.awt.Color(153, 153, 153));
+        cmbNomeQuarto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cmbNomeQuarto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cmbNomeQuarto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(cmbNomeQuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 580, 260, 30));
+
+        lblValorDiaria.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblValorDiaria.setText("Valor Diária R$:");
+        jPanel1.add(lblValorDiaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, -1, 30));
+
+        lblBotoes1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblBotoes1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Hospede"));
+        jPanel1.add(lblBotoes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 90, 140, 240));
+
+        lblHospede.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblHospede.setText("nome");
+        lblHospede.setToolTipText("");
+        jPanel1.add(lblHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 120, 320, 20));
+
+        lblDataCheckIn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblDataCheckIn.setText("Data Check-In :");
+        jPanel1.add(lblDataCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, 30));
+
+        lblNomeHospede1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblNomeHospede1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Comando", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        jPanel1.add(lblNomeHospede1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 380, 480, 130));
+
+        lblQuartoNomeReseva.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblQuartoNomeReseva.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Quarto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        jPanel1.add(lblQuartoNomeReseva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 860, 290));
+
+        lblNomeHospede2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblNomeHospede2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Hospede Reserva", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        jPanel1.add(lblNomeHospede2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 90, 460, 240));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1620, 890));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -507,11 +612,6 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
         telaCheckOut.setVisible(true);
     }//GEN-LAST:event_bntRealizarCheckOutActionPerformed
 
-    private void testeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testeActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_testeActionPerformed
-
     private void btnRealizarCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarCheckOutActionPerformed
         // TODO add your handling code here:
         fazerCheckOut();
@@ -539,7 +639,7 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -644,15 +744,18 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbNomeQuarto;
     private javax.swing.JComboBox<String> cmbPesquisa;
     private javax.swing.JComboBox<String> cmbTipoQuarto;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAcompanhantes;
+    private javax.swing.JLabel lblBotoes1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCampoPesquisa;
     private javax.swing.JLabel lblCheckInOculto;
     private javax.swing.JLabel lblCpfCheckOut;
     private javax.swing.JLabel lblCpfSelecionadoCheckOut;
-    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDataCheckIn;
     private javax.swing.JLabel lblDataHoje;
+    private javax.swing.JLabel lblGerenciamentoDeContas;
+    private javax.swing.JLabel lblGerenciamentoDeContas1;
     private javax.swing.JLabel lblHospede;
     private javax.swing.JLabel lblHospedeCheckOut;
     private javax.swing.JLabel lblHospedeCpf;
@@ -660,14 +763,17 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
     private javax.swing.JLabel lblHospedeSelecionado;
     private javax.swing.JLabel lblHospedeSelecionadoCheckOut;
     private javax.swing.JLabel lblHospedes;
-    private javax.swing.JLabel lblNomeHospede;
+    private javax.swing.JLabel lblNomeHospede1;
+    private javax.swing.JLabel lblNomeHospede2;
     private javax.swing.JLabel lblNomeQuartoOculto;
     private javax.swing.JLabel lblNumeroHospede;
     private javax.swing.JLabel lblNumeroQuarto;
     private javax.swing.JLabel lblPassaporte;
     private javax.swing.JLabel lblPassaporteSelecionadoCheckOut;
     private javax.swing.JLabel lblPassporteCheckOut;
-    private javax.swing.JLabel lblRealizaCheckInCheckOut;
+    private javax.swing.JLabel lblQuartoNomeReseva;
+    private javax.swing.JLabel lblQuartoNomeReseva1;
+    private javax.swing.JLabel lblQuartoNomeReseva2;
     private javax.swing.JLabel lblTipoQuarto;
     private javax.swing.JLabel lblTxtDataCheckIn;
     private javax.swing.JLabel lblTxtValorDiaria;
@@ -682,7 +788,6 @@ public class GerenciamentoCheckInCheckOut extends javax.swing.JFrame {
     private javax.swing.JTable tbReserva;
     private javax.swing.JFrame telaCheckOut;
     private javax.swing.JFrame telaPesquisa;
-    private javax.swing.JToggleButton teste;
     private javax.swing.JTextField txtNumeroHospedes;
     private javax.swing.JTextField txtValorPesquisa;
     // End of variables declaration//GEN-END:variables
